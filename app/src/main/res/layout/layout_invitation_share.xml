@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/ll_invitation_share"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/attestation_bg_edittext"
+    android:layout_height="45dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="您尚未完成实名认证，暂时无法租车"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:layout_marginLeft="30dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/public_all"
+        android:text="@string/goto_attestation"/>
+</LinearLayout>
