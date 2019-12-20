@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">菁喜</string>
+    <string name="app_name">菁喜技师端</string>
     <string name="register_aut_code"><u>还没有账号，立即注册</u></string>
     <string name="register_aut_code_login"><u>已有账号，密码登录</u></string>
     <string name="goto_attestation"><u>去认证</u></string>
