@@ -15,12 +15,7 @@
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@mipmap/loading" />
+            android:src="@mipmap/ic_launcher_round" />
 
     </LinearLayout>
-    <ImageView
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/loading1" />
 </LinearLayout>

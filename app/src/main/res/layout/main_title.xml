@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:drawableLeft="@mipmap/user_info"
+            android:drawableLeft="@mipmap/logo"
             android:drawablePadding="10dp"
             android:text=""
             android:textSize="16dp"
@@ -43,7 +43,7 @@
             android:paddingRight="20dp"
             android:drawablePadding="10dp"
             android:textSize="16dp"
-            android:drawableRight="@mipmap/ic_search"
+            android:drawableRight="@mipmap/logo"
             android:visibility="visible"/>
     </RelativeLayout>
     <View

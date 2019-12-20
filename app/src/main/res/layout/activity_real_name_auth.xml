@@ -18,11 +18,6 @@
             android:textColor="@color/public_all"
             android:textSize="14sp"
             android:text="手机认证"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -156,11 +151,6 @@
             android:layout_marginLeft="15dp"
             android:hint="所属公司（单位）"
             android:textSize="14sp" />
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/xia_jiantou"/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_login"

@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/iv_head"/>
+            android:src="@mipmap/ic_launcher_round"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -132,11 +132,6 @@
             android:textColor="#ccc"
             android:textSize="12sp"
             android:text="当前使用车辆信息"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -166,11 +161,6 @@
             android:textColor="#ccc"
             android:textSize="12sp"
             android:text="余额/押金/充值/优惠券"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -194,11 +184,6 @@
             android:textSize="14sp"
             android:textColor="@color/black"
             android:text="我的订单"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -228,11 +213,6 @@
             android:textColor="#ccc"
             android:textSize="12sp"
             android:text="邀请越多，奖励越多"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -256,11 +236,6 @@
             android:textSize="14sp"
             android:textColor="@color/black"
             android:text="系统设置"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
