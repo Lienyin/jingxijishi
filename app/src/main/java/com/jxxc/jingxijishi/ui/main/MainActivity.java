@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.main.firstfragment.FirstFragment;
-import com.jxxc.jingxijishi.ui.main.myfragment.secondfragment.MyFragment;
 import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
 
 
@@ -25,14 +24,13 @@ import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
 
 public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresenter> implements MainContract.View, View.OnClickListener {
 
-    private TextView topOrder;
-    private TextView tabDeal;
-    private TextView tabMore;
+    private TextView topOrder;//上线、下线
+    private TextView tabDeal;//首页
+    private TextView tabMore;//个人中心
     private FrameLayout ly_content;
 
     private FirstFragment f1;
     private SecondFragment f2;
-    private MyFragment f3;
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
@@ -75,9 +73,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         if(f2!=null){
             transaction.hide(f2);
         }
-        if(f3!=null){
-            transaction.hide(f3);
-        }
     }
 
     @Override
@@ -107,14 +102,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_order:
-                selected();
-                topOrder.setSelected(true);
-                if(f3==null){
-                    f3 = new MyFragment(this);
-                    transaction.add(R.id.fragment_container,f3);
-                }else{
-                    transaction.show(f3);
-                }
                 break;
         }
 
