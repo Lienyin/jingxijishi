@@ -53,9 +53,14 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
         tabDeal.setOnClickListener(this);
         tabMore.setOnClickListener(this);
-        topOrder.setOnClickListener(this);
         //默认显示第一个Fragment
         tabDeal.performClick();//自动触发首页按钮
+        topOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toast(MainActivity.this,"待开发");
+            }
+        });
     }
 
     //重置所有文本的选中状态
@@ -100,8 +105,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }else{
                     transaction.show(f2);
                 }
-                break;
-            case R.id.txt_order:
                 break;
         }
 
