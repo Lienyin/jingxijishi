@@ -4,6 +4,7 @@ package com.jxxc.jingxijishi.ui.login;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
@@ -32,6 +33,12 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText etPassword;
     @BindView(R.id.btn_login)
     Button btn_login;
+    @BindView(R.id.tv_login_fangshi)
+    TextView tv_login_fangshi;
+    @BindView(R.id.ll_password_view)
+    LinearLayout ll_password_view;
+    @BindView(R.id.ll_code_view)
+    LinearLayout ll_code_view;
 
     @Override
     protected int layoutId() {
@@ -43,7 +50,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     }
 
-    @OnClick({R.id.btn_login})
+    @OnClick({R.id.btn_login,R.id.tv_login_fangshi})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -55,6 +62,17 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }else{
                     StyledDialog.buildLoading("正在登录").setActivity(this).show();
                     mPresenter.login("13916141340","111111");
+                }
+                break;
+            case R.id.tv_login_fangshi://
+                if ("短信验证码登录".equals(tv_login_fangshi.getText().toString())){
+                    tv_login_fangshi.setText("账号登录");
+                    ll_password_view.setVisibility(View.GONE);
+                    ll_code_view.setVisibility(View.VISIBLE);
+                }else{
+                    tv_login_fangshi.setText("短信验证码登录");
+                    ll_password_view.setVisibility(View.VISIBLE);
+                    ll_code_view.setVisibility(View.GONE);
                 }
                 break;
             default:
