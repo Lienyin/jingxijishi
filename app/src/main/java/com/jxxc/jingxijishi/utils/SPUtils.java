@@ -22,10 +22,6 @@ public class SPUtils {
     public static SharedPreferences sp;
 
     public static final String K_TOKEN = "token";
-    public static final String K_EXPIREIN = "expireIn";
-    public static final String K_TOKENCREATETIME = "tokenCreateTime";
-    public static final String K_BATTERYTYPE = "batteryType";
-    public static final String K_STATIC_URL = "static_url";
     public static final String K_SESSION_TIMEOUT = "sessionTimeout";
     public static final String K_SESSION_MOBILE = "mobile";
     public static final String K_AGENTID = "agentId";//城市id

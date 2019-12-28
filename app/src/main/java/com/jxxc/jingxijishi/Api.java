@@ -7,4 +7,6 @@ public class Api {
 
     //1-客户登录
     public static final String LOGIN = BASEURL + "/technician/login.json";
+    //2-获取短信验证码
+    public static final String SMS_CODE = BASEURL + "/common/auth/get_code.json";
 }

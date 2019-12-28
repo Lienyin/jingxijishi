@@ -52,9 +52,8 @@
             android:paddingLeft="15dp"
             android:drawablePadding="15dp"
             android:drawableLeft="@mipmap/password"
-            android:inputType="phone"
-            android:maxLength="11"
             android:textSize="14sp"
+            android:inputType="textPassword"
             android:background="@drawable/shape_bg_edittext"
             android:text=""/>
     </LinearLayout>
@@ -76,11 +75,10 @@
             android:layout_weight="1"
             android:layout_height="50dp"
             android:hint="请输入您的验证码"
-            android:inputType="phone"
+            android:inputType="number"
             android:layout_marginLeft="20dp"
             android:drawablePadding="15dp"
             android:drawableLeft="@mipmap/password"
-            android:maxLength="11"
             android:background="@color/transparent"
             android:textSize="14sp"
             android:text=""/>
@@ -89,6 +87,7 @@
             android:layout_height="30dp"
             android:background="@color/blackccc"/>
         <TextView
+            android:id="@+id/tv_get_code"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -145,12 +144,30 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingTop="30dp">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#999"
-            android:text="——————其他登录方式——————"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:background="#f4f4f4"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#999"
+                android:textSize="14sp"
+                android:text="其他登录方式"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:layout_marginRight="20dp"
+                android:background="#f4f4f4"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
