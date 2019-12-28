@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -105,6 +106,23 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         }else {
                             toast(mContext,response.body().message);
                         }
+                    }
+                });
+    }
+
+    /**
+     * 第三方登录
+     * @param wxOpenId
+     */
+    @Override
+    public void thirdPartyLogin(String wxOpenId) {
+        OkGo.<HttpResult<ThirdPartyLogin>>post(Api.LOGIN_WECHAT)
+                .params("wxOpenId",wxOpenId)
+                .execute(new JsonCallback<HttpResult<ThirdPartyLogin>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<ThirdPartyLogin>> response) {
+                        HttpResult<ThirdPartyLogin> body = response.body();
+                        mView.getThirdPartyLogin(body.data);
                     }
                 });
     }
