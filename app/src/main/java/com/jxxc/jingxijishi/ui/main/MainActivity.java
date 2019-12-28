@@ -4,9 +4,12 @@ package com.jxxc.jingxijishi.ui.main;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -14,6 +17,8 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
+
+import butterknife.BindView;
 
 
 /**
@@ -34,6 +39,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
+    private DrawerLayout drawerLayout;
+    private ImageView iv_user_center;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -46,11 +53,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     //UI组件初始化与事件绑定
     private void bindView() {
+        drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
+        iv_user_center = (ImageView) findViewById(R.id.iv_user_center);
         topOrder = (TextView)this.findViewById(R.id.txt_order);
         tabDeal = (TextView)this.findViewById(R.id.txt_deal);
         tabMore = (TextView)this.findViewById(R.id.txt_more);
         ly_content = (FrameLayout) findViewById(R.id.fragment_container);
-
         tabDeal.setOnClickListener(this);
         tabMore.setOnClickListener(this);
         //默认显示第一个Fragment
@@ -59,6 +67,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 toast(MainActivity.this,"待开发");
+            }
+        });
+        iv_user_center.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.LEFT);//打开抽屉
             }
         });
     }
