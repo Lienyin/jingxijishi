@@ -13,4 +13,6 @@ public class Api {
     public static final String LOGIN_CODE = BASEURL + "/technician/login_by_code.json";
     //4-微信快捷登录
     public static final String LOGIN_WECHAT = BASEURL + "/technician/login_by_wechat.json";
+    //5-绑定微信
+    public static final String AUTH_WECHAT = BASEURL + "/technician/auth_wechat.json";
 }

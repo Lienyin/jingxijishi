@@ -12,10 +12,10 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 
 public class BindingPhoneNumberContract {
     interface View extends BaseView {
-        
+        void gotoUserMain();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void getThirdPartyInfo(String phonenumber,String password,String wxOpenId);
     }
 }
