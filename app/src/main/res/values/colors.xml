@@ -9,4 +9,6 @@
     <color name="transparent">#00000000</color>
     <color name="blackccc">#cccccc</color>
     <color name="black666">#666666</color>
+    <color name="black999">#999999</color>
+    <color name="yellow">#FFCC33</color>
 </resources>
