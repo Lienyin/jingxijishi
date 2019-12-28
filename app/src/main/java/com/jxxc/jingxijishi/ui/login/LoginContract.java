@@ -1,5 +1,7 @@
 package com.jxxc.jingxijishi.ui.login;
 
+import android.widget.TextView;
+
 import com.jxxc.jingxijishi.mvp.BaseView;
 import com.jxxc.jingxijishi.mvp.BasePresenter;
 
@@ -14,6 +16,7 @@ public class LoginContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void login(String userName,String passWord);
+        void login(String phonenumber,String password);
+        void getAuthCode(String phonenumber, TextView tvAuthCode);
     }
 }
