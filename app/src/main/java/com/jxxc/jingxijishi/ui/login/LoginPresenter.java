@@ -32,7 +32,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     private CountDownTimer timer;
     /**
-     * 登录接口
+     * 账户密码登录接口
      * @param phonenumber
      * @param password
      */
@@ -80,6 +80,30 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                             toast(mContext,"验证码已发送");
                         } else {
                             toast(mContext,data.message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 验证码登录
+     * @param phonenumber
+     * @param code
+     */
+    @Override
+    public void loginCode(final String phonenumber, String code) {
+        OkGo.<HttpResult<back_Login>>post(Api.LOGIN_CODE)
+                .params("phonenumber",phonenumber)
+                .params("code", code)
+                .execute(new JsonCallback<HttpResult<back_Login>>(){
+                    @Override
+                    public void onSuccess(Response<HttpResult<back_Login>> response) {
+                        hideLoading();
+                        if (response.body().code == 0){
+                            mView.loginCallBack();
+                            SPUtils.put(SPUtils.K_SESSION_MOBILE,phonenumber);
+                        }else {
+                            toast(mContext,response.body().message);
                         }
                     }
                 });

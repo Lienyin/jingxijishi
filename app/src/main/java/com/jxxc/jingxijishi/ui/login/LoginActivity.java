@@ -75,7 +75,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                         toast(this,"请输入您的账户密码");
                     }else{
                         StyledDialog.buildLoading("正在登录").setActivity(this).show();
-                        mPresenter.login("13916141340","111111");
+                        mPresenter.login(etAccount.getText().toString(),etPassword.getText().toString());
                     }
                 }else{
                     if (AppUtils.isEmpty(etAccount.getText().toString())){
@@ -84,7 +84,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                         toast(this,"请输入您的验证码");
                     }else{
                         StyledDialog.buildLoading("正在登录").setActivity(this).show();
-                        mPresenter.login("13916141340","111111");
+                        mPresenter.loginCode(etAccount.getText().toString(),et_password_code.getText().toString());
                     }
                 }
                 break;

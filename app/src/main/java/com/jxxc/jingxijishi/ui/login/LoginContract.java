@@ -16,7 +16,8 @@ public class LoginContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void login(String phonenumber,String password);
+        void login(String phonenumber,String password);//账户密码登录
         void getAuthCode(String phonenumber, TextView tvAuthCode);
+        void loginCode(String phonenumber,String code);//验证码登录
     }
 }
