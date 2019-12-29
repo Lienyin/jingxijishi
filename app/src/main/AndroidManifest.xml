@@ -60,5 +60,8 @@
         <!--修改密码-->
         <activity android:name=".ui.updatepassword.UpdatePasswordActivity"
             android:screenOrientation="portrait"/>
+        <!--我的消息-->
+        <activity android:name=".ui.message.MessageActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

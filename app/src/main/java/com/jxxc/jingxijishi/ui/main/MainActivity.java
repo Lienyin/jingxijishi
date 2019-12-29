@@ -21,6 +21,7 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxijishi.ui.message.MessageActivity;
 import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
@@ -57,6 +58,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     TextView tv_user_phonenumber;
     @BindView(R.id.ll_main_setting)
     LinearLayout ll_main_setting;
+    @BindView(R.id.iv_user_msg)
+    ImageView iv_user_msg;
+
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -112,6 +116,14 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 //系统设置
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(MainActivity.this, SetingActivity.class);
+            }
+        });
+        iv_user_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //系统信息
+                AnimUtils.clickAnimator(view);
+                ZzRouter.gotoActivity(MainActivity.this, MessageActivity.class);
             }
         });
     }

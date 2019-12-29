@@ -17,4 +17,6 @@ public class Api {
     public static final String AUTH_WECHAT = BASEURL + "system/technician/auth_wechat.json";
     //6-个人信息
     public static final String INFO_USER = BASEURL + "system/technician/info.json";
+    //7-个人信息
+    public static final String UPDATE_PASSWORD = BASEURL + "system/technician/update_password.json";
 }

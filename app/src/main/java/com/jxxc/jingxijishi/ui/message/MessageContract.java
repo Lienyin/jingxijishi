@@ -1,4 +1,4 @@
-package com.jxxc.jingxijishi.ui.updatepassword;
+package com.jxxc.jingxijishi.ui.message;
 
 import android.content.Context;
 
@@ -10,12 +10,12 @@ import com.jxxc.jingxijishi.mvp.BaseView;
  *  邮箱 784787081@qq.com
  */
 
-public class UpdatePasswordContract {
+public class MessageContract {
     interface View extends BaseView {
-        void updatePasswordCallBack();
+        
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void updatePassword(String oldPassword,String newPassword);
+        
     }
 }
