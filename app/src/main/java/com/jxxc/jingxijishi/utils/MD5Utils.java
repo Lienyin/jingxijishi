@@ -7,11 +7,14 @@ import java.security.MessageDigest;
  * @author feisher
  */
 public class MD5Utils {
-    public static final String SALT = "89632E9%^&*67869A26D18FC76"; //标准协议上没有*
+    public static final String SALT = "67884E9%^&*67899A26C18DC28"; //标准协议上没有*
     static final String PASSWORD_DELTA_1 = SALT;
 
     public static String md5Password(String src) {
         return md5(PASSWORD_DELTA_1 + sha(PASSWORD_DELTA_1 + src));
+    }
+    public static String shaPassword(String src) {
+        return sha(SALT + src);
     }
 
     public static String sha(String src) {

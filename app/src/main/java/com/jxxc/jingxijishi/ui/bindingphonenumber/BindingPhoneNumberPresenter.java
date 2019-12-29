@@ -9,6 +9,7 @@ import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.http.HttpResult;
 import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
+import com.jxxc.jingxijishi.utils.MD5Utils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -36,7 +37,7 @@ public class BindingPhoneNumberPresenter extends BasePresenterImpl<BindingPhoneN
     public void getThirdPartyInfo(String phonenumber, String password, String wxOpenId) {
         OkGo.<HttpResult<LoginEntity>>post(Api.AUTH_WECHAT)
                 .params("phonenumber",phonenumber)
-                .params("password",password)
+                .params("password", MD5Utils.shaPassword(password).trim().toUpperCase())
                 .params("wxOpenId",wxOpenId)
                 .execute(new JsonCallback<HttpResult<LoginEntity>>() {
                     @Override

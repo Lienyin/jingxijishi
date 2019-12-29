@@ -10,13 +10,18 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.SPUtils;
 
 import butterknife.BindView;
 
@@ -41,6 +46,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     public static String registrationId;
     private DrawerLayout drawerLayout;
     private ImageView iv_user_center;
+    @BindView(R.id.ll_out_login)
+    LinearLayout ll_out_login;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -72,7 +79,19 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         iv_user_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(Gravity.LEFT);//打开抽屉
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    drawerLayout.openDrawer(Gravity.LEFT);//打开抽屉
+                }else{
+                    ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
+                }
+            }
+        });
+        ll_out_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //推出登录
+                SPUtils.remove(MainActivity.this,SPUtils.K_TOKEN);
+                ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
             }
         });
     }

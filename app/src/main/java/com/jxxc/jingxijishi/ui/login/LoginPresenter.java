@@ -1,28 +1,23 @@
 package com.jxxc.jingxijishi.ui.login;
-import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.LoginEntity;
 import com.jxxc.jingxijishi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.jxxc.jingxijishi.Api;
-import com.jxxc.jingxijishi.entity.backparameter.back_Login;
-import com.jxxc.jingxijishi.entity.requestparameter.req_Login;
 import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.http.HttpResult;
 import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 import com.jxxc.jingxijishi.utils.MD5Utils;
-import com.sdsmdg.tastytoast.TastyToast;
 
 /**
  * MVPPlugin
@@ -39,16 +34,18 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
      */
     @Override
     public void login(final String phonenumber, String password) {
-        OkGo.<HttpResult<back_Login>>post(Api.LOGIN)
+        OkGo.<HttpResult<LoginEntity>>post(Api.LOGIN)
                 .params("phonenumber",phonenumber)
-                .params("password", MD5Utils.md5(password))
-                .execute(new JsonCallback<HttpResult<back_Login>>(){
+                .params("password", MD5Utils.shaPassword(password).trim().toUpperCase())
+                .execute(new JsonCallback<HttpResult<LoginEntity>>(){
                     @Override
-                    public void onSuccess(Response<HttpResult<back_Login>> response) {
+                    public void onSuccess(Response<HttpResult<LoginEntity>> response) {
                         hideLoading();
+                        LoginEntity d = response.body().data;
                         if (response.body().code == 0){
                             mView.loginCallBack();
                             SPUtils.put(SPUtils.K_SESSION_MOBILE,phonenumber);
+                            SPUtils.put(SPUtils.K_TOKEN,d.token);
                         }else {
                             toast(mContext,response.body().message);
                         }
@@ -93,16 +90,18 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
      */
     @Override
     public void loginCode(final String phonenumber, String code) {
-        OkGo.<HttpResult<back_Login>>post(Api.LOGIN_CODE)
+        OkGo.<HttpResult<LoginEntity>>post(Api.LOGIN_CODE)
                 .params("phonenumber",phonenumber)
                 .params("code", code)
-                .execute(new JsonCallback<HttpResult<back_Login>>(){
+                .execute(new JsonCallback<HttpResult<LoginEntity>>(){
                     @Override
-                    public void onSuccess(Response<HttpResult<back_Login>> response) {
+                    public void onSuccess(Response<HttpResult<LoginEntity>> response) {
                         hideLoading();
+                        LoginEntity d = response.body().data;
                         if (response.body().code == 0){
                             mView.loginCallBack();
                             SPUtils.put(SPUtils.K_SESSION_MOBILE,phonenumber);
+                            SPUtils.put(SPUtils.K_TOKEN,d.token);
                         }else {
                             toast(mContext,response.body().message);
                         }

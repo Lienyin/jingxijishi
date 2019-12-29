@@ -405,5 +405,23 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#eee"/>
+        <!--安全设置-->
+        <LinearLayout
+            android:id="@+id/ll_out_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eee"/>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

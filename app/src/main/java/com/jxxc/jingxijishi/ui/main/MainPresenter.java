@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.main;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.jxxc.jingxijishi.Api;
@@ -29,5 +30,4 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
     protected void onEventComing(EventCenter center) {
 
     }
-
 }

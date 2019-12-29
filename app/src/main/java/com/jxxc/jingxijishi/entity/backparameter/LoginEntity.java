@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class LoginEntity implements Serializable{
 //{"data":{"expireIn":86400,"id":2,"token":"49338d17a2b28a4497ab5b1ada234f97ac89"},"code":0,"message":null}
-    public int id;
+    public int technicianId;
     public String token;
 
 }
