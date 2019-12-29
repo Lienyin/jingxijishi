@@ -21,6 +21,8 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxijishi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxijishi.ui.seting.SetingActivity;
+import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 
@@ -53,6 +55,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     TextView tv_user_name;
     @BindView(R.id.tv_user_phonenumber)
     TextView tv_user_phonenumber;
+    @BindView(R.id.ll_main_setting)
+    LinearLayout ll_main_setting;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -95,10 +99,19 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         ll_out_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //推出登录
+                //退出登录
+                AnimUtils.clickAnimator(view);
                 SPUtils.remove(MainActivity.this,SPUtils.K_TOKEN);
                 SPUtils.remove(MainActivity.this,SPUtils.K_SESSION_MOBILE);
                 ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
+            }
+        });
+        ll_main_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //系统设置
+                AnimUtils.clickAnimator(view);
+                ZzRouter.gotoActivity(MainActivity.this, SetingActivity.class);
             }
         });
     }
@@ -147,7 +160,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
         }
-
         transaction.commit();
     }
 

@@ -376,6 +376,7 @@
             android:background="#eee"/>
         <!--安全设置-->
         <LinearLayout
+            android:id="@+id/ll_main_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:visibility="visible"

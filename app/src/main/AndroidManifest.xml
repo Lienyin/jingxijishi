@@ -54,5 +54,11 @@
         <!--绑定手机号-->
         <activity android:name=".ui.bindingphonenumber.BindingPhoneNumberActivity"
             android:screenOrientation="portrait"/>
+        <!--设置-->
+        <activity android:name=".ui.seting.SetingActivity"
+            android:screenOrientation="portrait"/>
+        <!--修改密码-->
+        <activity android:name=".ui.updatepassword.UpdatePasswordActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
