@@ -119,6 +119,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 //系统设置
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(MainActivity.this, SetingActivity.class);
+                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
             }
         });
         iv_user_msg.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +128,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 //系统信息
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(MainActivity.this, MessageActivity.class);
+                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
             }
         });
         ll_order_list.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +137,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 //订单记录
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(MainActivity.this, OrderListActivity.class);
+                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
             }
         });
     }
