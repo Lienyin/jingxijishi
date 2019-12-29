@@ -80,7 +80,7 @@
                 android:drawableTop="@drawable/tab_menu_my"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="个人中心"
+                android:text="抢单大厅"
                 android:textColor="@drawable/tab_menu_deal_text"
                 android:textSize="14sp" />
 
@@ -248,6 +248,7 @@
         </LinearLayout>
         <!--订单记录-->
         <LinearLayout
+            android:id="@+id/ll_order_list"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:visibility="visible"

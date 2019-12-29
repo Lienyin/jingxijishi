@@ -63,5 +63,8 @@
         <!--我的消息-->
         <activity android:name=".ui.message.MessageActivity"
             android:screenOrientation="portrait"/>
+        <!--我的订单-->
+        <activity android:name=".ui.orderlist.OrderListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

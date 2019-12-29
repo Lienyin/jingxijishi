@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blackf6">
+
+    <include layout="@layout/title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_work_order_all"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:checked="true"
+                android:text="全部"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_work_order_dai_jie"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="待服务"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+            <RadioButton
+                android:id="@+id/rb_work_order_jin_xing"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="已完成"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
