@@ -1,4 +1,4 @@
-package com.jxxc.jingxijishi.ui.message;
+package com.jxxc.jingxijishi.ui.messagedetails;
 
 
 import android.view.View;
@@ -17,22 +17,21 @@ import butterknife.OnClick;
  *  邮箱 784787081@qq.com
  */
 
-public class MessageActivity extends MVPBaseActivity<MessageContract.View, MessagePresenter> implements MessageContract.View {
+public class MessageDetailsActivity extends MVPBaseActivity<MessageDetailsContract.View, MessageDetailsPresenter> implements MessageDetailsContract.View {
 
     @BindView(R.id.tv_back)
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    private MsgAdapter adapter;//msg_adapter
 
     @Override
     protected int layoutId() {
-        return R.layout.message_activity;
+        return R.layout.message_details_activity;
     }
 
     @Override
     public void initData() {
-        tv_title.setText("我的信息");
+        tv_title.setText("信息详情");
     }
 
     @OnClick({R.id.tv_back})
