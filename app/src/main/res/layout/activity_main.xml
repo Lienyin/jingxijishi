@@ -118,6 +118,7 @@
                     android:layout_marginLeft="20dp"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -129,12 +130,14 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical">
                         <TextView
+                            android:id="@+id/tv_user_phonenumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:text="XXX-XXXX-XXXX"/>
 
                         <TextView
+                            android:id="@+id/tv_user_dengji"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@mipmap/logo"

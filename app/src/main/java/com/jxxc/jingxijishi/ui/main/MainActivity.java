@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
@@ -48,6 +49,10 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private ImageView iv_user_center;
     @BindView(R.id.ll_out_login)
     LinearLayout ll_out_login;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
+    @BindView(R.id.tv_user_phonenumber)
+    TextView tv_user_phonenumber;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -56,6 +61,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     public void initData() {
         bindView();
+        mPresenter.getUserInfo();
     }
 
     //UI组件初始化与事件绑定
@@ -91,6 +97,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             public void onClick(View view) {
                 //推出登录
                 SPUtils.remove(MainActivity.this,SPUtils.K_TOKEN);
+                SPUtils.remove(MainActivity.this,SPUtils.K_SESSION_MOBILE);
                 ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
             }
         });
@@ -170,5 +177,15 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    /**
+     * 个人信息返回数据
+     * @param data
+     */
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+        tv_user_name.setText(data.realName);
+        tv_user_phonenumber.setText(data.phonenumber);
     }
 }

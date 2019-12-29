@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.main;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -29,5 +30,25 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
     @Override
     protected void onEventComing(EventCenter center) {
 
+    }
+
+    /**
+     * 个人信息
+     */
+    @Override
+    public void getUserInfo() {
+        OkGo.<HttpResult<UserInfoEntity>>post(Api.INFO_USER)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<UserInfoEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<UserInfoEntity>> response) {
+                        UserInfoEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getUserInfoCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
     }
 }
