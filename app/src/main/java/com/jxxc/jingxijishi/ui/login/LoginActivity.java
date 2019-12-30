@@ -19,6 +19,7 @@ import com.jxxc.jingxijishi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.ui.bindingphonenumber.BindingPhoneNumberActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
+import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
@@ -149,7 +150,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     //登录返回数据
     @Override
     public void loginCallBack() {
-        ZzRouter.gotoActivity(this, MainActivity.class);
+        ZzRouter.gotoActivity(this, NewMainActivity.class);
     }
 
     //第三方登录返回数据
@@ -158,7 +159,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         if ("ok".equals(data.step)) {
             //第一种状态：授权登录成功
             toast(this,"登录成功");
-            ZzRouter.gotoActivity(this, MainActivity.class);
+            ZzRouter.gotoActivity(this, NewMainActivity.class);
             finish();
         }else if ("not_auth".equals(data.step)){
             //第一次授权登录，跳转到手机获取验证码界面(新用户)

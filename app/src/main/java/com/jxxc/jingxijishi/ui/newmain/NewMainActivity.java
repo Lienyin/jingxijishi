@@ -22,6 +22,7 @@ import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,10 +35,6 @@ import butterknife.OnClick;
 
 public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMainPresenter> implements NewMainContract.View {
 
-    @BindView(R.id.tv_back)
-    TextView tv_back;
-    @BindView(R.id.tv_title)
-    TextView tv_title;
     @BindView(R.id.ll_out_login)
     LinearLayout ll_out_login;
     @BindView(R.id.tv_user_name)
@@ -67,14 +64,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         mPresenter.getUserInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
+    @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
     R.id.iv_user_msg,R.id.ll_order_list})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-            case R.id.tv_back://返回
-                finish();
-                break;
             case R.id.iv_user_center://抽屉
                 if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
                     drawerLayout.openDrawer(Gravity.LEFT);//打开抽屉
