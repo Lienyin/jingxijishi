@@ -49,20 +49,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
-    private DrawerLayout drawerLayout;
-    private ImageView iv_user_center;
-    @BindView(R.id.ll_out_login)
-    LinearLayout ll_out_login;
-    @BindView(R.id.tv_user_name)
-    TextView tv_user_name;
-    @BindView(R.id.tv_user_phonenumber)
-    TextView tv_user_phonenumber;
-    @BindView(R.id.ll_main_setting)
-    LinearLayout ll_main_setting;
-    @BindView(R.id.ll_order_list)
-    LinearLayout ll_order_list;
-    @BindView(R.id.iv_user_msg)
-    ImageView iv_user_msg;
+
 
     @Override
     protected int layoutId() {
@@ -77,8 +64,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     //UI组件初始化与事件绑定
     private void bindView() {
-        drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
-        iv_user_center = (ImageView) findViewById(R.id.iv_user_center);
         topOrder = (TextView)this.findViewById(R.id.txt_order);
         tabDeal = (TextView)this.findViewById(R.id.txt_deal);
         tabMore = (TextView)this.findViewById(R.id.txt_more);
@@ -91,53 +76,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 toast(MainActivity.this,"待开发");
-            }
-        });
-        iv_user_center.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
-                    drawerLayout.openDrawer(Gravity.LEFT);//打开抽屉
-                }else{
-                    ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
-                }
-            }
-        });
-        ll_out_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //退出登录
-                AnimUtils.clickAnimator(view);
-                SPUtils.remove(MainActivity.this,SPUtils.K_TOKEN);
-                SPUtils.remove(MainActivity.this,SPUtils.K_SESSION_MOBILE);
-                ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
-            }
-        });
-        ll_main_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //系统设置
-                AnimUtils.clickAnimator(view);
-                ZzRouter.gotoActivity(MainActivity.this, SetingActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
-            }
-        });
-        iv_user_msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //系统信息
-                AnimUtils.clickAnimator(view);
-                ZzRouter.gotoActivity(MainActivity.this, MessageActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
-            }
-        });
-        ll_order_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //订单记录
-                AnimUtils.clickAnimator(view);
-                ZzRouter.gotoActivity(MainActivity.this, OrderListActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
             }
         });
     }
@@ -223,7 +161,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
      */
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
-        tv_user_name.setText(data.realName);
-        tv_user_phonenumber.setText(data.phonenumber);
+
     }
 }

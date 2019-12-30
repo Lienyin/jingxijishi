@@ -10,6 +10,7 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
+import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -38,7 +39,7 @@ public class StartActivity extends Activity {
         timer = new Timer();
         TimerTask task =new TimerTask(){
             public void run(){
-                ZzRouter.gotoActivity(StartActivity.this, MainActivity.class);
+                ZzRouter.gotoActivity(StartActivity.this, NewMainActivity.class);
             }
         };
         timer.schedule(task,2000);//延迟2秒启动
