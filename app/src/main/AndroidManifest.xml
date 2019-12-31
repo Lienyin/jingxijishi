@@ -70,8 +70,11 @@
         <!--我的订单-->
         <activity android:name=".ui.orderlist.OrderListActivity"
             android:screenOrientation="portrait"/>
-<!--考试-->
+        <!--考试-->
         <activity android:name=".ui.examination.ExaminationActivity"
+            android:screenOrientation="portrait"/>
+        <!--我的钱包-->
+        <activity android:name=".ui.mywallet.MyWalletActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>
