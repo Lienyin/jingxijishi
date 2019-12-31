@@ -76,5 +76,11 @@
         <!--我的钱包-->
         <activity android:name=".ui.mywallet.MyWalletActivity"
             android:screenOrientation="portrait"/>
+        <!--绑定账户-->
+        <activity android:name=".ui.bindingaccount.BindingAccountActivity"
+            android:screenOrientation="portrait"/>
+        <!--余额提现-->
+        <activity android:name=".ui.withdrawdeposit.WithdrawDepositActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

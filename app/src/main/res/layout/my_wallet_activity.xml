@@ -159,6 +159,7 @@
         android:layout_height="1dp"
         android:background="@color/blackeee" />
     <LinearLayout
+        android:id="@+id/ll_withdraw_deposit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
@@ -188,6 +189,7 @@
         android:layout_height="1dp"
         android:background="@color/blackeee" />
     <LinearLayout
+        android:id="@+id/ll_binding"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
