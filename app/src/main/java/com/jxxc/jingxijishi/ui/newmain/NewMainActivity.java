@@ -3,6 +3,7 @@ package com.jxxc.jingxijishi.ui.newmain;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
  *  邮箱 784787081@qq.com
  */
 
-public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMainPresenter> implements NewMainContract.View {
+public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMainPresenter> implements NewMainContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.ll_out_login)
     LinearLayout ll_out_login;
@@ -49,6 +50,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     ImageView iv_user_msg;
     @BindView(R.id.iv_user_center)
     ImageView iv_user_center;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
 
@@ -62,6 +65,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         //tv_title.setText("");
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
     }
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
@@ -127,5 +132,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void getUserInfoCallBack(UserInfoEntity data) {
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
+    }
+
+    //下拉刷新
+    @Override
+    public void onRefresh() {
+
     }
 }
