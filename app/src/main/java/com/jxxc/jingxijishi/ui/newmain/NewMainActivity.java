@@ -145,6 +145,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
+        swipeLayout.setRefreshing(false);
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
         tv_today_order.setText(data.todayFinishOrder);
@@ -155,6 +156,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     //下拉刷新
     @Override
     public void onRefresh() {
-
+        mPresenter.getUserInfo();
     }
 }

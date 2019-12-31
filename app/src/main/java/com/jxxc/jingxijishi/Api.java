@@ -19,4 +19,8 @@ public class Api {
     public static final String INFO_USER = BASEURL + "system/technician/info.json";
     //7-个人信息
     public static final String UPDATE_PASSWORD = BASEURL + "system/technician/update_password.json";
+    //8-技师开始线上考试
+    public static final String START_EXAMINATION = BASEURL + "system/examination/startExamination.json";
+    //9-提交技师试卷
+    public static final String END_EXAMINATION = BASEURL + "system/examination/endExamination.json";
 }

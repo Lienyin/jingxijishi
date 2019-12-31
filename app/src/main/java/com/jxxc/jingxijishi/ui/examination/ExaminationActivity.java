@@ -1,4 +1,5 @@
 package com.jxxc.jingxijishi.ui.examination;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,31 +9,41 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.jxxc.jingxijishi.Api;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.SartExaminationEntity;
+import com.jxxc.jingxijishi.http.HttpResult;
+import com.jxxc.jingxijishi.http.JsonCallback;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
 public class ExaminationActivity extends FragmentActivity {
     //这个是有多少个 fragment页面
-    static final int NUM_ITEMS = 5;
     private MyAdapter mAdapter;
     private ViewPager mPager;
-    private int  nowPage;
+    private int nowPage;
     private TextView tv_examination_back;
+    private List<SartExaminationEntity.Question> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.examination_activity);
-        mAdapter = new MyAdapter(getSupportFragmentManager() );
-        mPager = (ViewPager)findViewById(R.id.mypagers_pager);
+        mPager = (ViewPager) findViewById(R.id.mypagers_pager);
         tv_examination_back = (TextView) findViewById(R.id.tv_examination_back);
-        mPager.setAdapter(mAdapter);
-
+        startExamination();//获取试题
         //返回
         tv_examination_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,87 +53,114 @@ public class ExaminationActivity extends FragmentActivity {
         });
     }
 
-    /**
-     *  有状态的 ，只会有前3个存在 其他销毁，  前1个， 中间， 下一个
-     */
-    public static class MyAdapter extends FragmentStatePagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-        //得到每个item
-        @Override
-        public Fragment getItem(int position) {
-            return ArrayFragment.newInstance(position);
-        }
-        // 初始化每个页卡选项
-        @Override
-        public Object instantiateItem(ViewGroup arg0, int arg1) {
-            // TODO Auto-generated method stub
-            return super.instantiateItem(arg0, arg1);
-        }
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            System.out.println( "position Destory" + position);
-            super.destroyItem(container, position, object);
-        }
+    //获取题目
+    public void startExamination() {
+        OkGo.<HttpResult<SartExaminationEntity>>post(Api.START_EXAMINATION)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<SartExaminationEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<SartExaminationEntity>> response) {
+                        SartExaminationEntity d = response.body().data;
+                        if (response.body().code == 0) {
+                            list = d.questionList;
+                            mAdapter = new MyAdapter(getSupportFragmentManager());
+                            mAdapter.setData(d.questionList);
+                            mPager.setAdapter(mAdapter);
+                        } else {
+                            Toast.makeText(ExaminationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     /**
      * 所有的  每个Fragment
      */
     public static class ArrayFragment extends Fragment {
-
         int mNum;
-        static ArrayFragment newInstance(int num) {
-            ArrayFragment  array= new ArrayFragment();
+        private String topic;
+        private String answerA;
+        private String answerB;
+        private String answerC;
+        private String answerD;
+
+        static ArrayFragment newInstance(int num,SartExaminationEntity.Question list) {
+            ArrayFragment array = new ArrayFragment();
             Bundle args = new Bundle();
-            args.putInt("num", num);
+            args.putInt("num", num+1);
+            args.putString("topic",list.topic);
+            args.putString("answerA",list.answerA);
+            args.putString("answerB",list.answerB);
+            args.putString("answerC",list.answerC);
+            args.putString("answerD",list.answerD);
             array.setArguments(args);
             return array;
         }
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mNum = getArguments() != null ? getArguments().getInt("num") : 1;
-            System.out.println("mNum Fragment create ="+ mNum);
+            topic = getArguments() != null ? getArguments().getString("topic") : "";
+            answerA = getArguments() != null ? getArguments().getString("answerA") : "";
+            answerB = getArguments() != null ? getArguments().getString("answerB") : "";
+            answerC = getArguments() != null ? getArguments().getString("answerC") : "";
+            answerD = getArguments() != null ? getArguments().getString("answerD") : "";
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            System.out.println("onCreateView = ");
             //在这里加载每个 fragment的显示的 View
             View v = null;
-            if(mNum == 0){
+            if (mNum == 0) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
-                ((TextView)v.findViewById(R.id.textView1)).setText(mNum+ "= mNum");
-            }else if(mNum == 1){
+                ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
+                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
+                ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
+                ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
+                ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+            } else if (mNum == 1) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
-                ((TextView)v.findViewById(R.id.textView1)).setText(mNum+ "= mNum");
-            }else  if(mNum == 2){
+                ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
+                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
+                ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
+                ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
+                ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+            } else if (mNum == 2) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
-                ((TextView)v.findViewById(R.id.textView1)).setText(mNum+ "= mNum");
-            }else{
+                ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
+                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
+                ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
+                ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
+                ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+            } else {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
-                ((TextView)v.findViewById(R.id.textView1)).setText(mNum+ "= mNum");
+                ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
+                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
+                ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
+                ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
+                ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
             }
             return v;
         }
+
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
-            System.out.println("onActivityCreated = ");
             super.onActivityCreated(savedInstanceState);
         }
+
         @Override
-        public void onDestroyView(){
-            System.out.println(mNum + "mNumDestory");
+        public void onDestroyView() {
             super.onDestroyView();
         }
+
         @Override
-        public void onDestroy(){
+        public void onDestroy() {
             super.onDestroy();
         }
     }
