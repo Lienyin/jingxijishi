@@ -9,6 +9,7 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
+import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 
 import butterknife.BindView;
@@ -48,7 +49,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
                 finish();
                 break;
             case R.id.ll_withdraw_deposit://提现
-                ZzRouter.gotoActivity(this, BindingAccountActivity.class);
+                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class);
                 break;
             case R.id.ll_binding://绑定
                 ZzRouter.gotoActivity(this, BindingAccountActivity.class);
