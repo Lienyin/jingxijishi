@@ -7,9 +7,16 @@ public class UserInfoEntity implements Serializable {
     public String technicianId;
     public String technicianCode;
     public String deviceId;
+    public String phonenumber;
     public String userName;
     public String realName;
     public String avatar;
     public String isOnline;
-    public String phonenumber;
+    public String score;
+    public String grade;
+    public String isExaminationQualified;
+    public String isOperationQualified;
+    public String todayFinishOrder;
+    public String todayProjectedIncome;
+    public String canWithdrawMoney;
 }

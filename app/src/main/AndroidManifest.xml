@@ -70,5 +70,8 @@
         <!--我的订单-->
         <activity android:name=".ui.orderlist.OrderListActivity"
             android:screenOrientation="portrait"/>
+<!--考试-->
+        <activity android:name=".ui.examination.ExaminationActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

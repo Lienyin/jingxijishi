@@ -15,6 +15,7 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.examination.ExaminationActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
 import com.jxxc.jingxijishi.ui.message.MessageActivity;
@@ -52,6 +53,14 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     ImageView iv_user_center;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout swipeLayout;
+    @BindView(R.id.ll_jishi_renzheng)
+    LinearLayout ll_jishi_renzheng;
+    @BindView(R.id.tv_today_order)
+    TextView tv_today_order;
+    @BindView(R.id.tv_tixian_money)
+    TextView tv_tixian_money;
+    @BindView(R.id.tv_today_shouru)
+    TextView tv_today_shouru;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
 
@@ -70,7 +79,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     }
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
-    R.id.iv_user_msg,R.id.ll_order_list})
+    R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -103,6 +112,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this, OrderListActivity.class);
                 drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
+            case R.id.ll_jishi_renzheng://技师认证
+                AnimUtils.clickAnimator(view);
+                Intent intent = new Intent(this, ExaminationActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
+                break;
             default:
         }
     }
@@ -132,6 +147,9 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void getUserInfoCallBack(UserInfoEntity data) {
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
+        tv_today_order.setText(data.todayFinishOrder);
+        tv_tixian_money.setText(data.canWithdrawMoney);
+        tv_today_shouru.setText(data.todayProjectedIncome);
     }
 
     //下拉刷新
