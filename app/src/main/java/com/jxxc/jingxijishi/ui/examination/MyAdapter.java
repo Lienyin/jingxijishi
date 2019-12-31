@@ -26,7 +26,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
     //得到每个item
     @Override
     public Fragment getItem(int position) {
-        return ExaminationActivity.ArrayFragment.newInstance(position,list.get(position));
+        return ExaminationActivity.ArrayFragment.newInstance(position,list.get(position),list.size());
     }
     // 初始化每个页卡选项
     @Override

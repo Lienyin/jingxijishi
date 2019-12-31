@@ -35,6 +35,7 @@ public class ExaminationActivity extends FragmentActivity {
     private ViewPager mPager;
     private int nowPage;
     private TextView tv_examination_back;
+    private TextView tv_topic_number;
     private List<SartExaminationEntity.Question> list = new ArrayList<>();
 
     @Override
@@ -43,6 +44,7 @@ public class ExaminationActivity extends FragmentActivity {
         setContentView(R.layout.examination_activity);
         mPager = (ViewPager) findViewById(R.id.mypagers_pager);
         tv_examination_back = (TextView) findViewById(R.id.tv_examination_back);
+        tv_topic_number = (TextView) findViewById(R.id.tv_topic_number);
         startExamination();//获取试题
         //返回
         tv_examination_back.setOnClickListener(new View.OnClickListener() {
@@ -77,17 +79,19 @@ public class ExaminationActivity extends FragmentActivity {
      * 所有的  每个Fragment
      */
     public static class ArrayFragment extends Fragment {
-        int mNum;
+        private int mNum;
+        private int zNum;
         private String topic;
         private String answerA;
         private String answerB;
         private String answerC;
         private String answerD;
 
-        static ArrayFragment newInstance(int num,SartExaminationEntity.Question list) {
+        static ArrayFragment newInstance(int num,SartExaminationEntity.Question list,int zongNumber) {
             ArrayFragment array = new ArrayFragment();
             Bundle args = new Bundle();
-            args.putInt("num", num+1);
+            args.putInt("num", num);
+            args.putInt("zNum", zongNumber);
             args.putString("topic",list.topic);
             args.putString("answerA",list.answerA);
             args.putString("answerB",list.answerB);
@@ -101,6 +105,7 @@ public class ExaminationActivity extends FragmentActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+            zNum = getArguments() != null ? getArguments().getInt("zNum") : 0;
             topic = getArguments() != null ? getArguments().getString("topic") : "";
             answerA = getArguments() != null ? getArguments().getString("answerA") : "";
             answerB = getArguments() != null ? getArguments().getString("answerB") : "";
@@ -116,35 +121,39 @@ public class ExaminationActivity extends FragmentActivity {
             if (mNum == 0) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
-                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((TextView) v.findViewById(R.id.tv_topic)).setText((mNum+1)+"."+topic);
                 ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
                 ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+                ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
             } else if (mNum == 1) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
-                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((TextView) v.findViewById(R.id.tv_topic)).setText((mNum+1)+"."+topic);
                 ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
                 ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+                ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
             } else if (mNum == 2) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
-                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((TextView) v.findViewById(R.id.tv_topic)).setText((mNum+1)+"."+topic);
                 ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
                 ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+                ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
             } else {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
-                ((TextView) v.findViewById(R.id.tv_topic)).setText(mNum+"."+topic);
+                ((TextView) v.findViewById(R.id.tv_topic)).setText((mNum+1)+"."+topic);
                 ((RadioButton) v.findViewById(R.id.tv_topic_a)).setText(answerA);
                 ((RadioButton) v.findViewById(R.id.tv_topic_b)).setText(answerB);
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
+                ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
             }
             return v;
         }
