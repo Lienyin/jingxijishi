@@ -53,4 +53,7 @@ dependencies {
     implementation files('libs/libammsdk.jar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.33'
+    implementation 'com.yuyh.imgsel:library:2.0.2'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'top.zibin:Luban:1.1.3'
 }

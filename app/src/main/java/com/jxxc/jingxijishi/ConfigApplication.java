@@ -9,8 +9,10 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
@@ -20,6 +22,8 @@ import com.jxxc.jingxijishi.http.Constants;
 import com.jxxc.jingxijishi.http.DensityHelper;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
+import com.yuyh.library.imgsel.ISNav;
+import com.yuyh.library.imgsel.common.ImageLoader;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -55,7 +59,12 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
         instans = this;
         mContext = instans.getApplicationContext();
         MultiDex.install(this);
-
+        ISNav.getInstance().init(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, String path, ImageView imageView) {
+                Glide.with(context).load(path).into(imageView);
+            }
+        });
         //将可以延时初始化的框架放入服务中
 //        MyIntentService.start(this);
         Cockroach.install(new Cockroach.ExceptionHandler() {

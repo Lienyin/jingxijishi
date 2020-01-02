@@ -22,6 +22,7 @@ import com.jxxc.jingxijishi.ui.message.MessageActivity;
 import com.jxxc.jingxijishi.ui.mywallet.MyWalletActivity;
 import com.jxxc.jingxijishi.ui.orderlist.OrderListActivity;
 import com.jxxc.jingxijishi.ui.seting.SetingActivity;
+import com.jxxc.jingxijishi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
@@ -58,6 +59,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     SwipeRefreshLayout swipeLayout;
     @BindView(R.id.ll_jishi_renzheng)
     LinearLayout ll_jishi_renzheng;
+    @BindView(R.id.ll_user_info)
+    LinearLayout ll_user_info;
     @BindView(R.id.tv_today_order)
     TextView tv_today_order;
     @BindView(R.id.tv_tixian_money)
@@ -82,7 +85,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     }
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
-    R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet})
+    R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -124,6 +127,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             case R.id.ll_my_wallet://我的钱包
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, MyWalletActivity.class);
+                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
+                break;
+            case R.id.ll_user_info://我的信息
+                AnimUtils.clickAnimator(view);
+                ZzRouter.gotoActivity(this, UsercenterActivity.class);
                 drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             default:

@@ -23,4 +23,6 @@ public class Api {
     public static final String START_EXAMINATION = BASEURL + "system/examination/startExamination.json";
     //9-提交技师试卷
     public static final String END_EXAMINATION = BASEURL + "system/examination/endExamination.json";
+    //10-更改信息(头像、在线状态)
+    public static final String UPDATE_INFO = BASEURL + "system/technician/update_info.json";
 }
