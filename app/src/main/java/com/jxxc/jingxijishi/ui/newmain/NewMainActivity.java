@@ -2,8 +2,10 @@ package com.jxxc.jingxijishi.ui.newmain;
 
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
@@ -25,6 +28,7 @@ import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.LocationUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
@@ -82,6 +86,25 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         mPresenter.getUserInfo();
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
+
+        getLatLng();
+    }
+
+    /**
+     * 获取当前经纬度
+     */
+    public void getLatLng() {
+        Location location = LocationUtils.getInstance(NewMainActivity.this).showLocation();
+        if (location != null) {
+            Log.i("TAG","lng=="+location.getLongitude()+"  lat=="+location.getLatitude());
+            mPresenter.awaitReceiveOrder(location.getLongitude(),location.getLatitude());
+        } else {
+            if (location == null) {
+                String lat = SPUtils.get(this, "lat", "");
+                String lng = SPUtils.get(this, "lng", "");
+                mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
+            }
+        }
     }
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
@@ -167,6 +190,24 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         tv_today_order.setText(data.todayFinishOrder);
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
+    }
+
+    /**
+     * 抢单大厅反回数据
+     * @param data
+     */
+    @Override
+    public void awaitReceiveOrderCallBack(AwaitReceiveOrderEntity data) {
+
+    }
+
+    /**
+     * 服务列表返回数据
+     * @param data
+     */
+    @Override
+    public void unfinishedOrderCallBack(AwaitReceiveOrderEntity data) {
+
     }
 
     //下拉刷新

@@ -3,6 +3,7 @@ package com.jxxc.jingxijishi.ui.newmain;
 import android.content.Context;
 
 import com.jxxc.jingxijishi.Api;
+import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.http.HttpResult;
@@ -36,6 +37,49 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                         UserInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 抢单大厅列表
+     * @param lng
+     * @param lat
+     */
+    @Override
+    public void awaitReceiveOrder(double lng, double lat) {
+        OkGo.<HttpResult<AwaitReceiveOrderEntity>>post(Api.AWAIT_RECEIVE_ORDER)
+                .params("lng",lng)
+                .params("lat",lat)
+                .execute(new JsonCallback<HttpResult<AwaitReceiveOrderEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<AwaitReceiveOrderEntity>> response) {
+                        AwaitReceiveOrderEntity d = response.body().data;
+                        if (response.body().code == 0){
+                            mView.awaitReceiveOrderCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 待服务列表
+     */
+    @Override
+    public void unfinishedOrder() {
+        OkGo.<HttpResult<AwaitReceiveOrderEntity>>post(Api.UNFINISHED_ORDER)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<AwaitReceiveOrderEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<AwaitReceiveOrderEntity>> response) {
+                        AwaitReceiveOrderEntity d = response.body().data;
+                        if (response.body().code == 0){
+                            mView.unfinishedOrderCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

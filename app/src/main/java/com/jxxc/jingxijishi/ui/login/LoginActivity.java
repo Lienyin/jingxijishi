@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.LocationUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.wxapi.Constant;
 import com.jxxc.jingxijishi.wxapi.WeiXin;
@@ -87,6 +90,14 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         tv_back.setVisibility(View.GONE);
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
             etAccount.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        }
+
+        Location location = LocationUtils.getInstance(LoginActivity.this).showLocation();
+        if (location != null) {
+            //保存经纬度
+            Log.i("TAG","lng=="+location.getLongitude()+"  lat=="+location.getLatitude());
+            SPUtils.put("lat", location.getLatitude());
+            SPUtils.put("lng", location.getLongitude());
         }
     }
 

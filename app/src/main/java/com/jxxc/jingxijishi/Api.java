@@ -25,4 +25,8 @@ public class Api {
     public static final String END_EXAMINATION = BASEURL + "system/examination/endExamination.json";
     //10-更改信息(头像、在线状态)
     public static final String UPDATE_INFO = BASEURL + "system/technician/update_info.json";
+    //11-抢单大厅列表
+    public static final String AWAIT_RECEIVE_ORDER = BASEURL + "biz/carWashOrder/awaitReceiveOrder.json";
+    //12-待服务列表
+    public static final String UNFINISHED_ORDER = BASEURL + "biz/carWashOrder/unfinishedOrder.json";
 }
