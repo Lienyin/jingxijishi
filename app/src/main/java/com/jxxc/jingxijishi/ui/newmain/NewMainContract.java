@@ -7,6 +7,8 @@ import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.mvp.BasePresenter;
 import com.jxxc.jingxijishi.mvp.BaseView;
 
+import java.util.List;
+
 /**
  * MVPPlugin
  *  邮箱 784787081@qq.com
@@ -15,8 +17,8 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 public class NewMainContract {
     interface View extends BaseView {
         void getUserInfoCallBack(UserInfoEntity data);
-        void awaitReceiveOrderCallBack(AwaitReceiveOrderEntity data);
-        void unfinishedOrderCallBack(AwaitReceiveOrderEntity data);
+        void awaitReceiveOrderCallBack(List<AwaitReceiveOrderEntity> data);
+        void unfinishedOrderCallBack(List<AwaitReceiveOrderEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {

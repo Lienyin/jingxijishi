@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/blackf4"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -55,7 +55,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rb_work_order_all"
+                    android:id="@+id/rb_dating"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
@@ -68,7 +68,7 @@
                     android:textSize="14sp" />
 
                 <RadioButton
-                    android:id="@+id/rb_work_order_dai_jie"
+                    android:id="@+id/rb_fuwu"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
@@ -80,18 +80,17 @@
                     android:textSize="14sp" />
             </RadioGroup>
         </LinearLayout>
-
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
             <ListView
                 android:id="@+id/lv_data"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:divider="@color/transparent"
+                android:visibility="visible" />
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
     <!--抽屉-->

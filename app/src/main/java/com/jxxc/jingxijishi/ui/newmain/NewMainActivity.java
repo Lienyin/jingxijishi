@@ -11,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
@@ -31,6 +33,9 @@ import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.LocationUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,8 +76,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     TextView tv_tixian_money;
     @BindView(R.id.tv_today_shouru)
     TextView tv_today_shouru;
+    @BindView(R.id.lv_data)
+    ListView lv_data;
+    @BindView(R.id.rb_dating)
+    RadioButton rb_dating;
+    @BindView(R.id.rb_fuwu)
+    RadioButton rb_fuwu;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
+    private NewMainAdapter adapter;
+    private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
 
     @Override
     protected int layoutId() {
@@ -88,6 +101,9 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
 
         getLatLng();
+        adapter = new NewMainAdapter(this);
+        adapter.setData(list);
+        lv_data.setAdapter(adapter);
     }
 
     /**
@@ -97,17 +113,25 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         Location location = LocationUtils.getInstance(NewMainActivity.this).showLocation();
         if (location != null) {
             Log.i("TAG","lng=="+location.getLongitude()+"  lat=="+location.getLatitude());
-            mPresenter.awaitReceiveOrder(location.getLongitude(),location.getLatitude());
+            if (rb_dating.isChecked() == true){
+                mPresenter.awaitReceiveOrder(location.getLongitude(),location.getLatitude());
+            }else{
+                mPresenter.unfinishedOrder();
+            }
         } else {
             if (location == null) {
                 String lat = SPUtils.get(this, "lat", "");
                 String lng = SPUtils.get(this, "lng", "");
-                mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
+                if (rb_dating.isChecked() == true){
+                    mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
+                }else{
+                    mPresenter.unfinishedOrder();
+                }
             }
         }
     }
 
-    @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,
+    @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
     R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
@@ -157,6 +181,10 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this, UsercenterActivity.class);
                 drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
+            case R.id.rb_dating://抢单大厅
+                break;
+            case R.id.rb_fuwu://带服务
+                break;
             default:
         }
     }
@@ -184,7 +212,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
-        swipeLayout.setRefreshing(false);
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
         tv_today_order.setText(data.todayFinishOrder);
@@ -197,8 +224,14 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
      * @param data
      */
     @Override
-    public void awaitReceiveOrderCallBack(AwaitReceiveOrderEntity data) {
-
+    public void awaitReceiveOrderCallBack(List<AwaitReceiveOrderEntity> data) {
+        swipeLayout.setRefreshing(false);
+        if (data.size()>0){
+            adapter.setData(data);
+            adapter.notifyDataSetChanged();
+        }else{
+            toast(this,"暂无订单");
+        }
     }
 
     /**
@@ -206,13 +239,19 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
      * @param data
      */
     @Override
-    public void unfinishedOrderCallBack(AwaitReceiveOrderEntity data) {
-
+    public void unfinishedOrderCallBack(List<AwaitReceiveOrderEntity> data) {
+        swipeLayout.setRefreshing(false);
+        if (data.size()>0){
+            adapter.setData(data);
+            adapter.notifyDataSetChanged();
+        }else{
+            toast(this,"暂无订单");
+        }
     }
 
     //下拉刷新
     @Override
     public void onRefresh() {
-        mPresenter.getUserInfo();
+       getLatLng();
     }
 }

@@ -12,6 +12,8 @@ import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
+import java.util.List;
+
 /**
  * MVPPlugin
  *  邮箱 784787081@qq.com
@@ -51,13 +53,13 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
      */
     @Override
     public void awaitReceiveOrder(double lng, double lat) {
-        OkGo.<HttpResult<AwaitReceiveOrderEntity>>post(Api.AWAIT_RECEIVE_ORDER)
+        OkGo.<HttpResult<List<AwaitReceiveOrderEntity>>>post(Api.AWAIT_RECEIVE_ORDER)
                 .params("lng",lng)
                 .params("lat",lat)
-                .execute(new JsonCallback<HttpResult<AwaitReceiveOrderEntity>>() {
+                .execute(new JsonCallback<HttpResult<List<AwaitReceiveOrderEntity>>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<AwaitReceiveOrderEntity>> response) {
-                        AwaitReceiveOrderEntity d = response.body().data;
+                    public void onSuccess(Response<HttpResult<List<AwaitReceiveOrderEntity>>> response) {
+                        List<AwaitReceiveOrderEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.awaitReceiveOrderCallBack(d);
                         }else{
@@ -72,12 +74,12 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
      */
     @Override
     public void unfinishedOrder() {
-        OkGo.<HttpResult<AwaitReceiveOrderEntity>>post(Api.UNFINISHED_ORDER)
+        OkGo.<HttpResult<List<AwaitReceiveOrderEntity>>>post(Api.UNFINISHED_ORDER)
                 .tag(this)
-                .execute(new JsonCallback<HttpResult<AwaitReceiveOrderEntity>>() {
+                .execute(new JsonCallback<HttpResult<List<AwaitReceiveOrderEntity>>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<AwaitReceiveOrderEntity>> response) {
-                        AwaitReceiveOrderEntity d = response.body().data;
+                    public void onSuccess(Response<HttpResult<List<AwaitReceiveOrderEntity>>> response) {
+                        List<AwaitReceiveOrderEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.unfinishedOrderCallBack(d);
                         }else{

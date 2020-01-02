@@ -8,18 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 
 import java.util.List;
 
 public class NewMainAdapter extends BaseAdapter {
     private Context context;
-    private List<String> list;
+    private List<AwaitReceiveOrderEntity> list;
 
     public NewMainAdapter(Context context){
         this.context=context;
     }
 
-    public void setData(List<String> list){
+    public void setData(List<AwaitReceiveOrderEntity> list){
         this.list = list;
     }
 
@@ -44,14 +45,29 @@ public class NewMainAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.new_main_adapter,null);
+            holder.tv_dating_order_static = convertView.findViewById(R.id.tv_dating_order_static);
+            holder.tv_dating_order_address = convertView.findViewById(R.id.tv_dating_order_address);
+            holder.tv_dating_order_time = convertView.findViewById(R.id.tv_dating_order_time);
+            holder.tv_dating_order_money = convertView.findViewById(R.id.tv_dating_order_money);
+            holder.tv_dating_order_memo = convertView.findViewById(R.id.tv_dating_order_memo);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
+        AwaitReceiveOrderEntity data = list.get(position);
+        holder.tv_dating_order_static.setText(data.orderTopic);
+        holder.tv_dating_order_address.setText(data.address);
+        holder.tv_dating_order_time.setText(data.appointmentTime);
+        holder.tv_dating_order_memo.setText(data.remark);
+        holder.tv_dating_order_money.setText("￥"+data.price);
         return convertView;
     }
 
     class ViewHolder{
-        TextView textView;
+        private TextView tv_dating_order_static;
+        private TextView tv_dating_order_address;
+        private TextView tv_dating_order_time;
+        private TextView tv_dating_order_money;
+        private TextView tv_dating_order_memo;
     }
 }
