@@ -54,7 +54,7 @@
             android:textColor="@color/public_all"
             android:textSize="12sp"
             android:layout_marginRight="30dp"
-            android:text="未通过"/>
+            android:text="XXX"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -74,12 +74,13 @@
             android:textColor="@color/black"
             android:text="技师等级"/>
         <TextView
+            android:id="@+id/tv_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/public_all"
             android:textSize="12sp"
             android:layout_marginRight="30dp"
-            android:text="青铜"/>
+            android:text="XXX"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -99,6 +100,7 @@
             android:textColor="@color/black"
             android:text="技师编号"/>
         <TextView
+            android:id="@+id/tv_technician_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/public_all"
