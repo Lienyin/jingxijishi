@@ -85,7 +85,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> implements Serializ
             HttpResult o = GsonUtil.fromJson(jsonReader, type);
             response.close();
             int code = o.code;
-            if (code == 0 || code == 5 || code == 6|| code == 2) {
+            if (code == 0 || code == 5 || code == 6|| code == 2|| code == 1) {
                 return (T) o;
             } else if (code == 3) {
                 EventBus.getDefault().post(new EventCenter<String>(EventCenter.TOKEN_INVALID, "登陆超时"));

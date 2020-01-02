@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.withdrawdeposit;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 
 /**
@@ -10,5 +11,9 @@ import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
  */
 
 public class WithdrawDepositPresenter extends BasePresenterImpl<WithdrawDepositContract.View> implements WithdrawDepositContract.Presenter{
-    
+
+    @Override
+    protected void onEventComing(EventCenter center) {
+
+    }
 }

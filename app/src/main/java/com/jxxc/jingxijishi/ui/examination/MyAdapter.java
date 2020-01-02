@@ -1,5 +1,6 @@
 package com.jxxc.jingxijishi.ui.examination;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -10,14 +11,16 @@ import com.jxxc.jingxijishi.entity.backparameter.SartExaminationEntity;
 import java.util.List;
 
 public class MyAdapter extends FragmentStatePagerAdapter {
+    private Context context;
     public List<SartExaminationEntity.Question> list;
 
     public MyAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void setData(List<SartExaminationEntity.Question> list) {
+    public void setData(Context context,List<SartExaminationEntity.Question> list) {
         this.list = list;
+        this.context = context;
     }
     @Override
     public int getCount() {
@@ -26,7 +29,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
     //得到每个item
     @Override
     public Fragment getItem(int position) {
-        return ExaminationActivity.ArrayFragment.newInstance(position,list.get(position),list.size());
+        return ExaminationActivity.ArrayFragment.newInstance(context,position,list.get(position),list.size());
     }
     // 初始化每个页卡选项
     @Override

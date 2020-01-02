@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.bindingaccount;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 
 /**
@@ -10,5 +11,9 @@ import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
  */
 
 public class BindingAccountPresenter extends BasePresenterImpl<BindingAccountContract.View> implements BindingAccountContract.Presenter{
-    
+
+    @Override
+    protected void onEventComing(EventCenter center) {
+
+    }
 }
