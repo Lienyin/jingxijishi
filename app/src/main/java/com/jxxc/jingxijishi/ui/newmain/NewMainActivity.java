@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.dialog.PopSeek;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
@@ -78,6 +79,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     TextView tv_today_shouru;
     @BindView(R.id.tv_user_dengji)
     TextView tv_user_dengji;
+    @BindView(R.id.tv_service_type)
+    TextView tv_service_type;
     @BindView(R.id.lv_data)
     ListView lv_data;
     @BindView(R.id.rb_dating)
@@ -88,6 +91,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private long exitTime = 0;
     private NewMainAdapter adapter;
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
+    private PopSeek popSeek;
 
     @Override
     protected int layoutId() {
@@ -106,6 +110,21 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         adapter = new NewMainAdapter(this);
         adapter.setData(list);
         lv_data.setAdapter(adapter);
+        popSeek = new PopSeek(this);
+        popSeek.setOnFenxiangClickListener(new PopSeek.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int type) {
+                if (type ==1){
+                    //小休
+                    mPresenter.updateServiceStatic(1);
+                }else if (type == 2){
+                    //下线
+                    mPresenter.updateServiceStatic(2);
+                }else{
+                    //无服务
+                }
+            }
+        });
     }
 
     /**
@@ -136,7 +155,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     }
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
-    R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info})
+    R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info,
+    R.id.tv_service_type})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -190,6 +210,9 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.rb_fuwu://带服务
                 mPresenter.unfinishedOrder();
+                break;
+            case R.id.tv_service_type://服务状态
+                popSeek.showPopupWindow(tv_service_type);
                 break;
             default:
         }
@@ -258,6 +281,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             toast(this,"暂无订单");
         }
         adapter.notifyDataSetChanged();
+    }
+
+    //修改服务状态
+    @Override
+    public void updateServiceStaticCallBack() {
+        popSeek.dismiss();
     }
 
     //下拉刷新

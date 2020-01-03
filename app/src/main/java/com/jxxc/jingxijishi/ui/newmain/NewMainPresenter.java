@@ -88,4 +88,24 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                     }
                 });
     }
+
+    /**
+     * 修改服务状态
+     * @param type
+     */
+    @Override
+    public void updateServiceStatic(int type) {
+        OkGo.<HttpResult>post(Api.UPDATE_INFO)
+                .params("isOnline",type)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code == 0){
+                            mView.updateServiceStaticCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }

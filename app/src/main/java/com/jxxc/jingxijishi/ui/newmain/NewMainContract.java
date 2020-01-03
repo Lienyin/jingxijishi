@@ -19,11 +19,13 @@ public class NewMainContract {
         void getUserInfoCallBack(UserInfoEntity data);
         void awaitReceiveOrderCallBack(List<AwaitReceiveOrderEntity> data);
         void unfinishedOrderCallBack(List<AwaitReceiveOrderEntity> data);
+        void updateServiceStaticCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getUserInfo();
         void awaitReceiveOrder(double lng,double lat);
         void unfinishedOrder();
+        void updateServiceStatic(int type);
     }
 }
