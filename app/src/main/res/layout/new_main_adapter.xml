@@ -151,8 +151,10 @@
             android:layout_height="1dp"
             android:background="@color/gray"/>
         <LinearLayout
+            android:id="@+id/ll_fuwu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_dating_order_kehu"
@@ -189,6 +191,23 @@
                 android:text="开始服务"
                 android:layout_marginLeft="5dp"
                 android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_dating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/btn_rob_order"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_bg_button"
+                android:text="马上抢单"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
@@ -50,6 +51,8 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_time = convertView.findViewById(R.id.tv_dating_order_time);
             holder.tv_dating_order_money = convertView.findViewById(R.id.tv_dating_order_money);
             holder.tv_dating_order_memo = convertView.findViewById(R.id.tv_dating_order_memo);
+            holder.ll_fuwu = convertView.findViewById(R.id.ll_fuwu);
+            holder.ll_dating = convertView.findViewById(R.id.ll_dating);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -69,5 +72,7 @@ public class NewMainAdapter extends BaseAdapter {
         private TextView tv_dating_order_time;
         private TextView tv_dating_order_money;
         private TextView tv_dating_order_memo;
+        private LinearLayout ll_fuwu;
+        private LinearLayout ll_dating;
     }
 }

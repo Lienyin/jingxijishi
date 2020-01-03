@@ -119,14 +119,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 mPresenter.unfinishedOrder();
             }
         } else {
-            if (location == null) {
-                String lat = SPUtils.get(this, "lat", "");
-                String lng = SPUtils.get(this, "lng", "");
+            String lat = SPUtils.get(this, "lat", "");
+            String lng = SPUtils.get(this, "lng", "");
+            if (!AppUtils.isEmpty(lat)) {
                 if (rb_dating.isChecked() == true){
                     mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
                 }else{
                     mPresenter.unfinishedOrder();
                 }
+            }else{
+                toast(this,"定位失败");
             }
         }
     }

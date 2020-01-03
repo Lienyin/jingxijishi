@@ -3,12 +3,12 @@ package com.jxxc.jingxijishi;
 public class Api {
 //       public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
 //    public static final String BASEURL = "https://zhizuxia.zhizukj.com/ydb/app/";//生产
-   public static final String BASEURL = "http://47.100.198.184:9100/";//
+   public static final String BASEURL = "http://106.54.252.151:8100/";//
 
     //1-客户登录
     public static final String LOGIN = BASEURL + "system/technician/login";
     //2-获取短信验证码
-    public static final String SMS_CODE = BASEURL + "/common/auth/get_code";
+    public static final String SMS_CODE = BASEURL + "common/auth/get_code";
     //3-短信验证码登录
     public static final String LOGIN_CODE = BASEURL + "system/technician/login_by_code";
     //4-微信快捷登录
@@ -17,7 +17,7 @@ public class Api {
     public static final String AUTH_WECHAT = BASEURL + "system/technician/auth_wechat";
     //6-个人信息
     public static final String INFO_USER = BASEURL + "system/technician/info";
-    //7-个人信息
+    //7-修改密码
     public static final String UPDATE_PASSWORD = BASEURL + "system/technician/update_password";
     //8-技师开始线上考试
     public static final String START_EXAMINATION = BASEURL + "system/examination/startExamination";

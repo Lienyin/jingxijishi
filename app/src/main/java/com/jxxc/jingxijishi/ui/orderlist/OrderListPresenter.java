@@ -16,4 +16,14 @@ public class OrderListPresenter extends BasePresenterImpl<OrderListContract.View
     protected void onEventComing(EventCenter center) {
 
     }
+
+    @Override
+    public void myOrder(int type) {
+
+    }
+
+    @Override
+    public void myOrderMore(int type) {
+
+    }
 }

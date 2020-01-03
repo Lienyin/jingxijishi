@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.updatepassword.UpdatePasswordActivity;
@@ -47,5 +48,15 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
                 break;
             default:
         }
+    }
+
+    @Override
+    public void myOrderCallBack(OrderListEntity data) {
+
+    }
+
+    @Override
+    public void myOrderMoreCallBack(OrderListEntity data) {
+
     }
 }
