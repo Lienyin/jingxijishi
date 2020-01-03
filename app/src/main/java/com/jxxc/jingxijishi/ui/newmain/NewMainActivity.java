@@ -76,6 +76,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     TextView tv_tixian_money;
     @BindView(R.id.tv_today_shouru)
     TextView tv_today_shouru;
+    @BindView(R.id.tv_user_dengji)
+    TextView tv_user_dengji;
     @BindView(R.id.lv_data)
     ListView lv_data;
     @BindView(R.id.rb_dating)
@@ -94,7 +96,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void initData() {
-        //tv_title.setText("");
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
         swipeLayout.setOnRefreshListener(this);
@@ -119,8 +120,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 mPresenter.unfinishedOrder();
             }
         } else {
-            String lat = SPUtils.get(this, "lat", "");
-            String lng = SPUtils.get(this, "lng", "");
+            String lat = SPUtils.get(this, "lat", "120.97111");//默认江苏昆山
+            String lng = SPUtils.get(this, "lng", "31.389817");
             if (!AppUtils.isEmpty(lat)) {
                 if (rb_dating.isChecked() == true){
                     mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
@@ -221,6 +222,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         tv_today_order.setText(data.todayFinishOrder);
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
+        tv_user_dengji.setText(data.grade);
     }
 
     /**
