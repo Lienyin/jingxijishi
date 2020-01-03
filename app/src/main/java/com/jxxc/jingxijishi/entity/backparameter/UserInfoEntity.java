@@ -11,7 +11,7 @@ public class UserInfoEntity implements Serializable {
     public String userName;
     public String realName;
     public String avatar;
-    public String isOnline;
+    public int isOnline;
     public String score;
     public String grade;
     public int isExaminationQualified;

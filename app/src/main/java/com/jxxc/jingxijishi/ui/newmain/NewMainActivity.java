@@ -92,6 +92,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private NewMainAdapter adapter;
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
     private PopSeek popSeek;
+    private int isOnline;
 
     @Override
     protected int layoutId() {
@@ -114,14 +115,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         popSeek.setOnFenxiangClickListener(new PopSeek.OnFenxiangClickListener() {
             @Override
             public void onFenxiangClick(int type) {
+                //状态 2:忙碌 1:上线 0:下线
                 if (type ==1){
                     //小休
-                    mPresenter.updateServiceStatic(1);
+                    mPresenter.updateServiceStatic(2);
                 }else if (type == 2){
                     //下线
-                    mPresenter.updateServiceStatic(2);
+                    mPresenter.updateServiceStatic(0);
                 }else{
-                    //无服务
+                    //上线
+                    mPresenter.updateServiceStatic(1);
                 }
             }
         });
@@ -212,7 +215,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 mPresenter.unfinishedOrder();
                 break;
             case R.id.tv_service_type://服务状态
-                popSeek.showPopupWindow(tv_service_type);
+                popSeek.showPopupWindow(tv_service_type,isOnline);
                 break;
             default:
         }
@@ -241,12 +244,21 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
+        isOnline = data.isOnline;
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
         tv_today_order.setText(data.todayFinishOrder);
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
         tv_user_dengji.setText(data.grade);
+        //状态 2:忙碌 1:上线 0:下线
+        if (data.isOnline == 1){
+            tv_service_type.setText("接单中");
+        }else if (data.isOnline == 2){
+            tv_service_type.setText("小休");
+        }else{
+            tv_service_type.setText("下线");
+        }
     }
 
     /**
@@ -287,6 +299,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @Override
     public void updateServiceStaticCallBack() {
         popSeek.dismiss();
+        mPresenter.getUserInfo();
     }
 
     //下拉刷新

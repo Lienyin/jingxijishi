@@ -18,7 +18,7 @@ import com.jxxc.jingxijishi.utils.AppUtils;
 public class PopSeek extends PopupWindow {
     private View conentView;
     private Context mContext;
-    private LinearLayout tv_qrest,tv_xia_xian;
+    private LinearLayout tv_qrest,tv_xia_xian,tv_shang_xian;
 
     public PopSeek(final Activity context) {
         mContext = context;
@@ -50,12 +50,19 @@ public class PopSeek extends PopupWindow {
     }
 
     private void initView(){
+        tv_shang_xian = conentView.findViewById(R.id.tv_shang_xian);
         tv_xia_xian = conentView.findViewById(R.id.tv_xia_xian);
         tv_qrest = conentView.findViewById(R.id.tv_qrest);
         tv_qrest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onFenxiangClickListener.onFenxiangClick(1);
+            }
+        });
+        tv_shang_xian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFenxiangClickListener.onFenxiangClick(3);
             }
         });
         tv_xia_xian.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +72,22 @@ public class PopSeek extends PopupWindow {
             }
         });
     }
-    public void showPopupWindow(View parent) {
+    public void showPopupWindow(View parent,int isOnline) {
         if (!this.isShowing()) {
+            //状态 2:忙碌 1:上线 0:下线
+            if (isOnline ==1){
+                tv_qrest.setVisibility(View.VISIBLE);
+                tv_shang_xian.setVisibility(View.GONE);
+                tv_xia_xian.setVisibility(View.VISIBLE);
+            }else if (isOnline ==2){
+                tv_qrest.setVisibility(View.GONE);
+                tv_shang_xian.setVisibility(View.VISIBLE);
+                tv_xia_xian.setVisibility(View.VISIBLE);
+            }else{
+                tv_qrest.setVisibility(View.VISIBLE);
+                tv_shang_xian.setVisibility(View.VISIBLE);
+                tv_xia_xian.setVisibility(View.GONE);
+            }
             this.showAsDropDown(parent, parent.getLayoutParams().width, 18);
         } else {
             this.dismiss();
