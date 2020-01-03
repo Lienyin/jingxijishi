@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--主界面-->
+        <!--主界面(废弃)-->
         <activity android:name=".ui.main.MainActivity"
         android:screenOrientation="portrait"
         android:launchMode="singleTop"/>

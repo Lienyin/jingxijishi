@@ -53,8 +53,6 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
         initData();
         initListener();
         permission();
-        //根据状态栏颜色来决定状态栏文字用黑色还是白色
-        StatusBarUtil.setStatusBarMode(this, true, R.color.white);
     }
     protected void initListener() {};
     protected abstract int layoutId();

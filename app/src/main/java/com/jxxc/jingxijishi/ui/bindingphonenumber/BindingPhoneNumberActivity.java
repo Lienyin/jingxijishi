@@ -13,6 +13,7 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
@@ -49,6 +50,7 @@ public class BindingPhoneNumberActivity extends MVPBaseActivity<BindingPhoneNumb
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("绑定手机号");
         otherAppId = getIntent().getStringExtra("otherAppId");
         photoPath = getIntent().getStringExtra("userHeadImage");

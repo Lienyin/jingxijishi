@@ -11,6 +11,7 @@ import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.updatepassword.UpdatePasswordActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,6 +37,7 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("我的订单");
     }
 

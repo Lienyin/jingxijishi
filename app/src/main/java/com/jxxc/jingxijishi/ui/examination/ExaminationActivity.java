@@ -24,6 +24,7 @@ import com.jxxc.jingxijishi.entity.backparameter.SartExaminationEntity;
 import com.jxxc.jingxijishi.http.HttpResult;
 import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
@@ -50,6 +51,7 @@ public class ExaminationActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.examination_activity);
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         mPager = (ViewPager) findViewById(R.id.mypagers_pager);
         tv_examination_back = (TextView) findViewById(R.id.tv_examination_back);
         tv_topic_number = (TextView) findViewById(R.id.tv_topic_number);

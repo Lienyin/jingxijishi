@@ -10,6 +10,7 @@ import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,6 +36,7 @@ public class WelcomeActivity extends MVPBaseActivity<WelcomeContract.View, Welco
     }
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         //控制是否显示系统状态栏，默认显示(可不写)
         mPresenter.querySetting();
         boolean isfirstlogin =  SPUtils.get(this,"ISFIRSTLOGIN", true);

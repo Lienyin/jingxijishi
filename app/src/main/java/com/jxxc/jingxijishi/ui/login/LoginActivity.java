@@ -28,6 +28,7 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.LocationUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.jxxc.jingxijishi.wxapi.Constant;
 import com.jxxc.jingxijishi.wxapi.WeiXin;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -87,6 +88,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_back.setVisibility(View.GONE);
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
             etAccount.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));

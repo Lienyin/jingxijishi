@@ -96,6 +96,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
         swipeLayout.setOnRefreshListener(this);

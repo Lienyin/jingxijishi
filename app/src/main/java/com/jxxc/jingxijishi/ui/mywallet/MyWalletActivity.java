@@ -11,6 +11,7 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
 import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,6 +39,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("我的钱包");
     }
 
