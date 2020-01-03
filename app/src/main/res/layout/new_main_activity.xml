@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_home_user" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_home_duanxin" />
         </RelativeLayout>
 
         <LinearLayout
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@mipmap/user" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -153,7 +153,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:drawableLeft="@mipmap/logo"
+                            android:drawableLeft="@mipmap/score"
                             android:drawablePadding="5dp"
                             android:text="0.0"
                             android:textColor="@color/yellow"
@@ -279,7 +279,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_user_2_3x" />
 
             <TextView
                 android:layout_width="0dp"
@@ -313,9 +313,9 @@
             android:visibility="visible">
 
             <ImageView
-                android:layout_width="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_user_3_3x" />
 
             <TextView
                 android:layout_width="0dp"
@@ -350,7 +350,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_user_4_3x" />
 
             <TextView
                 android:layout_width="0dp"
@@ -386,7 +386,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_user_1_3x" />
 
             <TextView
                 android:layout_width="0dp"
@@ -422,7 +422,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/logo" />
+                android:src="@mipmap/icon_user_5_3x" />
 
             <TextView
                 android:layout_width="0dp"

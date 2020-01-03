@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:drawableLeft="@mipmap/logo"
+            android:drawableLeft="@mipmap/icon_back_3x"
             android:drawablePadding="10dp"
             android:text=""
             android:textSize="16dp"

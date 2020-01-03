@@ -182,8 +182,10 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.rb_dating://抢单大厅
+                getLatLng();
                 break;
             case R.id.rb_fuwu://带服务
+                mPresenter.unfinishedOrder();
                 break;
             default:
         }
