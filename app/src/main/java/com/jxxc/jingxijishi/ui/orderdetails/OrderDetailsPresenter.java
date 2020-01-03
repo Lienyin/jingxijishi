@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.orderdetails;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 
 /**
@@ -10,5 +11,9 @@ import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
  */
 
 public class OrderDetailsPresenter extends BasePresenterImpl<OrderDetailsContract.View> implements OrderDetailsContract.Presenter{
-    
+
+    @Override
+    protected void onEventComing(EventCenter center) {
+
+    }
 }

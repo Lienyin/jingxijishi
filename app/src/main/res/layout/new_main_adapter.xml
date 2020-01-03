@@ -33,6 +33,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
             <ImageView
+                android:id="@+id/iv_dating_order_static_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/logo"/>
@@ -201,9 +202,9 @@
             <Button
                 android:id="@+id/btn_rob_order"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@drawable/shape_bg_button"
                 android:text="马上抢单"
                 android:textColor="@color/white"

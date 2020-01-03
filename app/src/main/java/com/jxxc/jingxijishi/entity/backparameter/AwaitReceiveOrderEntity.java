@@ -6,7 +6,7 @@ import java.util.List;
 public class AwaitReceiveOrderEntity implements Serializable {
     public String address;
     public String appointmentTime;
-    public String distance;
+    public int distance;
     public String price;
     public String orderTopic;
     public String remark;
@@ -15,6 +15,7 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public String phonenumber;
     public String createTime;
     public String statusName;
+    public int status;
     public List<Products> products;
 
     public class Products{

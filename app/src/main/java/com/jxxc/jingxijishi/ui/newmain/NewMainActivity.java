@@ -233,11 +233,13 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void awaitReceiveOrderCallBack(List<AwaitReceiveOrderEntity> data) {
         swipeLayout.setRefreshing(false);
         if (data.size()>0){
-            adapter.setData(data);
-            adapter.notifyDataSetChanged();
+            list = data;
+            adapter.setData(list);
         }else{
+            list.clear();
             toast(this,"暂无订单");
         }
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -248,11 +250,13 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void unfinishedOrderCallBack(List<AwaitReceiveOrderEntity> data) {
         swipeLayout.setRefreshing(false);
         if (data.size()>0){
-            adapter.setData(data);
-            adapter.notifyDataSetChanged();
+            list = data;
+            adapter.setData(list);
         }else{
+            list.clear();
             toast(this,"暂无订单");
         }
+        adapter.notifyDataSetChanged();
     }
 
     //下拉刷新
