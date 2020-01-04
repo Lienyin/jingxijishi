@@ -187,9 +187,36 @@
                 android:layout_weight="1"
                 android:layout_height="40dp"
                 android:textColor="@color/public_all"
-                android:background="@drawable/send_code_btn_bg"
+                android:background="@drawable/shape_bg_button_wh"
                 android:gravity="center"
                 android:text="开始服务"
+                android:visibility="gone"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_count_down"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:background="@mipmap/botn_jingxingz"
+                android:gravity="center"
+                android:text="00:00"
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_wancheng"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_bg_button"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="完成服务"
                 android:layout_marginLeft="5dp"
                 android:textSize="14sp"/>
         </LinearLayout>

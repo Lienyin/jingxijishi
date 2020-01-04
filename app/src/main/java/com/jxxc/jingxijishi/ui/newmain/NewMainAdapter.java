@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.newmain;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NewMainAdapter extends BaseAdapter {
@@ -54,6 +58,10 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_money = convertView.findViewById(R.id.tv_dating_order_money);
             holder.tv_dating_order_memo = convertView.findViewById(R.id.tv_dating_order_memo);
             holder.tv_dating_order_car_number = convertView.findViewById(R.id.tv_dating_order_car_number);
+            holder.tv_dating_order_zhuandan = convertView.findViewById(R.id.tv_dating_order_zhuandan);
+            holder.tv_dating_order_start = convertView.findViewById(R.id.tv_dating_order_start);
+            holder.tv_dating_order_wancheng = convertView.findViewById(R.id.tv_dating_order_wancheng);
+            holder.tv_dating_order_count_down = convertView.findViewById(R.id.tv_dating_order_count_down);
             holder.ll_fuwu = convertView.findViewById(R.id.ll_fuwu);
             holder.ll_dating = convertView.findViewById(R.id.ll_dating);
             holder.iv_dating_order_static_icon = convertView.findViewById(R.id.iv_dating_order_static_icon);
@@ -69,6 +77,7 @@ public class NewMainAdapter extends BaseAdapter {
         holder.tv_dating_order_time.setText(data.appointmentTime);
         holder.tv_dating_order_memo.setText(data.remark);
         holder.tv_dating_order_money.setText("￥"+data.price);
+
         //订单状态 0待支付 1已支付待接单 2已接单待服务 3服务中 4服务已完成 5取消订单
         if (data.status == 1){
             holder.iv_dating_order_static_icon.setImageResource(R.mipmap.order_dingwei);
@@ -81,18 +90,69 @@ public class NewMainAdapter extends BaseAdapter {
             }
             holder.tv_dating_order_static_memo.setText(showDistance);
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.black));
-        }else if (data.status == 2){
+            holder.ll_dating.setVisibility(View.VISIBLE);//抢单
+            holder.ll_fuwu.setVisibility(View.GONE);//服务
+            holder.tv_dating_order_zhuandan.setVisibility(View.VISIBLE);//转单
+            holder.tv_dating_order_start.setVisibility(View.GONE);//开始服务
+            holder.tv_dating_order_wancheng.setVisibility(View.GONE);//完成服务
+            holder.tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
+        }else if (data.status == 2){//待服务
             holder.iv_dating_order_static_icon.setImageResource(R.mipmap.order_dengdai);
             holder.tv_dating_order_static_memo.setText("待服务");
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.dai_fuwu));
-        }else if (data.status == 3){
+            holder.ll_dating.setVisibility(View.GONE);
+            holder.ll_fuwu.setVisibility(View.VISIBLE);
+            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_start.setVisibility(View.VISIBLE);
+            holder.tv_dating_order_wancheng.setVisibility(View.GONE);
+            holder.tv_dating_order_count_down.setVisibility(View.GONE);
+        }else if (data.status == 3){//服务中
             holder.iv_dating_order_static_icon.setImageResource(R.mipmap.order_jingxingz);
             holder.tv_dating_order_static_memo.setText("服务中");
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.public_all));
+            holder.ll_dating.setVisibility(View.GONE);
+            holder.ll_fuwu.setVisibility(View.VISIBLE);
+            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_start.setVisibility(View.GONE);
+
+            //服务截至时间-当前时间
+            int jzTIme =  Integer.parseInt(getTime(data.getCanCompleteTime()));//截至时间
+            int dqTime = Integer.parseInt(getTime(getDQTime()));//当前时间
+            if (jzTIme-dqTime>0){
+                holder.tv_dating_order_count_down.setVisibility(View.VISIBLE);//倒计时
+                holder.tv_dating_order_wancheng.setVisibility(View.GONE);//倒计时结束显示完成服务
+                String str = "";
+                int time = (jzTIme-dqTime)/3600;
+                if (time>=1){
+                   str = getStrTimeHour((jzTIme-dqTime)+"");//服务剩余时间
+                }else{
+                    str = getStrTimeMinute((jzTIme-dqTime)+"");//服务剩余时间
+                }
+                holder.tv_dating_order_count_down.setText("  "+str);
+            }else{
+                holder.tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
+                holder.tv_dating_order_wancheng.setVisibility(View.VISIBLE);//倒计时结束显示完成服务
+            }
+        }else if (data.status == 4){//服务已完成
+            holder.iv_dating_order_static_icon.setImageResource(R.mipmap.order_jingxingz);
+            holder.tv_dating_order_static_memo.setText("已完成");
+            holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.public_all));
+            holder.ll_dating.setVisibility(View.GONE);
+            holder.ll_fuwu.setVisibility(View.VISIBLE);
+            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_start.setVisibility(View.GONE);
+            holder.tv_dating_order_wancheng.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_count_down.setVisibility(View.GONE);
         }else{
             holder.iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5_3x);
             holder.tv_dating_order_static_memo.setText(data.statusName);
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.black));
+            holder.ll_dating.setVisibility(View.GONE);
+            holder.ll_fuwu.setVisibility(View.VISIBLE);
+            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_start.setVisibility(View.GONE);
+            holder.tv_dating_order_wancheng.setVisibility(View.GONE);
+            holder.tv_dating_order_count_down.setVisibility(View.GONE);
         }
         return convertView;
     }
@@ -105,8 +165,85 @@ public class NewMainAdapter extends BaseAdapter {
         private TextView tv_dating_order_memo;
         private TextView tv_dating_order_car_number;
         private TextView tv_dating_order_static_memo;
+        private TextView tv_dating_order_zhuandan;
+        private TextView tv_dating_order_start;
+        private TextView tv_dating_order_wancheng;
+        private TextView tv_dating_order_count_down;
         private LinearLayout ll_fuwu;
         private LinearLayout ll_dating;
         private ImageView iv_dating_order_static_icon;
+    }
+
+    // 将字符串转为时间戳
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+        }catch (ParseException e) {
+            // TODO Auto-generated catch block e.printStackTrace();
+        }
+        return re_time;
+    }
+    // 将时间戳转为字符串(从小时倒计时)
+    public static String getStrTimeHour(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        // 例如：
+        //cc_time=1291778220 ;
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+        return re_StrTime;
+    }
+    // 将时间戳转为字符串(从分钟倒计时)
+    public static String getStrTimeMinute(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        // 例如：
+        //cc_time=1291778220 ;
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+        return re_StrTime;
+    }
+
+    //获取当前时间
+    public String getDQTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
+    int result = 0;
+    private Thread thread;
+    public void start() {
+        thread = new Thread() {
+            public void run() {
+                while (true) {
+                    try {
+                        if (list == null || result == list.size()) {
+                            break;
+                        }
+                        sleep(1);
+                        for (AwaitReceiveOrderEntity person : list) {
+                            if (!"时间到".equals(person.getCanCompleteTime())) {
+                                if ("1".equals(person.getCanCompleteTime())) {
+                                    person.setCanCompleteTime("时间到");
+                                    result++;
+                                } else {
+                                    person.setCanCompleteTime(person.getCanCompleteTime());
+                                }
+                            }
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
     }
 }

@@ -14,6 +14,8 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public String brandType;
     public String phonenumber;
     public String createTime;
+    public String endTime;
+    public String canCompleteTime;
     public String statusName;
     public int status;
     public List<Products> products;
@@ -22,6 +24,13 @@ public class AwaitReceiveOrderEntity implements Serializable {
         public String productId;
         public String productName;
         public String imgUrl;
+    }
 
+    public String getCanCompleteTime() {
+        return canCompleteTime;
+    }
+
+    public void setCanCompleteTime(String canCompleteTime) {
+        this.canCompleteTime = canCompleteTime;
     }
 }

@@ -3,6 +3,8 @@ package com.jxxc.jingxijishi.ui.newmain;
 
 import android.content.Intent;
 import android.location.Location;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -37,6 +39,8 @@ import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -93,6 +97,17 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
     private PopSeek popSeek;
     private int isOnline;
+    Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what ==1) {
+                adapter.notifyDataSetChanged();
+                //每隔1秒更新一次界面，如果只需要精确到秒的倒计时此处改成1000即可
+                handler.sendEmptyMessageDelayed(1,1000);
+            }
+        }
+    };
 
     @Override
     protected int layoutId() {
@@ -214,6 +229,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.rb_fuwu://带服务
                 mPresenter.unfinishedOrder();
+                adapter.start();
+                handler.sendEmptyMessageDelayed(1,1000);
                 break;
             case R.id.tv_service_type://服务状态
                 popSeek.showPopupWindow(tv_service_type,isOnline);
