@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,6 +29,7 @@ import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
 import com.jxxc.jingxijishi.ui.message.MessageActivity;
 import com.jxxc.jingxijishi.ui.mywallet.MyWalletActivity;
+import com.jxxc.jingxijishi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxijishi.ui.orderlist.OrderListActivity;
 import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.ui.usercenter.UsercenterActivity;
@@ -129,17 +131,27 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         lv_data.setAdapter(adapter);
         adapter.setOnFenxiangClickListener(new NewMainAdapter.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(int type) {
+            public void onFenxiangClick(int type,String phoneNumber) {
                 switch (type){
                     case 1://抢单
+                        toast(NewMainActivity.this,"抢单");
                         break;
                     case 2: //联系客户
+                        AppUtils.callPhone(NewMainActivity.this,phoneNumber);
                         break;
                     case 3://转单
+                        toast(NewMainActivity.this,"转单");
                         break;
                     case 4://开始服务
+                        toast(NewMainActivity.this,"开始服务");
                         break;
                 }
+            }
+        });
+        lv_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ZzRouter.gotoActivity(NewMainActivity.this, OrderDetailsActivity.class);
             }
         });
         popSeek = new PopSeek(this);

@@ -155,13 +155,13 @@
             android:id="@+id/ll_fuwu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_dating_order_kehu"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColor="@color/black999"
                 android:drawableLeft="@mipmap/order_call_icon_3x"
                 android:drawablePadding="5dp"
@@ -173,7 +173,7 @@
                 android:id="@+id/tv_dating_order_zhuandan"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColor="@color/black999"
                 android:drawableLeft="@mipmap/order_zhuandan_icon_3x"
                 android:drawablePadding="5dp"
@@ -224,14 +224,15 @@
             android:id="@+id/ll_dating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:gravity="center_vertical">
-            <Button
+            <TextView
                 android:id="@+id/btn_rob_order"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:gravity="center"
                 android:background="@drawable/shape_bg_button"
                 android:text="马上抢单"
                 android:textColor="@color/white"

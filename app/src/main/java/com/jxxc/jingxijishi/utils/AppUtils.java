@@ -26,7 +26,10 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -97,7 +100,8 @@ public class AppUtils {
             data = Uri.fromFile(file);
         } else {
             if (isNotEmpty(authority)) {
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 data = FileProvider.getUriForFile(context.getApplicationContext(), authority, file);
             }
         }
@@ -329,5 +333,47 @@ public class AppUtils {
         }
     }
 
+    public static int dp2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
 
+    /*将字符串转为时间戳*/
+    public static String getStringToDate(String time) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = new Date();
+//        try{
+//            date = sdf.parse(time);
+//        } catch(ParseException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return date.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String re_time = null;
+        Date d;
+        try {
+            d = sdf.parse(time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+        }catch (ParseException e) {
+            // TODO Auto-generated catch block e.printStackTrace();
+        }
+        return re_time;
+    }
+
+    public static void callPhone(Context mContext, String tel) {
+        try {
+            //吊起来拨号界面不需要权限
+            Uri uri = Uri.parse("tel:" + tel);
+            Intent callHotPhone = new Intent(Intent.ACTION_DIAL);
+            callHotPhone.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            callHotPhone.setData(uri);
+            mContext.startActivity(callHotPhone);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

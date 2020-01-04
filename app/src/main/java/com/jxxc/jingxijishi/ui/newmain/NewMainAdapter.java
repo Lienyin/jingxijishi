@@ -74,7 +74,7 @@ public class NewMainAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        AwaitReceiveOrderEntity data = list.get(position);
+        final AwaitReceiveOrderEntity data = list.get(position);
         holder.tv_dating_order_static.setText(data.orderTopic);
         holder.tv_dating_order_car_number.setText(data.carNum);
         holder.tv_dating_order_address.setText(data.address);
@@ -176,25 +176,25 @@ public class NewMainAdapter extends BaseAdapter {
         holder.btn_rob_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(1);//抢单
+                onFenxiangClickListener.onFenxiangClick(1,"");//抢单
             }
         });
         holder.tv_dating_order_kehu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(2);//联系客户
+                onFenxiangClickListener.onFenxiangClick(2,data.phonenumber);//联系客户
             }
         });
         holder.tv_dating_order_zhuandan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(3);//转单
+                onFenxiangClickListener.onFenxiangClick(3,"");//转单
             }
         });
         holder.tv_dating_order_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(4);//开始服务
+                onFenxiangClickListener.onFenxiangClick(4,"");//开始服务
             }
         });
         return convertView;
@@ -216,7 +216,7 @@ public class NewMainAdapter extends BaseAdapter {
         private LinearLayout ll_fuwu;
         private LinearLayout ll_dating;
         private ImageView iv_dating_order_static_icon;
-        private Button btn_rob_order;
+        private TextView btn_rob_order;
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;
@@ -226,7 +226,7 @@ public class NewMainAdapter extends BaseAdapter {
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(int type);
+        void onFenxiangClick(int type,String phoneNumber);
     }
 
     // 将字符串转为时间戳
@@ -243,26 +243,6 @@ public class NewMainAdapter extends BaseAdapter {
             // TODO Auto-generated catch block e.printStackTrace();
         }
         return re_time;
-    }
-    // 将时间戳转为字符串(从小时倒计时)
-    public static String getStrTimeHour(String cc_time) {
-        String re_StrTime = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        // 例如：
-        //cc_time=1291778220 ;
-        long lcc_time = Long.valueOf(cc_time);
-        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-        return re_StrTime;
-    }
-    // 将时间戳转为字符串(从分钟倒计时)
-    public static String getStrTimeMinute(String cc_time) {
-        String re_StrTime = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-        // 例如：
-        //cc_time=1291778220 ;
-        long lcc_time = Long.valueOf(cc_time);
-        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-        return re_StrTime;
     }
 
     //获取当前时间
