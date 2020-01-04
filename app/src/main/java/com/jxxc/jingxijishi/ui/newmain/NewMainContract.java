@@ -20,6 +20,8 @@ public class NewMainContract {
         void awaitReceiveOrderCallBack(List<AwaitReceiveOrderEntity> data);
         void unfinishedOrderCallBack(List<AwaitReceiveOrderEntity> data);
         void updateServiceStaticCallBack();
+        void latestVersionCallBack();
+        void updateCB(boolean must);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -27,5 +29,6 @@ public class NewMainContract {
         void awaitReceiveOrder(double lng,double lat);
         void unfinishedOrder();
         void updateServiceStatic(int type);
+        void latestVersion(int type);
     }
 }

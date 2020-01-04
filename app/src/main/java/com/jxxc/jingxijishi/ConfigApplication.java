@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.jxxc.jingxijishi.utils.BasicThreadFactory;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
@@ -30,6 +31,7 @@ import java.io.Serializable;
 import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -52,6 +54,8 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
     private static ConfigApplication instans;
     private static Context mContext;
     public static  String CACHA_URL;
+    public static ScheduledThreadPoolExecutor pool = new ScheduledThreadPoolExecutor(3,
+            new BasicThreadFactory.Builder().namingPattern("轮询").daemon(true).build());
 
     @Override
     public void onCreate() {

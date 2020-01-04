@@ -29,4 +29,6 @@ public class Api {
     public static final String AWAIT_RECEIVE_ORDER = BASEURL + "biz/carWashOrder/awaitReceiveOrder";
     //12-待服务列表
     public static final String UNFINISHED_ORDER = BASEURL + "biz/carWashOrder/unfinishedOrder";
+    //13-查询app最新版本
+    public static final String LATEST_VERSION = BASEURL + "system/upgrade_pack/latest_version";
 }

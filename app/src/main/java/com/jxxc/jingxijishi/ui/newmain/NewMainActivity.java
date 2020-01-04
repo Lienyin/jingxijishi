@@ -104,6 +104,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
+        mPresenter.latestVersion(1);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
 
@@ -300,6 +301,20 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void updateServiceStaticCallBack() {
         popSeek.dismiss();
         mPresenter.getUserInfo();
+    }
+
+    /**
+     * 查询版本返回数据
+     */
+    @Override
+    public void latestVersionCallBack() {
+
+    }
+
+    boolean isMustUpdate;
+    @Override
+    public void updateCB(boolean must) {
+        this.isMustUpdate = must;
     }
 
     //下拉刷新

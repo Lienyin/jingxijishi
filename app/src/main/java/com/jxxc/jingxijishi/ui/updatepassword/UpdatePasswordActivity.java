@@ -62,7 +62,7 @@ public class UpdatePasswordActivity extends MVPBaseActivity<UpdatePasswordContra
                     toast(this,"请输入您的新密码");
                 }else if (AppUtils.isEmpty(et_affirm_new_password.getText().toString().trim())){
                     toast(this,"请确认您的新密码");
-                }else if (et_affirm_new_password.getText().toString().trim().equals(et_new_password.getText().toString().trim())){
+                }else if (!et_affirm_new_password.getText().toString().trim().equals(et_new_password.getText().toString().trim())){
                     toast(this,"密码不一致");
                 }else{
                     mPresenter.updatePassword(et_original_password.getText().toString().trim(),et_new_password.getText().toString().trim());
