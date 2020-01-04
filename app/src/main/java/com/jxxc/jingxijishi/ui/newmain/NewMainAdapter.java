@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.dialog.PopSeek;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 
 import java.text.DecimalFormat;
@@ -66,6 +68,8 @@ public class NewMainAdapter extends BaseAdapter {
             holder.ll_dating = convertView.findViewById(R.id.ll_dating);
             holder.iv_dating_order_static_icon = convertView.findViewById(R.id.iv_dating_order_static_icon);
             holder.tv_dating_order_static_memo = convertView.findViewById(R.id.tv_dating_order_static_memo);
+            holder.tv_dating_order_kehu = convertView.findViewById(R.id.tv_dating_order_kehu);
+            holder.btn_rob_order = convertView.findViewById(R.id.btn_rob_order);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -92,7 +96,7 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.black));
             holder.ll_dating.setVisibility(View.VISIBLE);//抢单
             holder.ll_fuwu.setVisibility(View.GONE);//服务
-            holder.tv_dating_order_zhuandan.setVisibility(View.VISIBLE);//转单
+            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);//转单
             holder.tv_dating_order_start.setVisibility(View.GONE);//开始服务
             holder.tv_dating_order_wancheng.setVisibility(View.GONE);//完成服务
             holder.tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
@@ -102,7 +106,7 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.dai_fuwu));
             holder.ll_dating.setVisibility(View.GONE);
             holder.ll_fuwu.setVisibility(View.VISIBLE);
-            holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            holder.tv_dating_order_zhuandan.setVisibility(View.VISIBLE);
             holder.tv_dating_order_start.setVisibility(View.VISIBLE);
             holder.tv_dating_order_wancheng.setVisibility(View.GONE);
             holder.tv_dating_order_count_down.setVisibility(View.GONE);
@@ -122,13 +126,28 @@ public class NewMainAdapter extends BaseAdapter {
                 holder.tv_dating_order_count_down.setVisibility(View.VISIBLE);//倒计时
                 holder.tv_dating_order_wancheng.setVisibility(View.GONE);//倒计时结束显示完成服务
                 String str = "";
-                int time = (jzTIme-dqTime)/3600;
+                int s = jzTIme-dqTime;
+                int time = s/3600;
                 if (time>=1){
-                   str = getStrTimeHour((jzTIme-dqTime)+"");//服务剩余时间
+                    int h = s/3600;//小时
+                    s = s-h*3600;//剩余秒数
+                    int m = s/60;//分钟
+                    s = s-m*60;//秒数
+                    if (h>=10){
+                        holder.tv_dating_order_count_down.setText("  "+h+":"+m+":"+s);//服务剩余时间
+                    }else{
+                        holder.tv_dating_order_count_down.setText("  0"+h+":"+m+":"+s);//服务剩余时间
+                    }
                 }else{
-                    str = getStrTimeMinute((jzTIme-dqTime)+"");//服务剩余时间
+                    int m = s/60;//分钟
+                    s = s-m*60;//秒数
+                    //str = getStrTimeMinute((jzTIme-dqTime)+"");//服务剩余时间
+                    if (m>=10){
+                        holder.tv_dating_order_count_down.setText(m+":"+s);
+                    }else{
+                        holder.tv_dating_order_count_down.setText("  0"+m+":"+s);
+                    }
                 }
-                holder.tv_dating_order_count_down.setText("  "+str);
             }else{
                 holder.tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
                 holder.tv_dating_order_wancheng.setVisibility(View.VISIBLE);//倒计时结束显示完成服务
@@ -154,6 +173,30 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_wancheng.setVisibility(View.GONE);
             holder.tv_dating_order_count_down.setVisibility(View.GONE);
         }
+        holder.btn_rob_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(1);//抢单
+            }
+        });
+        holder.tv_dating_order_kehu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(2);//联系客户
+            }
+        });
+        holder.tv_dating_order_zhuandan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(3);//转单
+            }
+        });
+        holder.tv_dating_order_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(4);//开始服务
+            }
+        });
         return convertView;
     }
 
@@ -169,9 +212,21 @@ public class NewMainAdapter extends BaseAdapter {
         private TextView tv_dating_order_start;
         private TextView tv_dating_order_wancheng;
         private TextView tv_dating_order_count_down;
+        private TextView tv_dating_order_kehu;
         private LinearLayout ll_fuwu;
         private LinearLayout ll_dating;
         private ImageView iv_dating_order_static_icon;
+        private Button btn_rob_order;
+    }
+
+    private OnFenxiangClickListener onFenxiangClickListener;
+
+    public void setOnFenxiangClickListener(OnFenxiangClickListener onFenxiangClickListener) {
+        this.onFenxiangClickListener = onFenxiangClickListener;
+    }
+
+    public interface OnFenxiangClickListener{
+        void onFenxiangClick(int type);
     }
 
     // 将字符串转为时间戳

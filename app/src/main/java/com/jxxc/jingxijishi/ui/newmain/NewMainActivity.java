@@ -127,6 +127,21 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         adapter = new NewMainAdapter(this);
         adapter.setData(list);
         lv_data.setAdapter(adapter);
+        adapter.setOnFenxiangClickListener(new NewMainAdapter.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int type) {
+                switch (type){
+                    case 1://抢单
+                        break;
+                    case 2: //联系客户
+                        break;
+                    case 3://转单
+                        break;
+                    case 4://开始服务
+                        break;
+                }
+            }
+        });
         popSeek = new PopSeek(this);
         popSeek.setOnFenxiangClickListener(new PopSeek.OnFenxiangClickListener() {
             @Override
