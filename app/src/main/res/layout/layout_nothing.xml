@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:layout_width="189dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="@mipmap/iv_nothing"
+        android:layout_height="175dp"/>
+    <TextView
+        android:id="@+id/tv_hotline"
+        android:visibility="gone"
+        android:textColor="#888888"
+        android:text="是否请求人工服务 400-136-0995"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+</LinearLayout>
+

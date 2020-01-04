@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxc.jingxijishi.entity.backparameter.MsgListEntity;
+import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 
 import java.util.List;
 
@@ -14,14 +15,14 @@ import java.util.List;
  * email:458079442@qq.com
  */
 
-public class OrderListAdapter extends BaseQuickAdapter<MsgListEntity, BaseViewHolder> {
+public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseViewHolder> {
 
-    public OrderListAdapter(@LayoutRes int layoutResId, @Nullable List<MsgListEntity> data) {
+    public OrderListAdapter(@LayoutRes int layoutResId, @Nullable List<OrderListEntity> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final MsgListEntity item) {
+    protected void convert(BaseViewHolder helper, final OrderListEntity item) {
         //helper.setText(R.id.tv_order_number, item.id+"");
     }
 
