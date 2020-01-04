@@ -167,7 +167,7 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_static_memo.setText(data.statusName);
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.black));
             holder.ll_dating.setVisibility(View.GONE);
-            holder.ll_fuwu.setVisibility(View.VISIBLE);
+            holder.ll_fuwu.setVisibility(View.GONE);
             holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
             holder.tv_dating_order_start.setVisibility(View.GONE);
             holder.tv_dating_order_wancheng.setVisibility(View.GONE);

@@ -151,7 +151,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         lv_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ZzRouter.gotoActivity(NewMainActivity.this, OrderDetailsActivity.class);
+                ZzRouter.gotoActivity(NewMainActivity.this, OrderDetailsActivity.class,list.get(i));
             }
         });
         popSeek = new PopSeek(this);
