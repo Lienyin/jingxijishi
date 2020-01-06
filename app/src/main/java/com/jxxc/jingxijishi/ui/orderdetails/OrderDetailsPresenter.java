@@ -89,27 +89,6 @@ public class OrderDetailsPresenter extends BasePresenterImpl<OrderDetailsContrac
     }
 
     /**
-     * 完成服务
-     * @param orderId
-     */
-    @Override
-    public void endService(String orderId) {
-        OkGo.<HttpResult>post(Api.END_SERVICE)
-                .params("orderId",orderId)
-                .execute(new JsonCallback<HttpResult>() {
-                    @Override
-                    public void onSuccess(Response<HttpResult> response) {
-                        if (response.body().code==0){
-                            mView.endServiceCallBack();
-                            toast(mContext,response.body().message);
-                        }else{
-                            toast(mContext,response.body().message);
-                        }
-                    }
-                });
-    }
-
-    /**
      * 转单
      * @param orderId
      */

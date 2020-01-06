@@ -16,7 +16,6 @@ public class OrderDetailsContract {
         void getOrderDetailsCallBack(AwaitReceiveOrderEntity data);
         void receiveCallBack();
         void startServiceCallBack();
-        void endServiceCallBack();
         void transferOrderCallBack();
     }
 
@@ -24,7 +23,6 @@ public class OrderDetailsContract {
         void getOrderDetails(String orderId);
         void receive(String orderId);
         void startService(String orderId);
-        void endService(String orderId);
         void transferOrder(String orderId);
     }
 }

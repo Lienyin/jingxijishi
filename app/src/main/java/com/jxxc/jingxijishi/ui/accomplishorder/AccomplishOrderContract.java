@@ -6,6 +6,8 @@ import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.mvp.BasePresenter;
 import com.jxxc.jingxijishi.mvp.BaseView;
 
+import java.util.List;
+
 /**
  * MVPPlugin
  *  邮箱 784787081@qq.com
@@ -14,6 +16,8 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 public class AccomplishOrderContract {
     interface View extends BaseView {
         void getOrderDetailsCallBack(AwaitReceiveOrderEntity data);
+        void endServiceCallBack();
+        void commitCallback(String imgUrl);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -21,5 +25,7 @@ public class AccomplishOrderContract {
         void gotoImageSelect(AccomplishOrderActivity malfunctionRepairActivity, int requestCodeChoose);
 
         void getOrderDetails(String orderId);
+        void endService(String orderId,String imgUrl);
+        void commit(List<String> uriList);
     }
 }

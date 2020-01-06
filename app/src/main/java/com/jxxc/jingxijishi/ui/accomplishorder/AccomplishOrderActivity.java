@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -56,6 +57,8 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
     RecyclerView rvListImages;
     @BindView(R.id.rv_ic_add)
     RecyclerView rvIcAdd;
+    @BindView(R.id.btn_service_wanc)
+    Button btn_service_wanc;
     private ImagesAdapter mImagesAdapter;
     private AddAdapter addAdapter;
     private List<String> uriList = new ArrayList<>();
@@ -70,7 +73,6 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         public void handleMessage(Message msg) {
             if (msg.what ==1) {
                 getTimeChang();
-                Log.i("TAG","123");
                 //每隔1秒更新一次界面，如果只需要精确到秒的倒计时此处改成1000即可
                 handler.sendEmptyMessageDelayed(1,1000);
             }
@@ -124,12 +126,19 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         });
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back,R.id.btn_service_wanc})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
+                break;
+            case R.id.btn_service_wanc://完成服务
+                if (mImagesAdapter.getData().size()<=0){
+                    toast(this,"请拍摄照片");
+                }else{
+                    mPresenter.commit(mImagesAdapter.getData());
+                }
                 break;
             default:
         }
@@ -255,5 +264,17 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                 }
             }
         }).start();
+    }
+
+    //完成服务返回数据
+    @Override
+    public void endServiceCallBack() {
+        finish();
+    }
+
+    //上传文件返回数据
+    @Override
+    public void commitCallback(String url) {
+        mPresenter.endService(OrderId,url);
     }
 }

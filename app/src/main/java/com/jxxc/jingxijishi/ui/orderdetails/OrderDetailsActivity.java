@@ -14,6 +14,7 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.MyGridView;
@@ -170,7 +171,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 mPresenter.startService(data.orderId);
                 break;
             case R.id.tv_dating_order_wancheng://完成服务
-                mPresenter.endService(data.orderId);
+                ZzRouter.gotoActivity(this, AccomplishOrderActivity.class);
                 break;
             case R.id.btn_rob_order://接单
                 mPresenter.receive(data.orderId);
@@ -298,11 +299,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     public void startServiceCallBack() {
         mPresenter.getOrderDetails(data.orderId);
     }
-    //完成服务返回数据
-    @Override
-    public void endServiceCallBack() {
-        mPresenter.getOrderDetails(data.orderId);
-    }
+
     //转单返回数据
     @Override
     public void transferOrderCallBack() {
