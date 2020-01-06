@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -69,6 +70,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         public void handleMessage(Message msg) {
             if (msg.what ==1) {
                 getTimeChang();
+                Log.i("TAG","123");
                 //每隔1秒更新一次界面，如果只需要精确到秒的倒计时此处改成1000即可
                 handler.sendEmptyMessageDelayed(1,1000);
             }
@@ -181,6 +183,8 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
     @Override
     public void getOrderDetailsCallBack(AwaitReceiveOrderEntity data) {
         awaitReceiveOrderEntity = data;
+        getTimeChang();
+        start();
     }
 
     //服务时长
@@ -188,7 +192,6 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         int jzTIme =  Integer.parseInt(getTime(awaitReceiveOrderEntity.startTime));//开始服务时间
         int dqTime = Integer.parseInt(getTime(getDQTime()));//当前时间
         //当前时间-开始时间
-        String str = "";
         int s = dqTime-jzTIme;
         int time = s/3600;
         if (time>=1){
@@ -196,23 +199,19 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
             s = s-h*3600;//剩余秒数
             int m = s/60;//分钟
             s = s-m*60;//秒数
-            tv_order_hour.setText(h);//服务剩余时间
-            tv_order_minute.setText(m);//服务剩余时间
-            tv_order_second.setText(s);//服务剩余时间
+            tv_order_hour.setText(h+"");//服务剩余时间
+            tv_order_minute.setText(m+"");//服务剩余时间
+            tv_order_second.setText(s+"");//服务剩余时间
 
             tv_order_hour.setVisibility(View.VISIBLE);
             tv_order_hour_miao.setVisibility(View.VISIBLE);
         }else{
             int m = s/60;//分钟
             s = s-m*60;//秒数
-            tv_order_minute.setText(m);//服务剩余时间
-            tv_order_second.setText(s);//服务剩余时间
+            tv_order_minute.setText(m+"");//服务剩余时间
+            tv_order_second.setText(s+"");//服务剩余时间
             tv_order_hour.setVisibility(View.GONE);
             tv_order_hour_miao.setVisibility(View.GONE);
-        }
-        if (dqTime-jzTIme>0){//服务倒计时中
-        }else{
-
         }
     }
     // 将字符串转为时间戳
