@@ -164,6 +164,90 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
     }
 
     /**
+     * 接单
+     * @param orderId
+     */
+    @Override
+    public void receive(String orderId) {
+        OkGo.<HttpResult>post(Api.RECEIVE)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.receiveCallBack();
+                            toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 开始服务
+     * @param orderId
+     */
+    @Override
+    public void startService(String orderId) {
+        OkGo.<HttpResult>post(Api.START_SERVICE)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.startServiceCallBack();
+                            toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 完成服务
+     * @param orderId
+     */
+    @Override
+    public void endService(String orderId) {
+        OkGo.<HttpResult>post(Api.END_SERVICE)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.endServiceCallBack();
+                            toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 转单
+     * @param orderId
+     */
+    @Override
+    public void transferOrder(String orderId) {
+        OkGo.<HttpResult>post(Api.TRANSFER_ORDER)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.transferOrderCallBack();
+                            toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
      * 下载apk并安装
      */
     public void updateAPK(final String url, String memo, boolean isMust,String versions) {

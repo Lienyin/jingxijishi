@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
@@ -78,6 +79,10 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     LinearLayout ll_dating_wan_order_time;
     @BindView(R.id.gv_data)
     MyGridView gv_data;
+    @BindView(R.id.tv_dating_order_kehu)
+    TextView tv_dating_order_kehu;
+    @BindView(R.id.btn_rob_order)
+    TextView btn_rob_order;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
     private CarAdapter carAdapter;
@@ -102,10 +107,133 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("订单详情");
+        StyledDialog.buildLoading("正在查询").setActivity(this).show();
         data = ZzRouter.getIntentData(this,AwaitReceiveOrderEntity.class);
-        carAdapter = new CarAdapter(this);
-        carAdapter.setData(data.products);
-        gv_data.setAdapter(carAdapter);
+        mPresenter.getOrderDetails(data.orderId);
+    }
+
+    //倒计时
+    private void daoJishi(){
+        //服务截至时间-当前时间
+        int jzTIme =  Integer.parseInt(getTime(data.getCanCompleteTime()));//截至时间
+        int dqTime = Integer.parseInt(getTime(getDQTime()));//当前时间
+        if (jzTIme-dqTime>0){
+            tv_dating_order_count_down.setVisibility(View.VISIBLE);//倒计时
+            tv_dating_order_wancheng.setVisibility(View.GONE);//倒计时结束显示完成服务
+            String str = "";
+            int s = jzTIme-dqTime;
+            int time = s/3600;
+            if (time>=1){
+                int h = s/3600;//小时
+                s = s-h*3600;//剩余秒数
+                int m = s/60;//分钟
+                s = s-m*60;//秒数
+                if (h>=10){
+                    tv_dating_order_count_down.setText("  "+h+":"+m+":"+s);//服务剩余时间
+                }else{
+                    tv_dating_order_count_down.setText("  0"+h+":"+m+":"+s);//服务剩余时间
+                }
+            }else{
+                int m = s/60;//分钟
+                s = s-m*60;//秒数
+                //str = getStrTimeMinute((jzTIme-dqTime)+"");//服务剩余时间
+                if (m>=10){
+                    tv_dating_order_count_down.setText(m+":"+s);
+                }else{
+                    tv_dating_order_count_down.setText("  0"+m+":"+s);
+                }
+            }
+        }else{
+            tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
+            tv_dating_order_wancheng.setVisibility(View.VISIBLE);//倒计时结束显示完成服务
+        }
+    }
+    @OnClick({R.id.tv_back,R.id.tv_dating_order_kehu,R.id.tv_dating_order_zhuandan,
+            R.id.tv_dating_order_start,R.id.tv_dating_order_wancheng,R.id.btn_rob_order})
+    public void onViewClicked(View view) {
+        AnimUtils.clickAnimator(view);
+        switch (view.getId()) {
+            case R.id.tv_back://返回
+                finish();
+                break;
+            case R.id.tv_dating_order_kehu://联系客服
+                if (!AppUtils.isEmpty(data.phonenumber)){
+                    AppUtils.callPhone(this,data.phonenumber);
+                }else{
+                    toast(this,"暂无联系方式");
+                }
+                break;
+            case R.id.tv_dating_order_zhuandan://转单
+                mPresenter.transferOrder(data.orderId);
+                break;
+            case R.id.tv_dating_order_start://开始服务
+                mPresenter.startService(data.orderId);
+                break;
+            case R.id.tv_dating_order_wancheng://完成服务
+                mPresenter.endService(data.orderId);
+                break;
+            case R.id.btn_rob_order://接单
+                mPresenter.receive(data.orderId);
+                break;
+            default:
+        }
+    }
+
+    // 将字符串转为时间戳
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+        }catch (ParseException e) {
+            // TODO Auto-generated catch block e.printStackTrace();
+        }
+        return re_time;
+    }
+
+    //获取当前时间
+    public String getDQTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
+    private Thread thread;
+    public void start() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                while (isRun) {
+                    try {
+                        Thread.sleep(1000); // sleep 1000ms
+                        Message message = Message.obtain();
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 订单详情返回数据
+     * @param data
+     */
+    @Override
+    public void getOrderDetailsCallBack(AwaitReceiveOrderEntity data) {
+        if (!AppUtils.isEmpty(data.products)){
+            carAdapter = new CarAdapter(this);
+            carAdapter.setData(data.products);
+            gv_data.setAdapter(carAdapter);
+        }
+
         tv_dating_order_static.setText(data.orderTopic);
         tv_dating_order_car_number.setText(data.carNum);
         tv_dating_order_address.setText(data.address);
@@ -166,93 +294,25 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         }
     }
 
-    //倒计时
-    private void daoJishi(){
-        //服务截至时间-当前时间
-        int jzTIme =  Integer.parseInt(getTime(data.getCanCompleteTime()));//截至时间
-        int dqTime = Integer.parseInt(getTime(getDQTime()));//当前时间
-        if (jzTIme-dqTime>0){
-            tv_dating_order_count_down.setVisibility(View.VISIBLE);//倒计时
-            tv_dating_order_wancheng.setVisibility(View.GONE);//倒计时结束显示完成服务
-            String str = "";
-            int s = jzTIme-dqTime;
-            int time = s/3600;
-            if (time>=1){
-                int h = s/3600;//小时
-                s = s-h*3600;//剩余秒数
-                int m = s/60;//分钟
-                s = s-m*60;//秒数
-                if (h>=10){
-                    tv_dating_order_count_down.setText("  "+h+":"+m+":"+s);//服务剩余时间
-                }else{
-                    tv_dating_order_count_down.setText("  0"+h+":"+m+":"+s);//服务剩余时间
-                }
-            }else{
-                int m = s/60;//分钟
-                s = s-m*60;//秒数
-                //str = getStrTimeMinute((jzTIme-dqTime)+"");//服务剩余时间
-                if (m>=10){
-                    tv_dating_order_count_down.setText(m+":"+s);
-                }else{
-                    tv_dating_order_count_down.setText("  0"+m+":"+s);
-                }
-            }
-        }else{
-            tv_dating_order_count_down.setVisibility(View.GONE);//倒计时
-            tv_dating_order_wancheng.setVisibility(View.VISIBLE);//倒计时结束显示完成服务
-        }
-    }
-    @OnClick({R.id.tv_back})
-    public void onViewClicked(View view) {
-        AnimUtils.clickAnimator(view);
-        switch (view.getId()) {
-            case R.id.tv_back://返回
-                finish();
-                break;
-            default:
-        }
+    //接单成功返回数据
+    @Override
+    public void receiveCallBack() {
+        mPresenter.getOrderDetails(data.orderId);
     }
 
-    // 将字符串转为时间戳
-    public static String getTime(String user_time) {
-        String re_time = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date d;
-        try {
-            d = sdf.parse(user_time);
-            long l = d.getTime();
-            String str = String.valueOf(l);
-            re_time = str.substring(0, 10);
-        }catch (ParseException e) {
-            // TODO Auto-generated catch block e.printStackTrace();
-        }
-        return re_time;
+    //开始服务返回数据
+    @Override
+    public void startServiceCallBack() {
+        mPresenter.getOrderDetails(data.orderId);
     }
-
-    //获取当前时间
-    public String getDQTime(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
-        Date date = new Date(System.currentTimeMillis());
-        return simpleDateFormat.format(date);
+    //完成服务返回数据
+    @Override
+    public void endServiceCallBack() {
+        mPresenter.getOrderDetails(data.orderId);
     }
-
-    private Thread thread;
-    public void start() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (isRun) {
-                    try {
-                        Thread.sleep(1000); // sleep 1000ms
-                        Message message = Message.obtain();
-                        message.what = 1;
-                        handler.sendMessage(message);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    //转单返回数据
+    @Override
+    public void transferOrderCallBack() {
+        mPresenter.getOrderDetails(data.orderId);
     }
 }

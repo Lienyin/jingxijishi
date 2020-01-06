@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.orderdetails;
 
 import android.content.Context;
 
+import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.mvp.BasePresenter;
 import com.jxxc.jingxijishi.mvp.BaseView;
 
@@ -12,10 +13,18 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 
 public class OrderDetailsContract {
     interface View extends BaseView {
-        
+        void getOrderDetailsCallBack(AwaitReceiveOrderEntity data);
+        void receiveCallBack();
+        void startServiceCallBack();
+        void endServiceCallBack();
+        void transferOrderCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void getOrderDetails(String orderId);
+        void receive(String orderId);
+        void startService(String orderId);
+        void endService(String orderId);
+        void transferOrder(String orderId);
     }
 }

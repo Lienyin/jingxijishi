@@ -131,19 +131,26 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         lv_data.setAdapter(adapter);
         adapter.setOnFenxiangClickListener(new NewMainAdapter.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(int type,String phoneNumber) {
+            public void onFenxiangClick(int type,String phoneNumber,String orderId) {
                 switch (type){
                     case 1://抢单
-                        toast(NewMainActivity.this,"抢单");
+                        mPresenter.receive(orderId);
                         break;
                     case 2: //联系客户
-                        AppUtils.callPhone(NewMainActivity.this,phoneNumber);
+                        if (!AppUtils.isEmpty(phoneNumber)){
+                            AppUtils.callPhone(NewMainActivity.this,phoneNumber);
+                        }else{
+                            toast(NewMainActivity.this,"暂无联系方式");
+                        }
                         break;
                     case 3://转单
-                        toast(NewMainActivity.this,"转单");
+                        mPresenter.transferOrder(orderId);
                         break;
                     case 4://开始服务
-                        toast(NewMainActivity.this,"开始服务");
+                        mPresenter.startService(orderId);
+                        break;
+                    case 5://完成服务
+                        mPresenter.endService(orderId);
                         break;
                 }
             }
@@ -359,6 +366,28 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @Override
     public void updateCB(boolean must) {
         this.isMustUpdate = must;
+    }
+
+    //接单成功返回数据
+    @Override
+    public void receiveCallBack() {
+        onRefresh();
+    }
+
+    //开始服务返回数据
+    @Override
+    public void startServiceCallBack() {
+        onRefresh();
+    }
+    //完成服务返回数据
+    @Override
+    public void endServiceCallBack() {
+        onRefresh();
+    }
+    //转单返回数据
+    @Override
+    public void transferOrderCallBack() {
+        onRefresh();
     }
 
     //下拉刷新

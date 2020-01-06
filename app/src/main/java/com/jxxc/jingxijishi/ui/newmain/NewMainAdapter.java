@@ -176,25 +176,31 @@ public class NewMainAdapter extends BaseAdapter {
         holder.btn_rob_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(1,"");//抢单
+                onFenxiangClickListener.onFenxiangClick(1,"",data.orderId);//抢单
             }
         });
         holder.tv_dating_order_kehu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(2,data.phonenumber);//联系客户
+                onFenxiangClickListener.onFenxiangClick(2,data.phonenumber,data.orderId);//联系客户
             }
         });
         holder.tv_dating_order_zhuandan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(3,"");//转单
+                onFenxiangClickListener.onFenxiangClick(3,"",data.orderId);//转单
             }
         });
         holder.tv_dating_order_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(4,"");//开始服务
+                onFenxiangClickListener.onFenxiangClick(4,"",data.orderId);//开始服务
+            }
+        });
+        holder.tv_dating_order_wancheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(5,"",data.orderId);//完成服务
             }
         });
         return convertView;
@@ -226,7 +232,7 @@ public class NewMainAdapter extends BaseAdapter {
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(int type,String phoneNumber);
+        void onFenxiangClick(int type,String phoneNumber,String orderId);
     }
 
     // 将字符串转为时间戳

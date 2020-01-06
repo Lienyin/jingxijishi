@@ -22,6 +22,10 @@ public class NewMainContract {
         void updateServiceStaticCallBack();
         void latestVersionCallBack();
         void updateCB(boolean must);
+        void receiveCallBack();
+        void startServiceCallBack();
+        void endServiceCallBack();
+        void transferOrderCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -30,5 +34,9 @@ public class NewMainContract {
         void unfinishedOrder();
         void updateServiceStatic(int type);
         void latestVersion(int type);
+        void receive(String orderId);
+        void startService(String orderId);
+        void endService(String orderId);
+        void transferOrder(String orderId);
     }
 }

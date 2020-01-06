@@ -33,4 +33,14 @@ public class Api {
     public static final String LATEST_VERSION = BASEURL + "system/upgrade_pack/latest_version";
     //14-我的订单列表
     public static final String MY_ORDER = BASEURL + "biz/carWashOrder/myOrder";
+    //15-接单
+    public static final String RECEIVE = BASEURL + "biz/carWashOrder/receive";
+    //16-开始服务
+    public static final String START_SERVICE = BASEURL + "biz/carWashOrder/startService";
+    //17-完成服务
+    public static final String END_SERVICE = BASEURL + "biz/carWashOrder/endService";
+    //18-转单
+    public static final String TRANSFER_ORDER = BASEURL + "biz/carWashOrder/transferOrder";
+    //19-订单详情
+    public static final String GET_ORDER_DETAILS = BASEURL + "biz/carWashOrder/biz/carWashOrder/getOrder";
 }
