@@ -14,6 +14,7 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public String brandType;
     public String phonenumber;
     public String createTime;
+    public String startTime;//开始服务时间
     public String endTime;
     public String orderId;
     public String canCompleteTime;

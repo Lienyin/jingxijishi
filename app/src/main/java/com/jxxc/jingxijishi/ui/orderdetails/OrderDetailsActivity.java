@@ -246,16 +246,9 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         //订单状态 0待支付 1已支付待接单 2已接单待服务 3服务中 4服务已完成 5取消订单
         if (data.status == 1){
             //已支付待接单
-            iv_dating_order_static_icon.setImageResource(R.mipmap.order_dingwei);
-            //计算距离distance
-            String showDistance = "?? m";
-            if (data.distance > 1000) {
-                showDistance = new DecimalFormat("0.00").format(data.distance / 1000d) + " km";
-            } else {
-                showDistance = new DecimalFormat("0").format(data.distance) + " m";
-            }
-            tv_dating_order_static_memo.setText(showDistance);
-            tv_dating_order_static_memo.setTextColor(this.getResources().getColor(R.color.black));
+            iv_dating_order_static_icon.setImageResource(R.mipmap.order_dengdai);
+            tv_dating_order_static_memo.setText("待接单");
+            tv_dating_order_static_memo.setTextColor(this.getResources().getColor(R.color.dai_fuwu));
             ll_dating.setVisibility(View.VISIBLE);//抢单
             ll_fuwu.setVisibility(View.GONE);//服务
         }else if (data.status == 2){

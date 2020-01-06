@@ -4,9 +4,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
+import com.jxxc.jingxijishi.Api;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.http.EventCenter;
+import com.jxxc.jingxijishi.http.HttpResult;
+import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.config.ISListConfig;
 
@@ -21,6 +27,27 @@ public class AccomplishOrderPresenter extends BasePresenterImpl<AccomplishOrderC
     @Override
     public void gotoImageSelect(AccomplishOrderActivity malfunctionRepairActivity, int requestCodeChoose) {
         ISNav.getInstance().toListActivity(malfunctionRepairActivity, config, requestCodeChoose);
+    }
+
+    /**
+     * 查询订单详情
+     * @param orderId
+     */
+    @Override
+    public void getOrderDetails(String orderId) {
+        OkGo.<HttpResult<AwaitReceiveOrderEntity>>post(Api.GET_ORDER_DETAILS)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult<AwaitReceiveOrderEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<AwaitReceiveOrderEntity>> response) {
+                        AwaitReceiveOrderEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getOrderDetailsCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
     }
 
     @Override

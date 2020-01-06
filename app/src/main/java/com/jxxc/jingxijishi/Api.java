@@ -44,7 +44,7 @@ public class Api {
     //18-转单
     public static final String TRANSFER_ORDER = BASEURL + "biz/carWashOrder/transferOrder";
     //19-订单详情
-    public static final String GET_ORDER_DETAILS = BASEURL + "biz/carWashOrder/biz/carWashOrder/getOrder";
+    public static final String GET_ORDER_DETAILS = BASEURL + "biz/carWashOrder/getOrder";
     //20-文件上传接口
     public static final String UPLOAD = SPUtils.get(SPUtils.K_STATIC_URL,"") + "common/upload";
 }
