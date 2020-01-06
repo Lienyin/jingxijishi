@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.Api;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.UpdateInfoEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.EventCenter;
 import com.jxxc.jingxijishi.http.HttpResult;
@@ -78,23 +79,44 @@ public class UsercenterPresenter extends BasePresenterImpl<UsercenterContract.Vi
     }
 
     /**
-     * @param s 头像路径
+     * @param s 头像路径(上传文件接口)
      */
     @Override
     public void uploadImage(String s) {
-        OkGo.<HttpResult>post(Api.UPDATE_INFO)
-                .params("avatar",new File(s))
+        OkGo.<HttpResult<UpdateInfoEntity>>post(Api.UPLOAD)
+                .params("file",new File(s))
                 .isMultipart(true)
-                .execute(new JsonCallback<HttpResult>() {
+                .execute(new JsonCallback<HttpResult<UpdateInfoEntity>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult> response) {
+                    public void onSuccess(Response<HttpResult<UpdateInfoEntity>> response) {
                         StyledDialog.dismissLoading();
+                        UpdateInfoEntity d = response.body().data;
                         if (AppUtils.isEmpty(mView)) {
                             return;
                         }
                         if (response.body().code == 0) {
-                            mView.uploadImageCallBack();
+                            updateInfo(d.fileName);
                             toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 更改信息
+     * @param avatar
+     */
+    @Override
+    public void updateInfo(String avatar) {
+        OkGo.<HttpResult>post(Api.UPDATE_INFO)
+                .params("avatar",avatar)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.updateInfoCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }

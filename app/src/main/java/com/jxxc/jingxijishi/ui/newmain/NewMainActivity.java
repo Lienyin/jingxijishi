@@ -35,6 +35,7 @@ import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.GlideImgManager;
 import com.jxxc.jingxijishi.utils.LocationUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -93,6 +94,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     RadioButton rb_dating;
     @BindView(R.id.rb_fuwu)
     RadioButton rb_fuwu;
+    @BindView(R.id.iv_user_logo)
+    ImageView iv_user_logo;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -121,7 +124,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
-        //mPresenter.latestVersion(1);//暂时关闭
+        mPresenter.latestVersion(1);//暂时关闭
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
 
@@ -296,6 +299,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
+        GlideImgManager.loadCircleImage(this, data.avatar, iv_user_logo);
         isOnline = data.isOnline;
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
@@ -394,5 +398,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @Override
     public void onRefresh() {
        getLatLng();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mPresenter.getUserInfo();
     }
 }

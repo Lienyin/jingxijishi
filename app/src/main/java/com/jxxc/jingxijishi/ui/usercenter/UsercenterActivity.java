@@ -109,6 +109,11 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
      */
     @Override
     public void uploadImageCallBack() {
+        //mPresenter.getUserInfo();
+    }
+
+    @Override
+    public void updateInfoCallBack() {
         mPresenter.getUserInfo();
     }
 

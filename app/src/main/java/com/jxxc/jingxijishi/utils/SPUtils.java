@@ -26,6 +26,7 @@ public class SPUtils {
     public static final String K_SESSION_MOBILE = "mobile";
     public static final String K_AGENTID = "agentId";//城市id
     public static final String K_ROLEID = "roleId";//管理员类型
+    public static final String K_STATIC_URL = "staticUrl";//上传静态资源图片
     private static Context mContext;
 
     public static SharedPreferences init(Context context) {

@@ -136,7 +136,7 @@ public class GlideImgManager {
     }
 
     /**
-     * 显示圆形图片
+     * 显示圆形图片(头像)
      * @param context
      * @param url
      * @param iv
@@ -144,8 +144,8 @@ public class GlideImgManager {
     public static void loadCircleImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.user)
+                .error(R.mipmap.user)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override

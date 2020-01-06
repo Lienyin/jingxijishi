@@ -15,6 +15,7 @@ import com.jxxc.jingxijishi.http.HttpResult;
 import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -138,23 +139,24 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                     public void onSuccess(Response<HttpResult<LatestVersionEntity>> response) {
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
+                            SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
                             String url = version.url;
                             String memo = version.memo;
                             String ver = version.version;
-                            if (!AppUtils.isEmpty(version)) {
-                                if (ver.contains(".")) {
-                                    String vOnline = ver.replace(".", "").trim();
-                                    String versionName = BuildConfig.VERSION_NAME;
-                                    String vLoal = versionName.replace(".", "").trim();
-                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
-                                        if (version.isForce == 1) {//是否强制更新
-                                            updateAPK(url, memo, true,ver);
-                                        } else {
-                                            updateAPK(url, memo, false,ver);
-                                        }
-                                    }
-                                }
-                            }
+//                            if (!AppUtils.isEmpty(version)) {
+//                                if (ver.contains(".")) {
+//                                    String vOnline = ver.replace(".", "").trim();
+//                                    String versionName = BuildConfig.VERSION_NAME;
+//                                    String vLoal = versionName.replace(".", "").trim();
+//                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
+//                                        if (version.isForce == 1) {//是否强制更新
+//                                            updateAPK(url, memo, true,ver);
+//                                        } else {
+//                                            updateAPK(url, memo, false,ver);
+//                                        }
+//                                    }
+//                                }
+//                            }
                             mView.latestVersionCallBack();
                         }else{
                             toast(mContext,response.body().message);

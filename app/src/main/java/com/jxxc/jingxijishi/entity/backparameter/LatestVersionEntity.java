@@ -7,4 +7,5 @@ public class LatestVersionEntity implements Serializable {
     public String memo;
     public String url;
     public int isForce;
+    public String staticUrl;
 }

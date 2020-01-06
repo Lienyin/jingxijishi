@@ -13,6 +13,7 @@ public class UsercenterContract {
     interface View extends BaseView {
         void queryUserInfoCallback(UserInfoEntity userInfo);
         void uploadImageCallBack();
+        void updateInfoCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -26,5 +27,6 @@ public class UsercenterContract {
          * @param s 头像路径
          */
         void uploadImage(String s);
+        void updateInfo(String avatar);
     }
 }

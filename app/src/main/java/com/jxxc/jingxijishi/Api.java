@@ -1,5 +1,7 @@
 package com.jxxc.jingxijishi;
 
+import com.jxxc.jingxijishi.utils.SPUtils;
+
 public class Api {
 //       public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
 //    public static final String BASEURL = "https://zhizuxia.zhizukj.com/ydb/app/";//生产
@@ -43,4 +45,6 @@ public class Api {
     public static final String TRANSFER_ORDER = BASEURL + "biz/carWashOrder/transferOrder";
     //19-订单详情
     public static final String GET_ORDER_DETAILS = BASEURL + "biz/carWashOrder/biz/carWashOrder/getOrder";
+    //20-文件上传接口
+    public static final String UPLOAD = SPUtils.get(SPUtils.K_STATIC_URL,"") + "common/upload";
 }
