@@ -24,6 +24,7 @@ import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
 import com.jxxc.jingxijishi.ui.examination.ExaminationActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
@@ -153,7 +154,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                         mPresenter.startService(orderId);
                         break;
                     case 5://完成服务
-                        mPresenter.endService(orderId);
+                        ZzRouter.gotoActivity(NewMainActivity.this, AccomplishOrderActivity.class,orderId);
+                        //mPresenter.endService(orderId);
                         break;
                 }
             }

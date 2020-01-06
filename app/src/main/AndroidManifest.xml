@@ -85,5 +85,8 @@
         <!--订单详情-->
         <activity android:name=".ui.orderdetails.OrderDetailsActivity"
             android:screenOrientation="portrait"/>
+        <!--完成服务界面-->
+        <activity android:name=".ui.accomplishorder.AccomplishOrderActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
