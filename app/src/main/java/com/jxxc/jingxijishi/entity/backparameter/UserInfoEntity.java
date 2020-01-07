@@ -19,4 +19,5 @@ public class UserInfoEntity implements Serializable {
     public String todayFinishOrder;
     public String todayProjectedIncome;
     public String canWithdrawMoney;
+    public String orderNum;
 }

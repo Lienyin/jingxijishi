@@ -47,4 +47,8 @@ public class Api {
     public static final String GET_ORDER_DETAILS = BASEURL + "biz/carWashOrder/getOrder";
     //20-文件上传接口
     public static final String UPLOAD = SPUtils.get(SPUtils.K_STATIC_URL,"") + "common/upload";
+    //21-佣金明细（账单明细、今日预计收入明细）
+    public static final String COMMISSION_DETAIL = BASEURL + "biz/drawMoney/commissionDetail";
+    //22-查询账户
+    public static final String GET_ACCOUNT_INFO = BASEURL + "biz/drawMoney/getAccountInfo";
 }

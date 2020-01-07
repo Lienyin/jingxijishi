@@ -32,6 +32,7 @@
                 android:textSize="14sp"
                 android:text="￥"/>
             <TextView
+                android:id="@+id/tv_ke_tixian_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -99,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="可提现金额 >"
+                        android:text="今日预计收入 >"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -117,7 +118,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_today_shouru"
+                        android:id="@+id/tv_zong_order"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -129,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="今日预计收入 >"
+                        android:text="总服务订单 >"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -137,6 +138,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_comm_details"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="20dp"

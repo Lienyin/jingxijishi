@@ -88,5 +88,8 @@
         <!--完成服务界面-->
         <activity android:name=".ui.accomplishorder.AccomplishOrderActivity"
             android:screenOrientation="portrait"/>
+        <!--佣金明细-->
+        <activity android:name=".ui.commissionlist.CommissionListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

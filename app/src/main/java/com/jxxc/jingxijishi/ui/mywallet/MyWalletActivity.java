@@ -6,9 +6,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.AccountInfoEntity;
+import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
+import com.jxxc.jingxijishi.ui.commissionlist.CommissionListActivity;
 import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -32,6 +35,17 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     LinearLayout ll_withdraw_deposit;
     @BindView(R.id.ll_binding)
     LinearLayout ll_binding;
+    @BindView(R.id.ll_comm_details)
+    LinearLayout ll_comm_details;
+    @BindView(R.id.tv_ke_tixian_money)
+    TextView tv_ke_tixian_money;
+    @BindView(R.id.tv_today_order)
+    TextView tv_today_order;
+    @BindView(R.id.tv_tixian_money)
+    TextView tv_tixian_money;
+    @BindView(R.id.tv_zong_order)
+    TextView tv_zong_order;
+    private String canWithdrawMoney="";
     @Override
     protected int layoutId() {
         return R.layout.my_wallet_activity;
@@ -41,9 +55,11 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("我的钱包");
+        mPresenter.getUserInfo();
+        mPresenter.getAccountInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_binding})
+    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_binding,R.id.ll_comm_details})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -51,12 +67,31 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
                 finish();
                 break;
             case R.id.ll_withdraw_deposit://提现
-                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class);
+                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class,canWithdrawMoney);
                 break;
             case R.id.ll_binding://绑定
                 ZzRouter.gotoActivity(this, BindingAccountActivity.class);
                 break;
+            case R.id.ll_comm_details://账单明细
+                ZzRouter.gotoActivity(this, CommissionListActivity.class);
+                break;
             default:
         }
+    }
+
+    //个人信息返回接口
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+        canWithdrawMoney = data.canWithdrawMoney;
+        tv_ke_tixian_money.setText(data.canWithdrawMoney);
+        tv_today_order.setText(data.todayFinishOrder);
+        tv_tixian_money.setText(data.todayProjectedIncome);
+        tv_zong_order.setText(data.orderNum);
+    }
+
+    //查询账户信息
+    @Override
+    public void getAccountInfoCallBack(AccountInfoEntity data) {
+        
     }
 }

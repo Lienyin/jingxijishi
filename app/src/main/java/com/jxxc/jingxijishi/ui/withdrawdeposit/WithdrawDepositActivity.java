@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -24,6 +25,9 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_ke_tixian_money)
+    TextView tv_ke_tixian_money;
+    private String canWithdrawMoney;
     @Override
     protected int layoutId() {
         return R.layout.withdraw_deposit_activity;
@@ -33,6 +37,8 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("余额提现");
+        canWithdrawMoney = ZzRouter.getIntentData(this,String.class);
+        tv_ke_tixian_money.setText("可提现金额"+canWithdrawMoney+"元");
     }
 
     @OnClick({R.id.tv_back})
