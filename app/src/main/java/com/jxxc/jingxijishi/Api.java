@@ -3,7 +3,7 @@ package com.jxxc.jingxijishi;
 import com.jxxc.jingxijishi.utils.SPUtils;
 
 public class Api {
-//       public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
+//    public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
 //    public static final String BASEURL = "https://zhizuxia.zhizukj.com/ydb/app/";//生产
    public static final String BASEURL = "http://106.54.252.151:8100/";//
 
@@ -51,4 +51,6 @@ public class Api {
     public static final String COMMISSION_DETAIL = BASEURL + "biz/drawMoney/commissionDetail";
     //22-查询账户
     public static final String GET_ACCOUNT_INFO = BASEURL + "biz/drawMoney/getAccountInfo";
+    //23-账户绑定
+    public static final String BINDING_TIXIAN = BASEURL + "biz/drawMoney/bindingAccount";
 }

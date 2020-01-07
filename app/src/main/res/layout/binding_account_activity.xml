@@ -11,63 +11,85 @@
         android:layout_height="120dp"
         android:orientation="horizontal"
         android:gravity="center">
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@mipmap/logo"/>
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="50dp"
-            android:src="@mipmap/logo"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_binding_zfb"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:button="@null"
+                android:background="@drawable/radio_alipay_bg"/>
+            <RadioButton
+                android:id="@+id/rb_binding_wx"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:button="@null"
+                android:background="@drawable/radio_wx_bg"/>
+        </RadioGroup>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/blackeee"/>
     <LinearLayout
+        android:id="@+id/ll_date_caiji"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:text="真实姓名"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/black666"
-            android:text="XXXX"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/blackeee"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:text="提现账户"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/black666"
-            android:text="XXXX"/>
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="真实姓名"/>
+            <EditText
+                android:id="@+id/et_alipay_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                android:background="@color/transparent"
+                android:hint="请输入您的姓名"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blackeee"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="提现账户"/>
+            <EditText
+                android:id="@+id/et_alipay_user_account"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                android:background="@color/transparent"
+                android:hint="请输入您的支付宝账户"/>
+        </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -118,7 +140,7 @@
             android:layout_marginLeft="20dp"
             android:background="@color/transparent"
             android:textColor="@color/black"
-            android:hint="请输入您的手机号码"/>
+            android:hint="请输入短信验证码"/>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"

@@ -99,6 +99,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     RadioButton rb_fuwu;
     @BindView(R.id.iv_user_logo)
     ImageView iv_user_logo;
+    @BindView(R.id.ll_today_order)
+    LinearLayout ll_today_order;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -216,7 +218,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
     R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info,
-    R.id.tv_service_type})
+    R.id.tv_service_type,R.id.ll_today_order})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -275,6 +277,9 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.tv_service_type://服务状态
                 popSeek.showPopupWindow(tv_service_type,isOnline);
+                break;
+            case R.id.ll_today_order://今日完成订单
+                ZzRouter.gotoActivity(this,OrderListActivity.class);
                 break;
             default:
         }

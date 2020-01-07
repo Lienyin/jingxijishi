@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.mywallet;
 
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
 import com.jxxc.jingxijishi.ui.commissionlist.CommissionListActivity;
 import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -33,8 +35,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_title;
     @BindView(R.id.ll_withdraw_deposit)
     LinearLayout ll_withdraw_deposit;
-    @BindView(R.id.ll_binding)
-    LinearLayout ll_binding;
+    @BindView(R.id.ll_wei_binding)
+    LinearLayout ll_wei_binding;
     @BindView(R.id.ll_comm_details)
     LinearLayout ll_comm_details;
     @BindView(R.id.tv_ke_tixian_money)
@@ -45,6 +47,10 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_tixian_money;
     @BindView(R.id.tv_zong_order)
     TextView tv_zong_order;
+    @BindView(R.id.tv_zhanghu_number)
+    TextView tv_zhanghu_number;
+    @BindView(R.id.iv_tixian_zhanghu)
+    ImageView iv_tixian_zhanghu;
     private String canWithdrawMoney="";
     @Override
     protected int layoutId() {
@@ -59,7 +65,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
         mPresenter.getAccountInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_binding,R.id.ll_comm_details})
+    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -69,7 +75,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
             case R.id.ll_withdraw_deposit://提现
                 ZzRouter.gotoActivity(this, WithdrawDepositActivity.class,canWithdrawMoney);
                 break;
-            case R.id.ll_binding://绑定
+            case R.id.ll_wei_binding://绑定
                 ZzRouter.gotoActivity(this, BindingAccountActivity.class);
                 break;
             case R.id.ll_comm_details://账单明细
@@ -92,6 +98,22 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     //查询账户信息
     @Override
     public void getAccountInfoCallBack(AccountInfoEntity data) {
-        
+        if ("not_account".equals(data.step)){
+            ll_wei_binding.setVisibility(View.VISIBLE);
+            ll_withdraw_deposit.setVisibility(View.GONE);
+        }else{
+            ll_wei_binding.setVisibility(View.GONE);
+            ll_withdraw_deposit.setVisibility(View.VISIBLE);
+            if (!AppUtils.isEmpty(data.alipayAccount)){
+                tv_zhanghu_number.setText("("+data.alipayAccount+")");
+                iv_tixian_zhanghu.setImageResource(R.mipmap.ic_alipay);
+            }else if (!AppUtils.isEmpty(data.openId)){
+                tv_zhanghu_number.setText("("+data.openId+")");
+                iv_tixian_zhanghu.setImageResource(R.mipmap.ex_share_wp);
+            }else{
+                iv_tixian_zhanghu.setVisibility(View.GONE);
+                tv_zhanghu_number.setText("");
+            }
+        }
     }
 }

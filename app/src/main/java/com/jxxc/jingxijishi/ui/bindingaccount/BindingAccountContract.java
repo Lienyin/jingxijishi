@@ -12,10 +12,10 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 
 public class BindingAccountContract {
     interface View extends BaseView {
-        
+        void bindingAliPayCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void bindingAliPay(String alipayAccount,String alipayName,String code);
     }
 }

@@ -165,18 +165,34 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
+        android:visibility="gone"
         android:gravity="center_vertical">
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提现"
             android:textColor="@color/black"
             android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/iv_tixian_zhanghu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/logo"/>
         <TextView
+            android:id="@+id/tv_zhanghu_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="XXX"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black999"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="立即提现"
+            android:gravity="right"
             android:layout_marginRight="5dp"
             android:textColor="@color/black999"
             android:textSize="12sp" />
@@ -191,10 +207,11 @@
         android:layout_height="1dp"
         android:background="@color/blackeee" />
     <LinearLayout
-        android:id="@+id/ll_binding"
+        android:id="@+id/ll_wei_binding"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
+        android:visibility="gone"
         android:gravity="center_vertical">
         <TextView
             android:layout_width="0dp"
