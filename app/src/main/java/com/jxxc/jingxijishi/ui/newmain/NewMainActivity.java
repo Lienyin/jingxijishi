@@ -107,6 +107,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
     private PopSeek popSeek;
     private int isOnline;
+    private int isExaminationQualified=-1;
+    private int isOperationQualified=-1;
     Handler handler = new Handler(){
 
         @Override
@@ -142,8 +144,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             public void onFenxiangClick(int type,String phoneNumber,String orderId) {
                 switch (type){
                     case 1://抢单
-                        StyledDialog.buildLoading("正在抢单").setActivity(NewMainActivity.this).show();
-                        mPresenter.receive(orderId);
+                        //状态 线上考试是否合格 1合格 0不合格
+                        if (isExaminationQualified ==0){
+                            toast(NewMainActivity.this,"线上考试不合格");
+                        }else if (isOperationQualified==0){
+                            //状态 线下实操是否合格 1合格 0不合格
+                            toast(NewMainActivity.this,"线下实操不合格");
+                        }else{
+                            StyledDialog.buildLoading("正在抢单").setActivity(NewMainActivity.this).show();
+                            mPresenter.receive(orderId);
+                        }
                         break;
                     case 2: //联系客户
                         if (!AppUtils.isEmpty(phoneNumber)){
@@ -310,6 +320,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void getUserInfoCallBack(UserInfoEntity data) {
         GlideImgManager.loadCircleImage(this, data.avatar, iv_user_logo);
         isOnline = data.isOnline;
+        isExaminationQualified =data.isExaminationQualified;
+        isOperationQualified =data.isOperationQualified;
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(data.phonenumber);
         tv_today_order.setText(data.todayFinishOrder);
