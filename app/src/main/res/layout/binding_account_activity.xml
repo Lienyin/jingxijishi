@@ -107,14 +107,15 @@
             android:textSize="14sp"
             android:textColor="@color/black"
             android:text="手机号码"/>
-        <EditText
+        <TextView
+            android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textSize="14sp"
             android:layout_marginLeft="20dp"
             android:background="@color/transparent"
-            android:textColor="@color/black"
-            android:hint="请输入您的手机号码"/>
+            android:textColor="@color/black"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -133,6 +134,7 @@
             android:textColor="@color/black"
             android:text="验  证  码"/>
         <EditText
+            android:id="@+id/et_msg_code"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -147,6 +149,7 @@
             android:layout_margin="10dp"
             android:background="@color/blackeee"/>
         <TextView
+            android:id="@+id/tv_send_msm_code"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="14sp"
@@ -162,7 +165,7 @@
         android:background="@color/blackeee"/>
     <!--登录按钮-->
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_binding"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"

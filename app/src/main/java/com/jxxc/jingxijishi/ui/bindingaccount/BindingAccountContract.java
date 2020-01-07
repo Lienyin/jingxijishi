@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.bindingaccount;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import com.jxxc.jingxijishi.mvp.BasePresenter;
 import com.jxxc.jingxijishi.mvp.BaseView;
@@ -16,6 +17,7 @@ public class BindingAccountContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void bindingAliPay(String alipayAccount,String alipayName,String code);
+        void bindingAliPay(String alipayName,String alipayAccount,String openId,String code,String phonenumber);
+        void getCode(String phonenumber, TextView textView);
     }
 }
