@@ -35,7 +35,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, final OrderListEntity item) {
-        helper.setText(R.id.tv_dating_order_static, item.orderTopic);
+        helper.setText(R.id.tv_dating_order_static, item.orderId);
         helper.setText(R.id.tv_dating_order_car_number, item.carNum);
         helper.setText(R.id.tv_dating_order_address, item.address);
         helper.setText(R.id.tv_dating_order_time, item.appointmentTime);
@@ -51,6 +51,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             helper.setTextColor(R.id.tv_dating_order_static_memo,mContext.getResources().getColor(R.color.yellow_fuwu));
             helper.setGone(R.id.tv_dating_order_zhuandan,true);
             helper.setGone(R.id.tv_dating_order_start,true);
+            helper.setGone(R.id.iv_navigation_icon,true);
             helper.setGone(R.id.tv_dating_order_wancheng,false);
             helper.setGone(R.id.tv_dating_order_count_down,false);
         }else if (item.status == 3){//服务中
@@ -59,6 +60,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             helper.setTextColor(R.id.tv_dating_order_static_memo,mContext.getResources().getColor(R.color.public_all));
             helper.setVisible(R.id.tv_dating_order_zhuandan,false);
             helper.setGone(R.id.tv_dating_order_start,false);
+            helper.setGone(R.id.iv_navigation_icon,false);
 
             //服务截至时间-当前时间
             int jzTIme =  Integer.parseInt(getTime(item.getCanCompleteTime()));//截至时间
@@ -99,6 +101,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             helper.setTextColor(R.id.tv_dating_order_static_memo,mContext.getResources().getColor(R.color.public_all));
             helper.setVisible(R.id.tv_dating_order_zhuandan,false);
             helper.setGone(R.id.tv_dating_order_start,false);
+            helper.setGone(R.id.iv_navigation_icon,false);
             helper.setVisible(R.id.tv_dating_order_wancheng,false);
             helper.setGone(R.id.tv_dating_order_count_down,false);
         }else{
@@ -107,6 +110,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             helper.setTextColor(R.id.tv_dating_order_static_memo,mContext.getResources().getColor(R.color.black));
             helper.setVisible(R.id.tv_dating_order_zhuandan,false);
             helper.setGone(R.id.tv_dating_order_start,false);
+            helper.setGone(R.id.iv_navigation_icon,false);
             helper.setVisible(R.id.tv_dating_order_wancheng,false);
             helper.setGone(R.id.tv_dating_order_count_down,false);
         }
@@ -136,6 +140,12 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             @Override
             public void onClick(View view) {
                 onFenxiangClickListener.onFenxiangClick(item.orderId,3);//完成服务
+            }
+        });
+        helper.setOnClickListener(R.id.ll_navigation, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick(item.orderId,4);//导航
             }
         });
     }

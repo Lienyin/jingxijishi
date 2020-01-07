@@ -108,6 +108,9 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
                     case 3://完成服务
                         ZzRouter.gotoActivity(OrderListActivity.this, AccomplishOrderActivity.class,orderId);
                         break;
+                    case 4://导航
+                        //
+                        break;
                 }
             }
         });

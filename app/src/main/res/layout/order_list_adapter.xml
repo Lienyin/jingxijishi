@@ -88,6 +88,7 @@
                 android:textSize="14sp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_navigation"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical">
@@ -100,12 +101,18 @@
                 android:textSize="14sp"/>
             <TextView
                 android:id="@+id/tv_dating_order_address"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="XXX"
                 android:layout_marginLeft="10dp"
                 android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/iv_navigation_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/dao_hang"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
