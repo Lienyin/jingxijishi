@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.newmain;
 
 import android.content.Context;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.Api;
 import com.jxxc.jingxijishi.BuildConfig;
 import com.jxxc.jingxijishi.ConfigApplication;
@@ -76,6 +77,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult<List<AwaitReceiveOrderEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<AwaitReceiveOrderEntity>>> response) {
+                        StyledDialog.dismissLoading();
                         List<AwaitReceiveOrderEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.awaitReceiveOrderCallBack(d);
@@ -176,6 +178,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
                         if (response.body().code==0){
                             mView.receiveCallBack();
                             toast(mContext,response.body().message);
@@ -199,27 +202,6 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                     public void onSuccess(Response<HttpResult> response) {
                         if (response.body().code==0){
                             mView.startServiceCallBack();
-                            toast(mContext,response.body().message);
-                        }else{
-                            toast(mContext,response.body().message);
-                        }
-                    }
-                });
-    }
-
-    /**
-     * 完成服务
-     * @param orderId
-     */
-    @Override
-    public void endService(String orderId) {
-        OkGo.<HttpResult>post(Api.END_SERVICE)
-                .params("orderId",orderId)
-                .execute(new JsonCallback<HttpResult>() {
-                    @Override
-                    public void onSuccess(Response<HttpResult> response) {
-                        if (response.body().code==0){
-                            mView.endServiceCallBack();
                             toast(mContext,response.body().message);
                         }else{
                             toast(mContext,response.body().message);

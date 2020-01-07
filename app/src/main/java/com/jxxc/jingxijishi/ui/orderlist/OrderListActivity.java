@@ -1,6 +1,8 @@
 package com.jxxc.jingxijishi.ui.orderlist;
 
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,8 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
+import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
 import com.jxxc.jingxijishi.ui.updatepassword.UpdatePasswordActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -49,7 +53,19 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
     RadioButton rb_work_order_jin_xing;
     private OrderListAdapter adapter;
     private int offset = 2;
-    private int orderType = 0;//状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+    private String orderType = "";//状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+
+    Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what ==1) {
+                adapter.notifyDataSetChanged();
+                //每隔1秒更新一次界面，如果只需要精确到秒的倒计时此处改成1000即可
+                handler.sendEmptyMessageDelayed(1,1000);
+            }
+        }
+    };
 
     @Override
     protected int layoutId() {
@@ -72,13 +88,27 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         rvList.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, rvList);
         adapter.setEmptyView(R.layout.layout_nothing);
+        adapter.start();
+        handler.sendEmptyMessageDelayed(1,1000);
 
         //隐藏侧滑删除功能(2019/08/05)
         //rvList.addOnItemTouchListener(new SwipeItemLayout.OnSwipeItemTouchListener(getContext()));
         adapter.setOnFenxiangClickListener(new OrderListAdapter.OnFenxiangClickListener() {
             @Override
             public void onFenxiangClick(String orderId, int type) {
-                //
+                switch (type){
+                    case 1://转单
+                        mPresenter.transferOrder(orderId);
+                        break;
+                    case 2://开始服务
+                        mPresenter.startService(orderId);
+                        adapter.start();
+                        handler.sendEmptyMessageDelayed(1,1000);
+                        break;
+                    case 3://完成服务
+                        ZzRouter.gotoActivity(OrderListActivity.this, AccomplishOrderActivity.class,orderId);
+                        break;
+                }
             }
         });
     }
@@ -91,16 +121,16 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
                 finish();
                 break;
             case R.id.rb_work_order_all://全部
-                orderType = 0;
-                mPresenter.myOrder(0,1,10);
+                orderType = "";
+                mPresenter.myOrder("",1,10);
                 break;
             case R.id.rb_work_order_dai_jie://待服务
-                orderType = 2;
-                mPresenter.myOrder(2,1,10);
+                orderType = "2";
+                mPresenter.myOrder("2",1,10);
                 break;
             case R.id.rb_work_order_jin_xing://已完成
-                orderType = 4;
-                mPresenter.myOrder(4,1,10);
+                orderType = "4";
+                mPresenter.myOrder("4",1,10);
                 break;
             default:
         }
@@ -134,5 +164,16 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         if (data.size() < 10) {
             adapter.loadMoreEnd();
         }
+    }
+
+    //开始服务返回数据
+    @Override
+    public void startServiceCallBack() {
+        onRefresh();
+    }
+    //转单返回数据
+    @Override
+    public void transferOrderCallBack() {
+        onRefresh();
     }
 }

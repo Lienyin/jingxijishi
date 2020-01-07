@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.newmain;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.dialog.PopSeek;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
@@ -128,7 +130,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         mPresenter.latestVersion(1);//暂时关闭
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
-
+        StyledDialog.buildLoading("加载中").setActivity(this).show();
         getLatLng();
         adapter = new NewMainAdapter(this);
         adapter.setData(list);
@@ -138,6 +140,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             public void onFenxiangClick(int type,String phoneNumber,String orderId) {
                 switch (type){
                     case 1://抢单
+                        StyledDialog.buildLoading("正在抢单").setActivity(NewMainActivity.this).show();
                         mPresenter.receive(orderId);
                         break;
                     case 2: //联系客户
@@ -155,7 +158,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                         break;
                     case 5://完成服务
                         ZzRouter.gotoActivity(NewMainActivity.this, AccomplishOrderActivity.class,orderId);
-                        //mPresenter.endService(orderId);
                         break;
                 }
             }
@@ -385,11 +387,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     public void startServiceCallBack() {
         onRefresh();
     }
-    //完成服务返回数据
-    @Override
-    public void endServiceCallBack() {
-        onRefresh();
-    }
     //转单返回数据
     @Override
     public void transferOrderCallBack() {
@@ -406,5 +403,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     protected void onRestart() {
         super.onRestart();
         mPresenter.getUserInfo();
+        getLatLng();
     }
 }

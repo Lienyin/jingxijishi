@@ -26,7 +26,7 @@ public class OrderListPresenter extends BasePresenterImpl<OrderListContract.View
     }
 
     @Override
-    public void myOrder(int status,int pageNum,int pageSize) {
+    public void myOrder(String status,int pageNum,int pageSize) {
         OkGo.<HttpResult<List<OrderListEntity>>>post(Api.MY_ORDER)
                 .params("status",status)
                 .params("pageNum",pageNum)
@@ -45,7 +45,7 @@ public class OrderListPresenter extends BasePresenterImpl<OrderListContract.View
     }
 
     @Override
-    public void myOrderMore(int status,int pageNum,int pageSize) {
+    public void myOrderMore(String status,int pageNum,int pageSize) {
         OkGo.<HttpResult<List<OrderListEntity>>>post(Api.MY_ORDER)
                 .params("status",status)
                 .params("pageNum",pageNum)
@@ -56,6 +56,48 @@ public class OrderListPresenter extends BasePresenterImpl<OrderListContract.View
                         List<OrderListEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.myOrderMoreCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 开始服务
+     * @param orderId
+     */
+    @Override
+    public void startService(String orderId) {
+        OkGo.<HttpResult>post(Api.START_SERVICE)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.startServiceCallBack();
+                            toast(mContext,response.body().message);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 转单
+     * @param orderId
+     */
+    @Override
+    public void transferOrder(String orderId) {
+        OkGo.<HttpResult>post(Api.TRANSFER_ORDER)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.transferOrderCallBack();
+                            toast(mContext,response.body().message);
                         }else{
                             toast(mContext,response.body().message);
                         }

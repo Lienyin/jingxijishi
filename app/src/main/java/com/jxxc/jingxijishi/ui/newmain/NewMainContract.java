@@ -24,7 +24,6 @@ public class NewMainContract {
         void updateCB(boolean must);
         void receiveCallBack();
         void startServiceCallBack();
-        void endServiceCallBack();
         void transferOrderCallBack();
     }
 
@@ -36,7 +35,6 @@ public class NewMainContract {
         void latestVersion(int type);
         void receive(String orderId);
         void startService(String orderId);
-        void endService(String orderId);
         void transferOrder(String orderId);
     }
 }

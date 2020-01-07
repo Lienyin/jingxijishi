@@ -6,181 +6,220 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_margin="10dp"
-        android:background="@drawable/attestation_bg_edittext"
-        android:orientation="vertical">
-
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/home_head_bg">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
-
+            android:gravity="center_vertical">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/logo" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="XXXXX"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@mipmap/logo"
-                android:drawablePadding="5dp"
-                android:text="XX"
-                android:textColor="@color/public_all"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/blackccc"
-                android:text="车牌号码"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:text="XXXXX"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/blackccc"
-                android:text="预约时间"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:text="XXXXX"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/blackccc"
-                android:text="服务地址"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:text="XXXXX"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:src="@mipmap/logo"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
             <TextView
+                android:id="@+id/tv_dating_order_static"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/blackccc"
-                android:text="备注信息"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
-                android:text="XXXXX"/>
+                android:text="XXX"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iv_dating_order_static_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/logo"/>
+            <TextView
+                android:id="@+id/tv_dating_order_static_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dai_fuwu"
+                android:text="XXX"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black999"
+                android:text="车牌号码"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_car_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="XXX"
+                android:layout_marginLeft="10dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black999"
+                android:text="预约时间"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="XXX"
+                android:layout_marginLeft="10dp"
+                android:textSize="14sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/blackccc"
-                android:text="订单金额"/>
+                android:textColor="@color/black999"
+                android:text="服务地址"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="XXX"
+                android:layout_marginLeft="10dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
+                android:textColor="@color/black999"
+                android:text="备注信息"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="XXX"
+                android:layout_marginLeft="10dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black999"
+                android:text="订单金额"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="@color/money"
-                android:text="￥0.00"/>
+                android:text="XXX"
+                android:layout_marginLeft="10dp"
+                android:textSize="14sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blackccc"/>
+            android:background="@color/gray"/>
         <LinearLayout
+            android:id="@+id/ll_fuwu"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp">
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
             <TextView
+                android:id="@+id/tv_dating_order_kehu"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:drawableLeft="@mipmap/logo"
+                android:layout_height="match_parent"
+                android:textColor="@color/black999"
+                android:drawableLeft="@mipmap/order_call_icon_3x"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
-                android:textColor="#A6A7AB"
-                android:text="联系客户"/>
+                android:text="联系客户"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
             <TextView
+                android:id="@+id/tv_dating_order_zhuandan"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginLeft="20dp"
-                android:drawableLeft="@mipmap/logo"
+                android:layout_height="match_parent"
+                android:textColor="@color/black999"
+                android:drawableLeft="@mipmap/order_zhuandan_icon_3x"
                 android:drawablePadding="5dp"
-                android:textColor="#A6A7AB"
-                android:text="转单"/>
-            <Button
+                android:gravity="center_vertical"
+                android:text="转单"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_start"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
                 android:textColor="@color/public_all"
-                android:textSize="14sp"
-                android:background="@drawable/send_code_btn_bg"
-                android:text="XXX"/>
+                android:background="@drawable/shape_bg_button_wh"
+                android:gravity="center"
+                android:text="开始服务"
+                android:visibility="gone"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_count_down"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:background="@mipmap/botn_jingxingz"
+                android:gravity="center"
+                android:text="00:00"
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tv_dating_order_wancheng"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/shape_bg_button"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="完成服务"
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

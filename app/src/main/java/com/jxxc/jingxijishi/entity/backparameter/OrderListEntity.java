@@ -15,10 +15,21 @@ public class OrderListEntity implements Serializable {
     public String createTime;
     public String endTime;
     public String statusName;
+    public String canCompleteTime;
+    public String orderId;
+    public int status;
     public List<OrderList> products;
     public class OrderList{
         public String productId;
         public String productName;
         public String imgUrl;
+    }
+
+    public String getCanCompleteTime() {
+        return canCompleteTime;
+    }
+
+    public void setCanCompleteTime(String canCompleteTime) {
+        this.canCompleteTime = canCompleteTime;
     }
 }

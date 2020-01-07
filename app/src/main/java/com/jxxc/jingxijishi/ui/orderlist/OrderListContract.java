@@ -17,10 +17,16 @@ public class OrderListContract {
     interface View extends BaseView {
         void myOrderCallBack(List<OrderListEntity> data);
         void myOrderMoreCallBack(List<OrderListEntity> data);
+
+        void startServiceCallBack();
+        void transferOrderCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void myOrder(int status,int pageNum,int pageSize);
-        void myOrderMore(int status,int pageNum,int pageSize);
+        void myOrder(String status,int pageNum,int pageSize);
+        void myOrderMore(String status,int pageNum,int pageSize);
+
+        void startService(String orderId);
+        void transferOrder(String orderId);
     }
 }
