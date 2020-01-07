@@ -42,4 +42,26 @@ public class WithdrawDepositPresenter extends BasePresenterImpl<WithdrawDepositC
                     }
                 });
     }
+
+    /**
+     * 提现
+     * @param money
+     * @param remitType
+     */
+    @Override
+    public void drawMoneyApply(String money, String remitType) {
+        OkGo.<HttpResult>post(Api.DRAW_MONEY_APPLY)
+                .params("money",money)
+                .params("remitType",remitType)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.drawMoneyApplyCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }

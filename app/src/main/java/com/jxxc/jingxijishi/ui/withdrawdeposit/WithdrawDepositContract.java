@@ -14,9 +14,11 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 public class WithdrawDepositContract {
     interface View extends BaseView {
         void getAccountInfoCallBack(AccountInfoEntity data);
+        void drawMoneyApplyCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getAccountInfo();
+        void drawMoneyApply(String money,String remitType);
     }
 }

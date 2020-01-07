@@ -7,6 +7,7 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ import butterknife.OnClick;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
 public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositContract.View, WithdrawDepositPresenter> implements WithdrawDepositContract.View {
@@ -45,8 +46,11 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     ImageView tv_account_icon;
     @BindView(R.id.et_money)
     EditText etMoney;
+    @BindView(R.id.btn_withdraw_deposit)
+    Button btn_withdraw_deposit;
     private String canWithdrawMoney;
     private double money;
+    private int tixianType = 0;
 
     @Override
     protected int layoutId() {
@@ -57,23 +61,25 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("余额提现");
-        canWithdrawMoney = ZzRouter.getIntentData(this,String.class);
-        tv_ke_tixian_money.setText("可提现金额"+canWithdrawMoney+"元");
+        canWithdrawMoney = ZzRouter.getIntentData(this, String.class);
+        tv_ke_tixian_money.setText("可提现金额" + canWithdrawMoney + "元");
         mPresenter.getAccountInfo();
         etMoney.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 String temp = s.toString();
-                if (temp.contains(".")){
+                if (temp.contains(".")) {
                     int posDot = temp.indexOf(".");
                     if (posDot <= 0) return;
-                    if (temp.length() - posDot - 1 > 2){
+                    if (temp.length() - posDot - 1 > 2) {
                         s.delete(posDot + 3, posDot + 4);
                     }
                     String number = etMoney.getText().toString();
@@ -88,19 +94,29 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
                             money = Double.parseDouble(number);
                         }
                     }
-                }else{
+                } else {
                     money = Double.parseDouble(etMoney.getText().toString());
                 }
             }
         });
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back, R.id.btn_withdraw_deposit})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
+                break;
+            case R.id.btn_withdraw_deposit://提现
+                if (AppUtils.isEmpty(etMoney.getText().toString().trim())) {
+                    toast(this, "请输入提现金额");
+                } else if (money <= 0) {
+                    toast(this, "充值金额要大于0");
+                    return;
+                } else {
+                    mPresenter.drawMoneyApply(etMoney.getText().toString().trim(), tixianType + "");
+                }
                 break;
             default:
         }
@@ -109,15 +125,26 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     //查询账户信息
     @Override
     public void getAccountInfoCallBack(AccountInfoEntity data) {
-        if (!AppUtils.isEmpty(data.alipayAccount)){
-            tv_account.setText("("+data.alipayAccount+")");
+        if (!AppUtils.isEmpty(data.alipayAccount)) {
+            tv_account.setText("(" + data.alipayAccount + ")");
             tv_account_icon.setImageResource(R.mipmap.ic_alipay);
-        }else if (!AppUtils.isEmpty(data.openId)){
-            tv_account.setText("("+data.openId+")");
+            tixianType = 1;
+        } else if (!AppUtils.isEmpty(data.openId)) {
+            tv_account.setText("(" + data.openId + ")");
             tv_account_icon.setImageResource(R.mipmap.ex_share_wp);
-        }else{
+            tixianType = 2;
+        } else {
             tv_account_icon.setVisibility(View.GONE);
             tv_account.setText("");
         }
+    }
+
+    /**
+     * 提现成功返回数据
+     */
+    @Override
+    public void drawMoneyApplyCallBack() {
+        toast(this, "提现成功，等待审核");
+        finish();
     }
 }
