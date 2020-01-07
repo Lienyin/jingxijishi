@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.AccountInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
@@ -48,6 +50,8 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     EditText etMoney;
     @BindView(R.id.btn_withdraw_deposit)
     Button btn_withdraw_deposit;
+    @BindView(R.id.ll_huan_tixian)
+    LinearLayout ll_huan_tixian;
     private String canWithdrawMoney;
     private double money;
     private int tixianType = 0;
@@ -101,7 +105,7 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
         });
     }
 
-    @OnClick({R.id.tv_back, R.id.btn_withdraw_deposit})
+    @OnClick({R.id.tv_back, R.id.btn_withdraw_deposit,R.id.ll_huan_tixian})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -117,6 +121,9 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
                 } else {
                     mPresenter.drawMoneyApply(etMoney.getText().toString().trim(), tixianType + "");
                 }
+                break;
+            case R.id.ll_huan_tixian://换提现账户
+                ZzRouter.gotoActivity(this, BindingAccountActivity.class);
                 break;
             default:
         }

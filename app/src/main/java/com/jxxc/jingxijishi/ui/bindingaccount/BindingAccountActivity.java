@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.AccountInfoEntity;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
@@ -60,6 +61,7 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("绑定账户");
         et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        mPresenter.getAccountInfo();
     }
 
     @OnClick({R.id.tv_back,R.id.rb_binding_zfb,R.id.rb_binding_wx,R.id.btn_binding,R.id.tv_send_msm_code})
@@ -91,8 +93,10 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
                         toast(this,"请输入验证码");
                     }else{
                         StyledDialog.buildLoading("正在绑定").setActivity(this).show();
-                        mPresenter.bindingAliPay(et_alipay_user_name.getText().toString().trim(),
-                                et_alipay_user_account.getText().toString().trim(),"",
+                        mPresenter.bindingAliPay(
+                                et_alipay_user_name.getText().toString().trim(),
+                                et_alipay_user_account.getText().toString().trim(),
+                                "",
                                 et_msg_code.getText().toString().trim(),
                                 et_phone_number.getText().toString().trim());
                     }
@@ -116,5 +120,21 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
     public void bindingAliPayCallBack() {
         toast(this,"绑定成功");
         finish();
+    }
+
+    //查询账户信息返回接口
+    @Override
+    public void getAccountInfoCallBack(AccountInfoEntity data) {
+        if (!AppUtils.isEmpty(data.alipayAccount)){//支付宝
+            rb_binding_zfb.setChecked(true);
+            et_alipay_user_name.setText(data.alipayName);
+            et_alipay_user_account.setText(data.alipayAccount);
+            ll_date_caiji.setVisibility(View.VISIBLE);
+            bindingType =1;
+        }else if (!AppUtils.isEmpty(data.openId)){//微信
+            rb_binding_wx.setChecked(true);
+            bindingType =2;
+        }else{
+        }
     }
 }

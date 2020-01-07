@@ -7,6 +7,7 @@
 
     <include layout="@layout/title"/>
     <LinearLayout
+        android:id="@+id/ll_huan_tixian"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -26,12 +27,18 @@
             android:src="@mipmap/logo"/>
         <TextView
             android:id="@+id/tv_account"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/black666"
             android:text="XXXX"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:drawableLeft="@mipmap/jiantou"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
