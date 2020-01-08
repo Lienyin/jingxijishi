@@ -135,7 +135,7 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
         if (!AppUtils.isEmpty(data.alipayAccount)) {
             tv_account.setText("(" + data.alipayAccount + ")");
             tv_account_icon.setImageResource(R.mipmap.ic_alipay);
-            tixianType = 1;
+            tixianType = 3;
         } else if (!AppUtils.isEmpty(data.openId)) {
             tv_account.setText("(" + data.openId + ")");
             tv_account_icon.setImageResource(R.mipmap.ex_share_wp);
