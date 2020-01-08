@@ -24,7 +24,7 @@ public class TixianAdapter extends BaseQuickAdapter<WithdrawDepositDetailEntity,
 
     @Override
     protected void convert(final BaseViewHolder helper, final WithdrawDepositDetailEntity item) {
-        if (item.remitType==1){
+        if (item.remitType==3){
             helper.setText(R.id.tv_order_type, "提现到支付宝");
         }else{
             helper.setText(R.id.tv_order_type, "提现到微信");

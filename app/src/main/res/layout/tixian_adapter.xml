@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 android:text="XXX"/>
             <TextView
                 android:id="@+id/tv_order_id"

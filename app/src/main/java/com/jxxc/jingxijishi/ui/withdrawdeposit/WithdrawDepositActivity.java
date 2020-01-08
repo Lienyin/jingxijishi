@@ -115,8 +115,8 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
             case R.id.btn_withdraw_deposit://提现
                 if (AppUtils.isEmpty(etMoney.getText().toString().trim())) {
                     toast(this, "请输入提现金额");
-                } else if (money <= 0) {
-                    toast(this, "充值金额要大于0");
+                } else if (money < 1) {
+                    toast(this, "提现金额要大于等于1元");
                     return;
                 } else {
                     mPresenter.drawMoneyApply(etMoney.getText().toString().trim(), tixianType + "");
