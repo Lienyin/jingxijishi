@@ -84,6 +84,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView tv_dating_order_kehu;
     @BindView(R.id.btn_rob_order)
     TextView btn_rob_order;
+    private String orderId;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
     private CarAdapter carAdapter;
@@ -109,8 +110,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("订单详情");
         StyledDialog.buildLoading("正在查询").setActivity(this).show();
-        data = ZzRouter.getIntentData(this,AwaitReceiveOrderEntity.class);
-        mPresenter.getOrderDetails(data.orderId);
+        orderId = ZzRouter.getIntentData(this,String.class);
+        mPresenter.getOrderDetails(orderId);
     }
 
     //倒计时
@@ -225,10 +226,11 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
 
     /**
      * 订单详情返回数据
-     * @param data
+     * @param d
      */
     @Override
-    public void getOrderDetailsCallBack(AwaitReceiveOrderEntity data) {
+    public void getOrderDetailsCallBack(AwaitReceiveOrderEntity d) {
+        data = d;
         if (!AppUtils.isEmpty(data.products)){
             carAdapter = new CarAdapter(this);
             carAdapter.setData(data.products);

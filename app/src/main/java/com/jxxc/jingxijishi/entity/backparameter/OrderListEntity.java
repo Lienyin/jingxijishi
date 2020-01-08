@@ -18,6 +18,8 @@ public class OrderListEntity implements Serializable {
     public String canCompleteTime;
     public String orderId;
     public int status;
+    public double lat;
+    public double lng;
     public List<OrderList> products;
     public class OrderList{
         public String productId;

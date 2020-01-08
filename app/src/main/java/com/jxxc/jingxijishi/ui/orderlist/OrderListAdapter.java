@@ -127,25 +127,25 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
         helper.setOnClickListener(R.id.tv_dating_order_zhuandan, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(item.orderId,1);//转单
+                onFenxiangClickListener.onFenxiangClick(item.orderId,1,0,0,"");//转单
             }
         });
         helper.setOnClickListener(R.id.tv_dating_order_start, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(item.orderId,2);//开始服务
+                onFenxiangClickListener.onFenxiangClick(item.orderId,2,0,0,"");//开始服务
             }
         });
         helper.setOnClickListener(R.id.tv_dating_order_wancheng, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(item.orderId,3);//完成服务
+                onFenxiangClickListener.onFenxiangClick(item.orderId,3,0,0,"");//完成服务
             }
         });
         helper.setOnClickListener(R.id.ll_navigation, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFenxiangClickListener.onFenxiangClick(item.orderId,4);//导航
+                onFenxiangClickListener.onFenxiangClick(item.orderId,4,item.lat,item.lng,item.address);//导航
             }
         });
     }
@@ -157,7 +157,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(String orderId, int type);
+        void onFenxiangClick(String orderId, int type,double siteLat,double siteLng,String siteAddress);
     }
 
     // 将字符串转为时间戳

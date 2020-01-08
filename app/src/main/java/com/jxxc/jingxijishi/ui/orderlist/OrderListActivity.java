@@ -1,11 +1,13 @@
 package com.jxxc.jingxijishi.ui.orderlist;
 
 
+import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -19,9 +21,14 @@ import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
 import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
+import com.jxxc.jingxijishi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxijishi.ui.updatepassword.UpdatePasswordActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.AppUtils;
+import com.jxxc.jingxijishi.utils.LocationUtils;
+import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
+import com.yusong.plugin_navi.NaviUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +61,9 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
     private OrderListAdapter adapter;
     private int offset = 2;
     private String orderType = "";//状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+    private double locationLatitude;
+    private double locationLongitude;
+    private List<OrderListEntity> list = new ArrayList<>();
 
     Handler handler = new Handler(){
 
@@ -78,6 +88,20 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         tv_title.setText("我的订单");
         initAdapter();
         onRefresh();
+        Location location = LocationUtils.getInstance(OrderListActivity.this).showLocation();
+        if (location != null) {
+            locationLatitude = location.getLatitude();
+            locationLongitude = location.getLongitude();
+        } else {
+            String lat = SPUtils.get(this, "lat", "120.97111");//默认江苏昆山
+            String lng = SPUtils.get(this, "lng", "31.389817");
+            if (!AppUtils.isEmpty(lat)) {
+                locationLatitude = Double.valueOf(lat);
+                locationLongitude = Double.valueOf(lng);
+            }else{
+                toast(this,"定位失败");
+            }
+        }
     }
 
     private void initAdapter() {
@@ -95,7 +119,7 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         //rvList.addOnItemTouchListener(new SwipeItemLayout.OnSwipeItemTouchListener(getContext()));
         adapter.setOnFenxiangClickListener(new OrderListAdapter.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(String orderId, int type) {
+            public void onFenxiangClick(String orderId, int type,double siteLat,double siteLng,String siteAddress) {
                 switch (type){
                     case 1://转单
                         mPresenter.transferOrder(orderId);
@@ -109,9 +133,22 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
                         ZzRouter.gotoActivity(OrderListActivity.this, AccomplishOrderActivity.class,orderId);
                         break;
                     case 4://导航
-                        //
+                        NaviUtil.with(OrderListActivity.this, NaviUtil.DB09).navi(
+                                locationLatitude,
+                                locationLongitude,
+                                "我的位置",
+                                siteLat,
+                                siteLng,
+                                siteAddress,
+                                getApplicationInfo().name);
                         break;
                 }
+            }
+        });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ZzRouter.gotoActivity(OrderListActivity.this, OrderDetailsActivity.class,list.get(position).orderId);
             }
         });
     }
@@ -153,6 +190,7 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
 
     @Override
     public void myOrderCallBack(List<OrderListEntity> data) {
+        list = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
         adapter.disableLoadMoreIfNotFullPage();
@@ -160,6 +198,7 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
 
     @Override
     public void myOrderMoreCallBack(List<OrderListEntity> data) {
+        list.addAll(data);
         swipeLayout.setRefreshing(false);
         offset++;
         adapter.addData(data);
