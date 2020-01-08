@@ -19,7 +19,11 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public String orderId;
     public String canCompleteTime;
     public String statusName;
+    public String duration;
     public int status;
+    public float starLevel;
+    public String commentContent;
+    public String customerCommentTime;
     public List<Products> products;
 
     public class Products{

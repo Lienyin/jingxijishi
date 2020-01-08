@@ -271,6 +271,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/ll_xiadan_time"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:gravity="center_vertical">
@@ -304,7 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="完成时间"
+                            android:text="服务时长"
                             android:textColor="@color/black999"
                             android:textSize="14sp" />
 
@@ -316,6 +317,68 @@
                             android:text="XXX"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+<!--                评价-->
+                <LinearLayout
+                    android:id="@+id/ll_comm_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="车主评价"
+                            android:textColor="@color/black999"
+                            android:textSize="14sp" />
+
+                        <RatingBar
+                            android:id="@+id/rb_pinglun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:stepSize="1"
+                            android:numStars="5"
+                            android:isIndicator="true"
+                            android:progressTint="#FFCC32"
+                            android:secondaryProgressTint="#FFCC32"/>
+                        <TextView
+                            android:id="@+id/tv_comm_static"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="好评"
+                            android:textColor="#FFCC32"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_comment_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/black"
+                            android:text="XXX"/>
+                        <TextView
+                            android:id="@+id/tv_customer_comment_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/black666"
+                            android:text="XXXX-XX-XX XX:XX:XX"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

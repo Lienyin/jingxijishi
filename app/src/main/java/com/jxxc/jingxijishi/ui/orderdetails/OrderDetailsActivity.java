@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
@@ -76,14 +77,26 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     LinearLayout ll_fuwu;
     @BindView(R.id.ll_dating)
     LinearLayout ll_dating;
+    @BindView(R.id.ll_xiadan_time)
+    LinearLayout ll_xiadan_time;
     @BindView(R.id.ll_dating_wan_order_time)
     LinearLayout ll_dating_wan_order_time;
     @BindView(R.id.gv_data)
     MyGridView gv_data;
     @BindView(R.id.tv_dating_order_kehu)
     TextView tv_dating_order_kehu;
+    @BindView(R.id.tv_comment_content)
+    TextView tv_comment_content;
+    @BindView(R.id.tv_customer_comment_time)
+    TextView tv_customer_comment_time;
     @BindView(R.id.btn_rob_order)
     TextView btn_rob_order;
+    @BindView(R.id.tv_comm_static)
+    TextView tv_comm_static;
+    @BindView(R.id.rb_pinglun)
+    RatingBar rb_pinglun;
+    @BindView(R.id.ll_comm_view)
+    RatingBar ll_comm_view;
     private String orderId;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
@@ -279,8 +292,28 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
             tv_dating_order_static_memo.setTextColor(this.getResources().getColor(R.color.public_all));
             ll_dating.setVisibility(View.GONE);
             ll_fuwu.setVisibility(View.VISIBLE);
+            ll_xiadan_time.setVisibility(View.GONE);
             ll_dating_wan_order_time.setVisibility(View.VISIBLE);
-            tv_dating_wan_order_time.setText(data.endTime);
+            tv_dating_wan_order_time.setText(data.duration+"分钟");
+
+            //评论内容
+            if (!AppUtils.isEmpty(data.commentContent)){
+                ll_comm_view.setVisibility(View.VISIBLE);
+                rb_pinglun.setRating(data.starLevel);
+                tv_comment_content.setText(data.commentContent);
+                tv_customer_comment_time.setText(data.customerCommentTime);
+                if (data.starLevel>0&&data.starLevel<=1){
+                    tv_comm_static.setText("差评");
+                }else if (data.starLevel>1&&data.starLevel<=2){
+                    tv_comm_static.setText("一般");
+                }else if (data.starLevel>2&&data.starLevel<=3){
+                    tv_comm_static.setText("及格");
+                }else if (data.starLevel>3&&data.starLevel<=4){
+                    tv_comm_static.setText("好评");
+                }else if (data.starLevel>4&&data.starLevel<=5){
+                    tv_comm_static.setText("优秀");
+                }
+            }
         }else{
             iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5_3x);
             tv_dating_order_static_memo.setText(data.statusName);
