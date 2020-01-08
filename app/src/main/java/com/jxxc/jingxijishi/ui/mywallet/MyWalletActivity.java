@@ -14,6 +14,7 @@ import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
 import com.jxxc.jingxijishi.ui.commissionlist.CommissionListActivity;
+import com.jxxc.jingxijishi.ui.orderlist.OrderListActivity;
 import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.ui.withdrawdepositdetail.WithdrawDepositDetailActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
@@ -55,6 +56,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_zhanghu_number;
     @BindView(R.id.iv_tixian_zhanghu)
     ImageView iv_tixian_zhanghu;
+    @BindView(R.id.ll_today_order)
+    LinearLayout ll_today_order;
     private String canWithdrawMoney="";
     @Override
     protected int layoutId() {
@@ -74,7 +77,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     }
 
     @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
-    R.id.tv_affirm})
+    R.id.tv_affirm,R.id.ll_today_order})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -92,6 +95,9 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
                 break;
             case R.id.tv_affirm://提现明细
                 ZzRouter.gotoActivity(this, WithdrawDepositDetailActivity.class);
+                break;
+            case R.id.ll_today_order://提现明细
+                ZzRouter.gotoActivity(this, OrderListActivity.class);
                 break;
             default:
         }
@@ -127,5 +133,12 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
                 tv_zhanghu_number.setText("");
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getUserInfo();
+        mPresenter.getAccountInfo();
     }
 }
