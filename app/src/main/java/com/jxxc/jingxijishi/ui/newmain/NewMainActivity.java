@@ -263,9 +263,13 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.ll_jishi_renzheng://技师认证
                 AnimUtils.clickAnimator(view);
-                Intent intent = new Intent(this, ExaminationActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
+                if (isExaminationQualified==1){
+                    toast(this,"线上考试已合格");
+                }else{
+                    Intent intent = new Intent(this, ExaminationActivity.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
+                }
                 break;
             case R.id.ll_my_wallet://我的钱包
                 AnimUtils.clickAnimator(view);
