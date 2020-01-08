@@ -29,7 +29,7 @@ public class TixianAdapter extends BaseQuickAdapter<WithdrawDepositDetailEntity,
         }else{
             helper.setText(R.id.tv_order_type, "提现到微信");
         }
-        helper.setText(R.id.tv_order_id, "￥"+item.orderMoney);
+        helper.setText(R.id.tv_order_id, "￥"+item.money);
         helper.setText(R.id.tv_order_time, item.applyTime);
         //状态 0未审核 1已审核 -1已驳回
         if (item.status==0){
