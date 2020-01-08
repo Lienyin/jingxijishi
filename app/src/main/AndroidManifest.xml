@@ -91,5 +91,8 @@
         <!--佣金明细-->
         <activity android:name=".ui.commissionlist.CommissionListActivity"
             android:screenOrientation="portrait"/>
+        <!--提现明细-->
+        <activity android:name=".ui.withdrawdepositdetail.WithdrawDepositDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

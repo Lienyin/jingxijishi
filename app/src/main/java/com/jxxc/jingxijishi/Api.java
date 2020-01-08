@@ -55,4 +55,6 @@ public class Api {
     public static final String BINDING_TIXIAN = BASEURL + "biz/drawMoney/bindingAccount";
     //24-提现
     public static final String DRAW_MONEY_APPLY = BASEURL + "biz/drawMoney/drawMoneyApply";
+    //25-提现记录
+    public static final String DRAW_MONEY_RECORD = BASEURL + "biz/drawMoney/drawMoneyRecord";
 }

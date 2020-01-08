@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.mywallet;
 
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.bindingaccount.BindingAccountActivity;
 import com.jxxc.jingxijishi.ui.commissionlist.CommissionListActivity;
 import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
+import com.jxxc.jingxijishi.ui.withdrawdepositdetail.WithdrawDepositDetailActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -33,6 +35,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_affirm)
+    TextView tv_affirm;
     @BindView(R.id.ll_withdraw_deposit)
     LinearLayout ll_withdraw_deposit;
     @BindView(R.id.ll_wei_binding)
@@ -61,11 +65,16 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("我的钱包");
+        Drawable img = this.getResources().getDrawable(R.mipmap.tixian_mingxi);
+        img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+        tv_affirm.setCompoundDrawables(img, null, null, null); //设置左图标
+        tv_affirm.setVisibility(View.VISIBLE);
         mPresenter.getUserInfo();
         mPresenter.getAccountInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details})
+    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
+    R.id.tv_affirm})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -80,6 +89,9 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
                 break;
             case R.id.ll_comm_details://账单明细
                 ZzRouter.gotoActivity(this, CommissionListActivity.class);
+                break;
+            case R.id.tv_affirm://提现明细
+                ZzRouter.gotoActivity(this, WithdrawDepositDetailActivity.class);
                 break;
             default:
         }
