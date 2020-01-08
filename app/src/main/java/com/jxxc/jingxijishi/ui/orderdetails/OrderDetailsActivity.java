@@ -96,7 +96,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @BindView(R.id.rb_pinglun)
     RatingBar rb_pinglun;
     @BindView(R.id.ll_comm_view)
-    RatingBar ll_comm_view;
+    LinearLayout ll_comm_view;
     private String orderId;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
