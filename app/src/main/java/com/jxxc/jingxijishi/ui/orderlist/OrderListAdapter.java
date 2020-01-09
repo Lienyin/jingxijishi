@@ -142,7 +142,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
                 onFenxiangClickListener.onFenxiangClick(item.orderId,3,0,0,"");//完成服务
             }
         });
-        helper.setOnClickListener(R.id.ll_navigation, new View.OnClickListener() {
+        helper.setOnClickListener(R.id.iv_navigation_icon, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onFenxiangClickListener.onFenxiangClick(item.orderId,4,item.lat,item.lng,item.address);//导航
