@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.dialog.PopSeek;
+import com.jxxc.jingxijishi.dialog.ZhuanDanDialog;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
@@ -107,6 +108,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
     private PopSeek popSeek;
     private int isOnline;
+    private String oId;//订单id
+    private ZhuanDanDialog zhuanDanDialog;
     private int isExaminationQualified=-1;
     private int isOperationQualified=-1;
     Handler handler = new Handler(){
@@ -136,12 +139,14 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         StyledDialog.buildLoading("加载中").setActivity(this).show();
         getLatLng();
+        zhuanDanDialog = new ZhuanDanDialog(this);
         adapter = new NewMainAdapter(this);
         adapter.setData(list);
         lv_data.setAdapter(adapter);
         adapter.setOnFenxiangClickListener(new NewMainAdapter.OnFenxiangClickListener() {
             @Override
             public void onFenxiangClick(int type,String phoneNumber,String orderId) {
+                oId = orderId;
                 switch (type){
                     case 1://抢单
                         //状态 线上考试是否合格 1合格 0不合格
@@ -163,7 +168,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                         }
                         break;
                     case 3://转单
-                        mPresenter.transferOrder(orderId);
+                        zhuanDanDialog.showShareDialog(true);
                         break;
                     case 4://开始服务
                         mPresenter.startService(orderId);
@@ -195,6 +200,14 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                     //上线
                     mPresenter.updateServiceStatic(1);
                 }
+            }
+        });
+
+        //转单提示框
+        zhuanDanDialog.setOnFenxiangClickListener(new ZhuanDanDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int shareType) {
+                mPresenter.transferOrder(oId);
             }
         });
     }
