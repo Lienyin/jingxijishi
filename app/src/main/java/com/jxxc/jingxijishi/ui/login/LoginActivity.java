@@ -36,6 +36,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendAuth;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
@@ -91,6 +92,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_back.setVisibility(View.GONE);
+        EventBus.getDefault().register(this);
         api = WXAPIFactory.createWXAPI(this,Constant.APP_ID,true);
         api.registerApp(Constant.APP_ID);
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
@@ -217,6 +219,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     }
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onEventMainThread(WeiXin wx) {
+        System.out.println("执行了...");
         getAccessToken(wx.getCode());
     }
     //获取Token
@@ -275,4 +278,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         });
     }
     //---------------------------------微信登录结束----------------------------------------------
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

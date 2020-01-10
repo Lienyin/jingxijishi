@@ -28,8 +28,10 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -375,5 +377,26 @@ public class AppUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 检查手机上是否安装了指定的软件
+     * @param context
+     * @param packageName
+     * @return
+     */
+    public static boolean isAvilible(Context context, String packageName) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> packageInfos = packageManager.getInstalledPackages(0);
+        List<String> packageNames = new ArrayList<String>();
+
+        if (packageInfos != null) {
+            for (int i = 0; i < packageInfos.size(); i++) {
+                String packName = packageInfos.get(i).packageName;
+                packageNames.add(packName);
+            }
+        }
+        // 判断packageNames中是否有目标程序的包名，有TRUE，没有FALSE
+        return packageNames.contains(packageName);
     }
 }
