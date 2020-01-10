@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +27,19 @@ import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.jxxc.jingxijishi.wxapi.Constant;
+import com.jxxc.jingxijishi.wxapi.WeiXin;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -67,6 +79,7 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
     private static final int SDK_AUTH_FLAG = 2;
     private String userId="";
     private String openId="";
+    public IWXAPI api;
 
     @Override
     protected int layoutId() {
@@ -79,6 +92,9 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
         tv_title.setText("绑定账户");
         et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
         mPresenter.getAccountInfo();
+        EventBus.getDefault().register(this);
+        api = WXAPIFactory.createWXAPI(this,Constant.APP_ID,true);
+        api.registerApp(Constant.APP_ID);
     }
 
     @OnClick({R.id.tv_back,R.id.rb_binding_zfb,R.id.rb_binding_wx,R.id.btn_binding,R.id.tv_send_msm_code})
@@ -106,6 +122,12 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
                     toast(this,"已绑定微信");
                 }else{
                     bindingType = 2;
+                    //支付宝
+                    if (!AppUtils.isAvilible(this,"com.tencent.mm")){
+                        toast(this,"目前您安装的支付宝版本过低或尚未安装");
+                    }else{
+                        weiXinLogin();
+                    }
                 }
                 break;
             case R.id.btn_binding://绑定账户
@@ -228,8 +250,10 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
                         // 传入，则支付账户为该授权账户
                         Toast.makeText(BindingAccountActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
                         userId = String.format("%s", authResult.getUserId());
-                        Log.i("TAG","userId=="+userId);
-                        Log.i("TAG","authResult=="+authResult);
+                        if (!AppUtils.isEmpty(userId)){
+                            openId="";
+                            tv_account_type.setText("支付宝");
+                        }
                     } else {
                         // 其他状态值则为授权失败
                         Toast.makeText(BindingAccountActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
@@ -244,4 +268,45 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
         ;
     };
     //---------------------------------支付宝授权结束----------------------------------------------
+    //---------------------------------微信授权开始----------------------------------------------
+    public void weiXinLogin() {
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = String.valueOf(System.currentTimeMillis());
+        api.sendReq(req);
+    }
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void onEventMainThread(WeiXin wx) {
+        getAccessToken(wx.getCode());
+    }
+    //获取Token
+    public void getAccessToken(String code) {
+        String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
+                "appid=" + Constant.APP_ID + "&secret=" + Constant.WECHAT_SECRET +
+                "&code=" + code + "&grant_type=authorization_code";
+        OkGo.<String>post(url)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject dataJson = new JSONObject(response.body());
+                            openId = dataJson.getString("openid");
+                            if (!AppUtils.isEmpty(openId)){
+                                userId="";
+                                tv_account_type.setText("微信");
+                            }
+                        } catch (JSONException e) {
+                            System.out.println("Something wrong...");
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+    //---------------------------------微信授权结束----------------------------------------------
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

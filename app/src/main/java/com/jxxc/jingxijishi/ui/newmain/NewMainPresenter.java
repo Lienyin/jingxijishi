@@ -57,6 +57,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                         UserInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
+                            SPUtils.put(SPUtils.K_SESSION_MOBILE,d.phonenumber);
                         }else{
                             toast(mContext,response.body().message);
                         }

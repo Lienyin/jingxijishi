@@ -123,10 +123,10 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
             ll_wei_binding.setVisibility(View.GONE);
             ll_withdraw_deposit.setVisibility(View.VISIBLE);
             if (!AppUtils.isEmpty(data.alipayAccount)){
-                tv_zhanghu_number.setText("("+data.alipayAccount+")");
+                tv_zhanghu_number.setText("(支付宝)");
                 iv_tixian_zhanghu.setImageResource(R.mipmap.ic_alipay);
             }else if (!AppUtils.isEmpty(data.openId)){
-                tv_zhanghu_number.setText("("+data.openId+")");
+                tv_zhanghu_number.setText("(微信)");
                 iv_tixian_zhanghu.setImageResource(R.mipmap.ex_share_wp);
             }else{
                 iv_tixian_zhanghu.setVisibility(View.GONE);

@@ -76,9 +76,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> implements Serializ
         }
         JsonReader jsonReader = new JsonReader(body.charStream());
         if (rawType != HttpResult.class) {
-
             T data = GsonUtil.fromJson(jsonReader, type);
-
             response.close();
             return data;
         } else {

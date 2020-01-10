@@ -120,8 +120,9 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                 .execute(new JsonCallback<HttpResult<ThirdPartyLogin>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<ThirdPartyLogin>> response) {
-                        HttpResult<ThirdPartyLogin> body = response.body();
-                        mView.getThirdPartyLogin(body.data);
+                        ThirdPartyLogin d = response.body().data;
+                        mView.getThirdPartyLogin(d);
+                        SPUtils.put(SPUtils.K_TOKEN,d.token);
                     }
                 });
     }

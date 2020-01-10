@@ -31,6 +31,9 @@ import com.jxxc.jingxijishi.utils.SPUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.jxxc.jingxijishi.wxapi.Constant;
 import com.jxxc.jingxijishi.wxapi.WeiXin;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendAuth;
@@ -178,7 +181,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             //第一种状态：授权登录成功
             toast(this,"登录成功");
             ZzRouter.gotoActivity(this, NewMainActivity.class);
-            finish();
         }else if ("not_auth".equals(data.step)){
             //第一次授权登录，跳转到手机获取验证码界面(新用户)
             Intent intent = new Intent(this, BindingPhoneNumberActivity.class);
@@ -226,55 +228,41 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                 "appid=" + Constant.APP_ID + "&secret=" + Constant.WECHAT_SECRET +
                 "&code=" + code + "&grant_type=authorization_code";
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new HttpClient.ProtoResultCallback() {
-            @Override
-            public void onSuccess(String s) {
-                if (!s.isEmpty()) {
-                    try {
-                        JSONObject dataJson = new JSONObject(s);
-                        String access_token = dataJson.getString("access_token");
-                        String openid = dataJson.getString("openid");
-                        getWeiXinUserInfo(access_token, openid);
-                    } catch (JSONException e) {
-                        System.out.println("Something wrong...");
-                        e.printStackTrace();
+        OkGo.<String>post(url)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject dataJson = new JSONObject(response.body());
+                            String access_token = dataJson.getString("access_token");
+                            String openid = dataJson.getString("openid");
+                            getWeiXinUserInfo(access_token, openid);
+                        } catch (JSONException e) {
+                            System.out.println("Something wrong...");
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }
-
-            @Override
-            public void onFailed(HttpClient.HttpStateError httpStateError) {
-
-            }
-        });
+                });
     }
     //获取用户信息
     public void getWeiXinUserInfo(String access_token, String Openid) {
         String url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + Openid;
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new HttpClient.ProtoResultCallback() {
-            @Override
-            public void onSuccess(String s) {
-                if (!s.isEmpty()) {
-                    try {
-                        JSONObject dataJson = new JSONObject(s);
-                        wxOpenid = dataJson.getString("openid");
-                        wxHeadimgurl = dataJson.getString("headimgurl");
-                        fullName = dataJson.getString("nickname");
-                        mPresenter.thirdPartyLogin(wxOpenid);
-                    } catch (JSONException e) {
-                        System.out.println("Something wrong...");
-                        e.printStackTrace();
+        OkGo.<String>post(url)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject dataJson = new JSONObject(response.body());
+                            wxOpenid = dataJson.getString("openid");
+                            wxHeadimgurl = dataJson.getString("headimgurl");
+                            fullName = dataJson.getString("nickname");
+                            mPresenter.thirdPartyLogin(wxOpenid);
+                        } catch (JSONException e) {
+                            System.out.println("Something wrong...");
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }
-
-            @Override
-            public void onFailed(HttpClient.HttpStateError httpStateError) {
-
-            }
-        });
+                });
     }
     //---------------------------------微信登录结束----------------------------------------------
 

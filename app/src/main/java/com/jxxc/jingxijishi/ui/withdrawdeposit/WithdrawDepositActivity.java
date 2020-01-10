@@ -138,11 +138,11 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     @Override
     public void getAccountInfoCallBack(AccountInfoEntity data) {
         if (!AppUtils.isEmpty(data.alipayAccount)) {
-            tv_account.setText("(" + data.alipayAccount + ")");
+            tv_account.setText("(支付宝)");
             tv_account_icon.setImageResource(R.mipmap.ic_alipay);
             tixianType = 3;
         } else if (!AppUtils.isEmpty(data.openId)) {
-            tv_account.setText("(" + data.openId + ")");
+            tv_account.setText("(微信)");
             tv_account_icon.setImageResource(R.mipmap.ex_share_wp);
             tixianType = 2;
         } else {
@@ -158,5 +158,11 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     public void drawMoneyApplyCallBack() {
         toast(this, "提现成功，等待审核");
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getAccountInfo();
     }
 }

@@ -11,6 +11,7 @@ import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
+import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -84,7 +85,7 @@ public class BindingPhoneNumberActivity extends MVPBaseActivity<BindingPhoneNumb
 
     @Override
     public void gotoUserMain() {
-        ZzRouter.gotoActivity(this, MainActivity.class);
+        ZzRouter.gotoActivity(this, NewMainActivity.class);
         finish();
     }
 }
