@@ -34,6 +34,7 @@ import com.jxxc.jingxijishi.wxapi.WeiXin;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -90,6 +91,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_back.setVisibility(View.GONE);
+        api = WXAPIFactory.createWXAPI(this,Constant.APP_ID,true);
+        api.registerApp(Constant.APP_ID);
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
             etAccount.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
         }

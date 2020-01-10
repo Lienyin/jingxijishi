@@ -8,15 +8,15 @@ import java.io.Serializable;
 
 public class Constant implements Serializable {
     //微信配置
-    public static final String APP_ID = "wxc70188f849c9c3cb";
-    public static final String WECHAT_SECRET = "b29ecd4804fe422783a74086b3333218";
+    public static final String APP_ID = "wx5daa1aa8174bd15f";
+    public static final String WECHAT_SECRET = "408cb17987a86ff2518d12917f13d9e7";
     //支付宝配置
     /** 支付宝支付业务：入参app_id */
-    public static final String ALIPAY_APPID = "2019032063588814";
+    public static final String ALIPAY_APPID = "2021001103654185";
     /** 支付宝账户登录授权业务：入参pid值 */
-    public static final String ALIPAY_PID = "2088821834281814";
+    public static final String ALIPAY_PID = "2088731215077504";
     /** 支付宝账户登录授权业务：入参target_id值 */
-    public static final String ALIPAY_TARGET_ID = "zhizukeji";
+    public static final String ALIPAY_TARGET_ID = "jingxi";
     /** 商户私钥，pkcs8格式 */
     /** 如下私钥，RSA2_PRIVATE 或者 RSA_PRIVATE 只需要填入一个 */
     /** 如果商户两个都设置了，优先使用 RSA2_PRIVATE */
@@ -24,5 +24,5 @@ public class Constant implements Serializable {
     /** 获取 RSA2_PRIVATE，建议使用支付宝提供的公私钥生成工具生成， */
     /** 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1 */
     public static final String RSA_PRIVATE = "";
-    public static final String RSA2_PRIVATE = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCTRU2UFCbeiEaQU/R4eGq77nT6YIAqR+O4FZtQWlZ1TewFDgpm/DNPARiQsqAfAHaRd/iOjOpfagQu/uce4u1eV9K6yKeMNLs5h1aIDBVXdPlFwJtvSssO24DxQ2gV3IOk33JLyT+p+e/BRQoq6ThjdudJYXxZA1GSaIMYfzWTFPSfKLucxYKxe4G+6qRY/4SyxC4v/sicHC/CtzlmLuf3EjMIhcZ4Zc+B1r+cS8rOeot8i31MYstvo7H4fCJDEASYxHxSFDePoAyfbV7nvDAVnvGkiAtNzGY+ueyTSGUlmlxTPsmo4Bprw5cFDA05p10/SmbnP7ibv2i8xQ6xY/h/AgMBAAECggEAXIvQlJ2VT4KT1V7s4kfJyw+usyixYeCLWcM6NuSOMGknSIXqQ415MMyfg069EL5ZxFCAAhTLs+oLdvz4gJBaWk8WPgqaP6FjhmNmHVh6kNsRSqQfCXEW6d9GyFZzsklA8Pr5+GYfe9F0uR+JpC2rIdY2wgZg/g730+mZeGt4X1R1vZUDXYxX5tvStwa3oauDyUb08SBdrVw2zjuMiRDhuQxtdPQ/HhqDWgCPd+YPDCHw72Ic2yEFxZtLddzkGPy11Y1QTDrvlvnYUwrBL5BLLdRnlgkUyqZKaNUB4j2Vm+1hs+CRVrnaovXaiP5fwpSY/kxSCnwGEt4RfbuuqXpzAQKBgQDdexRC9+atgPhGeD1xA+lZ2aMMt5m4KQwUIxIS3vCypuVFIg2EqlXP/zUmklu4rupBlhkGks3i+LRcz0RuFSPA2oV3rY3hZsF6Msf/hX3t0M6u8CJzSE6AgGKQ2jOYI+zI1oWwv0IT1iYiK8/uTsc6n82yQwT0ONinXFAGaNsQ1QKBgQCqOUv2Pbx8jeD1iiYMSx8Volyd1vHNVKrV8H0AtM9Y21N6Ut3Gw1xfDzzjrYI6Y69WUu9N9w8I2JgaYBDBK+3Dh7mC/fclUJfc77XBroRPAsb6PFlklFdgYNsro//3N12gznY6+w1PAh5d+xgQMSn1jSd4Orf6mMflmtr/TNquAwKBgQCHD5A6imwccCJ27sohCg6aITLiBXBzMmzQNtbFtTg46be0YeC2fx0XWvzxiZzvUZM+7aZTMODmwV1Tn32OV8vWxitP4QE9a+keeKsnsiMqDASN/5gyjux4RlJVHQsLgxTZIKCkOO21pQjaG7eQDnBF2r+YLnBt8eCEprGSRw0YBQKBgQCBK3dkBNb54SO6zzkuDPcqkIkdURUtzbjRHWuN1Kae89e1tBoMkQSQMdzvnCN9MVXE+KwVCowDF3DcWtd77ly/CkgQia04SJ7kjZXrwgUue5oIGzFubE6dmQHXbNx4eS/4LZN0EDu6H45xnG9XIieH6LPxvQUNCVBvAAJ8xpIOhwKBgQCzB9Fxh+TWb/K/f3EqdtqfxNjpXabiwuH8nsfP/CagTygcayhPvZdt7k6HKh79KeBbwxdTAiCkZSD+r1QVMdZMGwsKAZqo1jrCAccXs3fhG4/LbEy3rSbTA2inIGFj2SutfsN51RjrKgbFMi2SDHhs9Q6AF9v/igLAl3edhDYAyQ==";
-}
+    public static final String RSA2_PRIVATE = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCeBaAfdQaK/gABgzGH87aJGu70f4t8hUOnwrFj2lUS7vZu3PK5rpMGXD1IEQMLX/bpfoz9YnZPHQPuxfKaSDdAYpSoPjnQ4V+Ye3f96Pw97IQV+mbUOcBAc6foDz2+C2Sh0k/iu3EpUA7401XaDm5Xeb2cPLQ9kYiLrH62hRHMwcRtravkeqb/qHd/cl7H0X2EHxMRxD5c5KRYTzsDGmjcUiupagNRhaXb7hcpF0lhCXAzedcfZmGPAOOb85YfZdqALWEsfGkbajeqMq8uASmh5iisTUGTpv8IRs1nJbZsNm/fNU6TW2K7psg542SezBYcA6jJsE4leSVQEehGNsuZAgMBAAECggEAKeiqB828l343uC74IutC3OfUueldr/+T6tkavLW53FSd7NcSVKZ0/bnW0tcYLJsd290hPU4wvFigo2HCLqK6bIv4iwo9wSUUelc8go2Y4D9q5H1NajmKwE0sGcJ5CH7zCGvDnglCQMenwNwjp7ouD2sNG3OKBc4kHY746CUwjFHmRz3ZhRNNgM66gycPz3D+IGseZLMmSpYH3aqr3R+zSP4pZdBvrRrS+viuk90Uffv7nvoSWbimhvgq6DDsNpOoe3nPOFpgnWOfTxLf8HbcM9COHaKzzskeG9PXNum1vBGcmWFdDqVIY/8ybRZyWQ8P1XDylAyLJZ4iQH1VbSZgEQKBgQD5LF/WYqC69qVKZ+NvBTsN8QWDN7WutlrIbKqebu3bnyFiFG6psL9CO+mqu5kWXwAJGmX21YKgm+rNdj17uANLZMyP7y/1biX3JRSol99xYp8X5O+zrpIbiNl9wDqUvhAp3Kti45NOYOsbqbXZNJJNVlP1wWhrIMZJ0imlDC/M3QKBgQCiWfF9CGpfcqh8la/MAY5MFkj2NFI9YThq0rMJuMB7JFYti9KxDL5vNHGR7wmDVmVYYnIqJDpxfmFd6kTKAdFNrhJvf0oNMqG5mDe97LXK4kEpDIT9xF7E/tEGJQMhPd4IscCSkB/gfY7RoZbRsWdTuvePffJiNphvnATWax7/7QKBgFDWsqkNCnRdvLZtCf5kxgn53f36PvlVtBI+HwSTnJuZ/uyhEF4BN6u3YFHB1yLI42wQom/4SQ7uRrkt2TigNIFrTGqOARMxDyQlZZRk4VsZ0d+gqJu00TYZqeYATYEgQII0U24bwxi0nNI2twam5agtj8O1YbkPwwUEJ/qh/4gJAoGATrMdDgg7UGOLa0FAg7spWJbg7YB1cU2khJv4sDjADbGSmOeTzcGous2IVD60tNb3r72hK+596jBiUJ1UlTwGUwqT4zqoEfe+T/KK6uVJRr0g6x4nhcBgVExV1Q2yE7Yi4MIR4Lo+yZrz1YjoTGQb+4nBoexix9tBT7Eo4yvwTg0CgYEAx7l/bfHQpkr9+0wP3VIRyQPlr25ftUGMccHeiq83fFL+VvXBhMV2oo9kcsFANpVqTgPAwq1LpRium2wnbJT/4AK3N8OP6rlpgvajDSN33iYFA3ARmf5x9qnKL31hW0TldjE8dvr50Mjwe87ncnpk1YP4wptrJ19uy0AU/ZTn+tw=";
+        }
