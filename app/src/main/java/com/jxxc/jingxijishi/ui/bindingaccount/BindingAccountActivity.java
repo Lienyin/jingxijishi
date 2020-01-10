@@ -52,10 +52,6 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
     RadioButton rb_binding_wx;
     @BindView(R.id.ll_date_caiji)
     LinearLayout ll_date_caiji;
-    @BindView(R.id.et_alipay_user_name)
-    EditText et_alipay_user_name;
-    @BindView(R.id.et_alipay_user_account)
-    EditText et_alipay_user_account;
     @BindView(R.id.et_phone_number)
     TextView et_phone_number;
     @BindView(R.id.et_msg_code)
@@ -64,10 +60,13 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
     Button btn_binding;
     @BindView(R.id.tv_send_msm_code)
     TextView tv_send_msm_code;
+    @BindView(R.id.tv_account_type)
+    TextView tv_account_type;
     private  int bindingType=0;
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
-    private String AuthCode;
+    private String userId="";
+    private String openId="";
 
     @Override
     protected int layoutId() {
@@ -90,42 +89,38 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
                 finish();
                 break;
             case R.id.rb_binding_zfb://支付宝
-                ll_date_caiji.setVisibility(View.VISIBLE);
-                bindingType =1;
-                //支付宝
-                if (!AppUtils.isAvilible(this,"com.eg.android.AlipayGphone")){
-                    toast(this,"目前您安装的支付宝版本过低或尚未安装");
+                if (!AppUtils.isEmpty(userId)){
+                    toast(this,"已绑定支付宝");
                 }else{
-                    aliPayAuthorization();
+                    bindingType =1;
+                    //支付宝
+                    if (!AppUtils.isAvilible(this,"com.eg.android.AlipayGphone")){
+                        toast(this,"目前您安装的支付宝版本过低或尚未安装");
+                    }else{
+                        aliPayAuthorization();
+                    }
                 }
                 break;
             case R.id.rb_binding_wx://微信
-                ll_date_caiji.setVisibility(View.GONE);
-                bindingType = 2;
+                if (!AppUtils.isEmpty(openId)){
+                    toast(this,"已绑定微信");
+                }else{
+                    bindingType = 2;
+                }
                 break;
             case R.id.btn_binding://绑定账户
                 if (bindingType==0){
                     toast(this,"请选择绑定账户类型");
-                }else if (bindingType == 1){
-                    if (AppUtils.isEmpty(et_alipay_user_name.getText().toString().trim())){
-                        toast(this,"请输入姓名");
-                    }else if (AppUtils.isEmpty(et_alipay_user_account.getText().toString().trim())){
-                        toast(this,"请输入支付宝账户");
-                    }else if (AppUtils.isEmpty(et_phone_number.getText().toString().trim())){
-                        toast(this,"请输入手机号");
+                }else{
+                    if (AppUtils.isEmpty(userId)&&AppUtils.isEmpty(openId)){
+                        toast(this,"请绑定提现账户");
                     }else if (AppUtils.isEmpty(et_msg_code.getText().toString().trim())){
                         toast(this,"请输入验证码");
                     }else{
                         StyledDialog.buildLoading("正在绑定").setActivity(this).show();
-                        mPresenter.bindingAliPay(
-                                et_alipay_user_name.getText().toString().trim(),
-                                et_alipay_user_account.getText().toString().trim(),
-                                "",
-                                et_msg_code.getText().toString().trim(),
-                                et_phone_number.getText().toString().trim());
+                        mPresenter.bindingAccount(userId,openId,
+                                et_msg_code.getText().toString().trim());
                     }
-                }else{
-                    //
                 }
                 break;
             case R.id.tv_send_msm_code://获取验证码
@@ -141,7 +136,7 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
 
     //绑定支付宝返回数据
     @Override
-    public void bindingAliPayCallBack() {
+    public void bindingAccountCallBack() {
         toast(this,"绑定成功");
         finish();
     }
@@ -150,13 +145,14 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
     @Override
     public void getAccountInfoCallBack(AccountInfoEntity data) {
         if (!AppUtils.isEmpty(data.alipayAccount)){//支付宝
+            userId = data.alipayAccount;
             rb_binding_zfb.setChecked(true);
-            et_alipay_user_name.setText(data.alipayName);
-            et_alipay_user_account.setText(data.alipayAccount);
             ll_date_caiji.setVisibility(View.VISIBLE);
+            tv_account_type.setText("支付宝");
             bindingType =1;
         }else if (!AppUtils.isEmpty(data.openId)){//微信
             rb_binding_wx.setChecked(true);
+            tv_account_type.setText("微信");
             bindingType =2;
         }else{
         }
@@ -231,8 +227,8 @@ public class BindingAccountActivity extends MVPBaseActivity<BindingAccountContra
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value
                         // 传入，则支付账户为该授权账户
                         Toast.makeText(BindingAccountActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
-                        AuthCode = String.format("%s", authResult.getAuthCode());
-                        Log.i("TAG","AuthCode=="+AuthCode);
+                        userId = String.format("%s", authResult.getUserId());
+                        Log.i("TAG","userId=="+userId);
                         Log.i("TAG","authResult=="+authResult);
                     } else {
                         // 其他状态值则为授权失败

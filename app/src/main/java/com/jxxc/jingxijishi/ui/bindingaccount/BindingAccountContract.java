@@ -14,12 +14,12 @@ import com.jxxc.jingxijishi.mvp.BaseView;
 
 public class BindingAccountContract {
     interface View extends BaseView {
-        void bindingAliPayCallBack();
+        void bindingAccountCallBack();
         void getAccountInfoCallBack(AccountInfoEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void bindingAliPay(String alipayName,String alipayAccount,String openId,String code,String phonenumber);
+        void bindingAccount(String alipayAccount,String openId,String code);
         void getCode(String phonenumber, TextView textView);
         void getAccountInfo();
     }

@@ -35,23 +35,21 @@ public class BindingAccountPresenter extends BasePresenterImpl<BindingAccountCon
     /**
      * 绑定账户
      * @param alipayAccount
-     * @param alipayName
+     * @param openId
      * @param code
      */
     @Override
-    public void bindingAliPay(String alipayName,String alipayAccount,String openId,String code,String phonenumber) {
+    public void bindingAccount(String alipayAccount,String openId,String code) {
         OkGo.<HttpResult>post(Api.BINDING_TIXIAN)
-                .params("alipayName",alipayName)
                 .params("alipayAccount",alipayAccount)
                 .params("openId",openId)
                 .params("code",code)
-                .params("phonenumber",phonenumber)
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
                         StyledDialog.dismissLoading();
                         if (response.body().code==0){
-                            mView.bindingAliPayCallBack();
+                            mView.bindingAccountCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }
