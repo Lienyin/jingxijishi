@@ -65,8 +65,8 @@ public class RegardsActivity extends MVPBaseActivity<RegardsContract.View, Regar
             case R.id.ll_privacy://隐私政策
                 break;
             case R.id.ll_renewal://版本更新
-                StyledDialog.buildLoading().setActivity(this).show();
-                mPresenter.queryAppVersion("5");
+                StyledDialog.buildLoading("加载中").setActivity(this).show();
+                mPresenter.queryAppVersion("1");
                 break;
             case R.id.ll_official_website://官方网站
                 break;
