@@ -8,12 +8,9 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxc.jingxijishi.R;
-import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
-import com.jxxc.jingxijishi.entity.backparameter.MsgListEntity;
 import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 import com.jxxc.jingxijishi.utils.AppUtils;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

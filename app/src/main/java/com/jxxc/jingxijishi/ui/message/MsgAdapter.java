@@ -2,12 +2,11 @@ package com.jxxc.jingxijishi.ui.message;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jxxc.jingxijishi.entity.backparameter.MsgListEntity;
+import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.MessageListEntity;
 
 import java.util.List;
 
@@ -16,15 +15,17 @@ import java.util.List;
  * email:458079442@qq.com
  */
 
-public class MsgAdapter extends BaseQuickAdapter<MsgListEntity, BaseViewHolder> {
+public class MsgAdapter extends BaseQuickAdapter<MessageListEntity, BaseViewHolder> {
 
-    public MsgAdapter(@LayoutRes int layoutResId, @Nullable List<MsgListEntity> data) {
+    public MsgAdapter(@LayoutRes int layoutResId, @Nullable List<MessageListEntity> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final MsgListEntity item) {
-        //helper.setText(R.id.tv_order_number, item.id+"");
+    protected void convert(BaseViewHolder helper, final MessageListEntity item) {
+        helper.setText(R.id.tv_order_static_name, item.messageTopic);
+        helper.setText(R.id.tv_order_static_time, item.sendTime);
+        helper.setText(R.id.tv_order_static_content, item.content);
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;

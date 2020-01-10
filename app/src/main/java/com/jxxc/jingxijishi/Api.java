@@ -57,4 +57,6 @@ public class Api {
     public static final String DRAW_MONEY_APPLY = BASEURL + "biz/drawMoney/drawMoneyApply";
     //25-提现记录
     public static final String DRAW_MONEY_RECORD = BASEURL + "biz/drawMoney/drawMoneyRecord";
+    //26-消息列表
+    public static final String MESSAGE_LIST = BASEURL + "biz/message/messageList";
 }
