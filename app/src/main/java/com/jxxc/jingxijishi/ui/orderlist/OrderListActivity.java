@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.dialog.ZhuanDanDialog;
 import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
@@ -64,6 +65,8 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
     private double locationLatitude;
     private double locationLongitude;
     private List<OrderListEntity> list = new ArrayList<>();
+    private ZhuanDanDialog zhuanDanDialog;
+    private String oId;//订单id
 
     Handler handler = new Handler(){
 
@@ -88,6 +91,7 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         tv_title.setText("我的订单");
         initAdapter();
         onRefresh();
+        zhuanDanDialog = new ZhuanDanDialog(this);
         Location location = LocationUtils.getInstance(OrderListActivity.this).showLocation();
         if (location != null) {
             locationLatitude = location.getLatitude();
@@ -120,9 +124,10 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         adapter.setOnFenxiangClickListener(new OrderListAdapter.OnFenxiangClickListener() {
             @Override
             public void onFenxiangClick(String orderId, int type,double siteLat,double siteLng,String siteAddress) {
+                oId = orderId;
                 switch (type){
                     case 1://转单
-                        mPresenter.transferOrder(orderId);
+                        zhuanDanDialog.showShareDialog(true);
                         break;
                     case 2://开始服务
                         mPresenter.startService(orderId);
@@ -149,6 +154,12 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ZzRouter.gotoActivity(OrderListActivity.this, OrderDetailsActivity.class,list.get(position).orderId);
+            }
+        });
+        zhuanDanDialog.setOnFenxiangClickListener(new ZhuanDanDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int shareType) {
+                mPresenter.transferOrder(oId);
             }
         });
     }
