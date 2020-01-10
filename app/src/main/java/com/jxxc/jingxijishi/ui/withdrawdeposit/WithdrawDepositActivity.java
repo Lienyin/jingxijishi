@@ -52,6 +52,8 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
     Button btn_withdraw_deposit;
     @BindView(R.id.ll_huan_tixian)
     LinearLayout ll_huan_tixian;
+    @BindView(R.id.tv_tixian_all)
+    TextView tv_tixian_all;
     private String canWithdrawMoney;
     private double money;
     private int tixianType = 0;
@@ -105,7 +107,7 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
         });
     }
 
-    @OnClick({R.id.tv_back, R.id.btn_withdraw_deposit,R.id.ll_huan_tixian})
+    @OnClick({R.id.tv_back, R.id.btn_withdraw_deposit,R.id.ll_huan_tixian,R.id.tv_tixian_all})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -124,6 +126,9 @@ public class WithdrawDepositActivity extends MVPBaseActivity<WithdrawDepositCont
                 break;
             case R.id.ll_huan_tixian://换提现账户
                 ZzRouter.gotoActivity(this, BindingAccountActivity.class);
+                break;
+            case R.id.tv_tixian_all://全部
+                etMoney.setText(canWithdrawMoney);
                 break;
             default:
         }
