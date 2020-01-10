@@ -82,18 +82,42 @@
                     android:textSize="14sp" />
             </RadioGroup>
         </LinearLayout>
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ListView
-                android:id="@+id/lv_data"
+            android:layout_height="match_parent">
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@color/transparent"
-                android:visibility="visible" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+                android:orientation="vertical">
+                <ListView
+                    android:id="@+id/lv_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/transparent"
+                    android:visibility="visible" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:id="@+id/ll_icon_home_shuaxin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:background="@color/white">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_home_shuaxin"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="刷新"/>
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
     <!--抽屉-->
     <LinearLayout
@@ -210,6 +234,7 @@
                     android:background="#eee" />
 
                 <LinearLayout
+                    android:id="@+id/ll_money_tixian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -240,6 +265,7 @@
                     android:background="#eee" />
 
                 <LinearLayout
+                    android:id="@+id/ll_today_shouru"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

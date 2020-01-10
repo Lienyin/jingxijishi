@@ -28,6 +28,7 @@ import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
+import com.jxxc.jingxijishi.ui.commissionlist.CommissionListActivity;
 import com.jxxc.jingxijishi.ui.examination.ExaminationActivity;
 import com.jxxc.jingxijishi.ui.login.LoginActivity;
 import com.jxxc.jingxijishi.ui.main.MainActivity;
@@ -37,6 +38,7 @@ import com.jxxc.jingxijishi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxijishi.ui.orderlist.OrderListActivity;
 import com.jxxc.jingxijishi.ui.seting.SetingActivity;
 import com.jxxc.jingxijishi.ui.usercenter.UsercenterActivity;
+import com.jxxc.jingxijishi.ui.withdrawdeposit.WithdrawDepositActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.GlideImgManager;
@@ -102,6 +104,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     ImageView iv_user_logo;
     @BindView(R.id.ll_today_order)
     LinearLayout ll_today_order;
+    @BindView(R.id.ll_money_tixian)
+    LinearLayout ll_money_tixian;
+    @BindView(R.id.ll_today_shouru)
+    LinearLayout ll_today_shouru;
+    @BindView(R.id.ll_icon_home_shuaxin)
+    LinearLayout ll_icon_home_shuaxin;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -241,7 +249,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
     R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info,
-    R.id.tv_service_type,R.id.ll_today_order})
+    R.id.tv_service_type,R.id.ll_today_order,R.id.ll_money_tixian,R.id.ll_today_shouru,R.id.ll_icon_home_shuaxin})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -261,18 +269,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             case R.id.ll_main_setting://系统设置
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, SetingActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
+                //drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.iv_user_msg://系统设置
                 //系统信息
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, MessageActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.ll_order_list://订单记录
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, OrderListActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.ll_jishi_renzheng://技师认证
                 AnimUtils.clickAnimator(view);
@@ -281,18 +287,15 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 }else{
                     Intent intent = new Intent(this, ExaminationActivity.class);
                     startActivity(intent);
-                    drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 }
                 break;
             case R.id.ll_my_wallet://我的钱包
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, MyWalletActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.ll_user_info://我的信息
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, UsercenterActivity.class);
-                drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.rb_dating://抢单大厅
                 getLatLng();
@@ -307,6 +310,15 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.ll_today_order://今日完成订单
                 ZzRouter.gotoActivity(this,OrderListActivity.class);
+                break;
+            case R.id.ll_money_tixian://可提现金额
+                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class);
+                break;
+            case R.id.ll_today_shouru://今日预计收入
+                ZzRouter.gotoActivity(this, CommissionListActivity.class);
+                break;
+            case R.id.ll_icon_home_shuaxin://刷新
+                getLatLng();
                 break;
             default:
         }

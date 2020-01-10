@@ -89,9 +89,9 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("我的订单");
+        zhuanDanDialog = new ZhuanDanDialog(this);
         initAdapter();
         onRefresh();
-        zhuanDanDialog = new ZhuanDanDialog(this);
         Location location = LocationUtils.getInstance(OrderListActivity.this).showLocation();
         if (location != null) {
             locationLatitude = location.getLatitude();
