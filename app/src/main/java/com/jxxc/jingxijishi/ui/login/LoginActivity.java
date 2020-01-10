@@ -219,7 +219,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     }
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onEventMainThread(WeiXin wx) {
-        System.out.println("执行了...");
         getAccessToken(wx.getCode());
     }
     //获取Token

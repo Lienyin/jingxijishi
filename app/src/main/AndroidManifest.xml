@@ -28,6 +28,35 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/MyAppTheme">
+        <!--apk安装-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            tools:replace="android:authorities"
+            android:grantUriPermissions="true">
+            <!--${applicationId}可以保证唯一取值问题，获取应用id-->
+            <meta-data
+                tools:replace="android:resource"
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <!--微信支付设置-->
+        <activity
+            android:name="com.jxxc.jingxijishi.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wxc70188f849c9c3cb"/>
+            </intent-filter>
+        </activity>
+        <!--微信注册设置-->
+        <activity
+            android:exported="true"
+            android:name=".wxapi.WXEntryActivity"/>
         <!--欢迎界面-->
         <activity android:name=".ui.welcome.WelcomeActivity">
         </activity>
