@@ -102,7 +102,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
             helper.setVisible(R.id.tv_dating_order_wancheng,false);
             helper.setGone(R.id.tv_dating_order_count_down,false);
         }else{
-            helper.setImageResource(R.id.iv_dating_order_static_icon,R.mipmap.icon_user_5_3x);
+            helper.setImageResource(R.id.iv_dating_order_static_icon,R.mipmap.icon_user_5);
             helper.setText(R.id.tv_dating_order_static_memo,item.statusName);
             helper.setTextColor(R.id.tv_dating_order_static_memo,mContext.getResources().getColor(R.color.black));
             helper.setVisible(R.id.tv_dating_order_zhuandan,false);

@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -85,6 +86,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     private String wxOpenid = "";
     private String wxHeadimgurl = "";//头像
     private String fullName = "";//昵称
+    private long exitTime = 0;
 
     @Override
     protected int layoutId() {
@@ -270,5 +272,26 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            toast(this, "再按一次退出程序");
+            exitTime = System.currentTimeMillis();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            System.exit(0);
+        }
     }
 }

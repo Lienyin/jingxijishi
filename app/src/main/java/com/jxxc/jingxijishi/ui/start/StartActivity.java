@@ -43,8 +43,10 @@ public class StartActivity extends Activity {
             public void run(){
                 if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
                     ZzRouter.gotoActivity(StartActivity.this, NewMainActivity.class);
+                    finish();
                 }else{
                     ZzRouter.gotoActivity(StartActivity.this, LoginActivity.class);
+                    finish();
                 }
             }
         };

@@ -163,7 +163,7 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_wancheng.setVisibility(View.INVISIBLE);
             holder.tv_dating_order_count_down.setVisibility(View.GONE);
         }else{
-            holder.iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5_3x);
+            holder.iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5);
             holder.tv_dating_order_static_memo.setText(data.statusName);
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.black));
             holder.ll_dating.setVisibility(View.GONE);

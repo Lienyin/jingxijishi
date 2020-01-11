@@ -315,7 +315,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 }
             }
         }else{
-            iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5_3x);
+            iv_dating_order_static_icon.setImageResource(R.mipmap.icon_user_5);
             tv_dating_order_static_memo.setText(data.statusName);
             tv_dating_order_static_memo.setTextColor(this.getResources().getColor(R.color.black));
             ll_dating.setVisibility(View.GONE);
