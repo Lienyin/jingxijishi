@@ -13,7 +13,7 @@ public class UserInfoEntity implements Serializable {
     public String avatar;
     public int isOnline;
     public String score;
-    public String grade;
+    public float grade;
     public int isExaminationQualified;
     public int isOperationQualified;
     public String todayFinishOrder;

@@ -94,7 +94,7 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
     @Override
     public void queryUserInfoCallback(UserInfoEntity userInfo) {
         GlideImgManager.loadCircleImage(this, userInfo.avatar, iv_user_head);
-        tv_grade.setText(AppUtils.isEmpty(userInfo.grade)?"0级":userInfo.grade);
+        tv_grade.setText(userInfo.grade+"级");
         tv_technician_code.setText(AppUtils.isEmpty(userInfo.technicianCode)?"暂无":userInfo.technicianCode);
         tv_user_info_mobile.setText(userInfo.phonenumber);
         if (userInfo.isExaminationQualified==1&&userInfo.isOperationQualified==1){

@@ -91,7 +91,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @BindView(R.id.tv_today_shouru)
     TextView tv_today_shouru;
     @BindView(R.id.tv_user_dengji)
-    TextView tv_user_dengji;
+    ImageView tv_user_dengji;
     @BindView(R.id.tv_service_type)
     TextView tv_service_type;
     @BindView(R.id.lv_data)
@@ -354,11 +354,23 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         isExaminationQualified =data.isExaminationQualified;
         isOperationQualified =data.isOperationQualified;
         tv_user_name.setText(data.realName);
-        tv_user_phonenumber.setText(data.phonenumber);
+        tv_user_phonenumber.setText(data.technicianCode);
         tv_today_order.setText(data.todayFinishOrder);
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
-        tv_user_dengji.setText(data.grade);
+        if (data.grade>0&&data.grade<=1){
+            tv_user_dengji.setImageResource(R.mipmap.score);
+        }else if (data.grade>1&&data.grade<=2){
+            tv_user_dengji.setImageResource(R.mipmap.pingfen_tow);
+        }else if (data.grade>2&&data.grade<=3){
+            tv_user_dengji.setImageResource(R.mipmap.pingfen_three);
+        }else if (data.grade>3&&data.grade<=4){
+            tv_user_dengji.setImageResource(R.mipmap.pingfen_forl);
+        }else if (data.grade>4&&data.grade<=5){
+            tv_user_dengji.setImageResource(R.mipmap.pingfen_five);
+        }else{
+            tv_user_dengji.setImageResource(R.mipmap.pingfen_three);
+        }
         //状态 2:忙碌 1:上线 0:下线
         if (data.isOnline == 1){
             tv_service_type.setText("接单中");
