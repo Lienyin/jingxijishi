@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jxxc.jingxijishi.ui.message.MessageActivity;
 import com.jxxc.jingxijishi.utils.SPUtils;
 
 import org.json.JSONException;
@@ -48,41 +49,10 @@ public class MyReceiver extends BroadcastReceiver {
 
 			} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 				Log.i(TAG, "[MyReceiver] 用户点击打开了通知");
-				StringBuilder sb = new StringBuilder();
-				//1.充值 2.电池低电量 3.客户优惠券  4.客户退押金成功  5.账户在其他设备登录 6.通知公告
-				for (String key : bundle.keySet()) {
-					if (key.equals(JPushInterface.EXTRA_ALERT_TYPE)) {
-						if ("2".equals(bundle.get(key))) {
-//							//打开自定义的Activity
-//							String deviceType = SPUtils.get(SPUtils.K_DEVICETYPE,"0");
-//							if ("1".equals(deviceType)){//1车
-//								Intent i = new Intent(context, MyEquipmentCarActivity.class);
-//								i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//								context.startActivity(i);
-//							}else if ("2".equals(deviceType)){//2电
-//								Intent i = new Intent(context, MyEquipmentBatteryActivity.class);
-//								i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//								context.startActivity(i);
-//							}else{
-//								Intent i = new Intent(context, NotificationActivity.class);
-//								i.putExtras(bundle);
-//								i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//								context.startActivity(i);
-//							}
-						}else if ("3".equals(bundle.get(key))) {
-							//打开自定义的Activity
-//							Intent i = new Intent(context, MyCouponActivity.class);
-//							i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//							context.startActivity(i);
-						}else {
-							//打开自定义的Activity
-//							Intent i = new Intent(context, NotificationActivity.class);
-//							i.putExtras(bundle);
-//							i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//							context.startActivity(i);
-						}
-					}
-				}
+				Intent intent1 = new Intent(context, MessageActivity.class);
+				intent1.putExtras(bundle);
+				intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				context.startActivity(intent1);
 
 			} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
 				Log.i(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));

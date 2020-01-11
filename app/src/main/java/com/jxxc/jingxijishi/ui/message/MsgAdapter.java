@@ -26,6 +26,12 @@ public class MsgAdapter extends BaseQuickAdapter<MessageListEntity, BaseViewHold
         helper.setText(R.id.tv_order_static_name, item.messageTopic);
         helper.setText(R.id.tv_order_static_time, item.sendTime);
         helper.setText(R.id.tv_order_static_content, item.content);
+        //已读标识 1是0否 预留字段 可忽略
+        if (item.isRead == 0){
+            helper.setVisible(R.id.tv_is_read,true);
+        }else{
+            helper.setVisible(R.id.tv_is_read,false);
+        }
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;
