@@ -5,10 +5,12 @@ import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxijishi.BuildConfig;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.entity.backparameter.LoginEntity;
 import com.jxxc.jingxijishi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxijishi.utils.SPUtils;
+import com.jxxc.jingxijishi.utils.SystemUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.jxxc.jingxijishi.Api;
@@ -18,6 +20,8 @@ import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.mvp.BasePresenterImpl;
 import com.jxxc.jingxijishi.utils.MD5Utils;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * MVPPlugin
@@ -46,6 +50,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                             mView.loginCallBack();
                             SPUtils.put(SPUtils.K_SESSION_MOBILE,phonenumber);
                             SPUtils.put(SPUtils.K_TOKEN,d.token);
+                            reportCofing();
                         }else {
                             toast(mContext,response.body().message);
                         }
@@ -102,6 +107,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                             mView.loginCallBack();
                             SPUtils.put(SPUtils.K_SESSION_MOBILE,phonenumber);
                             SPUtils.put(SPUtils.K_TOKEN,d.token);
+                            reportCofing();
                         }else {
                             toast(mContext,response.body().message);
                         }
@@ -123,6 +129,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         ThirdPartyLogin d = response.body().data;
                         mView.getThirdPartyLogin(d);
                         SPUtils.put(SPUtils.K_TOKEN,d.token);
+                        reportCofing();
                     }
                 });
     }
@@ -154,5 +161,44 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                 }
             }
         };
+    }
+
+    /**
+     * 上传配置信息
+     */
+    @Override
+    public void reportCofing() {
+        //手机类型 1, "华为", 2, "小米", 3, "苹果",4, "OPPO",5, "VIVO"， 6, "魅族"，7, "锤子"，8, "其他"
+        //机型    1,”华为”;  2,”IOS”;  3,”小米”; 4,”OPPP”;  5,”VIVO”;  6,”魅族”;  7,”锤子”;  8,”其他”;
+        String pToken = JPushInterface.getRegistrationID(mContext);
+        String pModel = SystemUtil.getSystemModel();
+        String pType = "";
+        if ("Xiaomi".equals(SystemUtil.getDeviceBrand())){
+            pType = "2";
+        }else if ("HUAWEI".equals(SystemUtil.getDeviceBrand())){
+            pType = "1";
+        }else if ("oppo".equals(SystemUtil.getDeviceBrand())){
+            pType = "5";
+        }else if ("vivo".equals(SystemUtil.getDeviceBrand())){
+            pType = "6";
+        }else{
+            pType = "8";
+        }
+        String sVersion = SystemUtil.getSystemVersion();
+        String aVersion = BuildConfig.VERSION_NAME;
+        String ip = SPUtils.GetNetIp();
+        OkGo.<HttpResult>post(Api.REPORTCOFING)
+                .params("pushToken",pToken)
+                .params("phoneType",pType)
+                .params("phoneModel",pModel)
+                .params("systemVersion",sVersion)
+                .params("appVersion",aVersion)
+                .params("ip",ip)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        //
+                    }
+                });
     }
 }

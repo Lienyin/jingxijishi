@@ -39,6 +39,7 @@ import java.util.logging.Level;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 public class ConfigApplication extends MultiDexApplication implements Serializable {
@@ -119,6 +120,9 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
 //        Stetho.initializeWithDefaults(this);
         SPUtils.init(this);
          CACHA_URL = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.getDownloadCacheDirectory().getAbsolutePath();
+        //极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
 

@@ -325,6 +325,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this, CommissionListActivity.class);
                 break;
             case R.id.ll_icon_home_shuaxin://刷新
+                StyledDialog.buildLoading("正在刷新").setActivity(this).show();
                 getLatLng();
                 break;
             case R.id.ll_ting_dan://开启听单
@@ -365,11 +366,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         isExaminationQualified =data.isExaminationQualified;
         isOperationQualified =data.isOperationQualified;
         tv_user_name.setText(data.realName);
-        tv_user_phonenumber.setText(data.technicianCode);
+        tv_user_phonenumber.setText(AppUtils.isEmpty(data.technicianCode)?"":data.technicianCode);
         tv_today_order.setText(data.todayFinishOrder);
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
-        if (data.grade>0&&data.grade<=1){
+        if (data.grade>=0&&data.grade<=1){
             tv_user_dengji.setImageResource(R.mipmap.score);
         }else if (data.grade>1&&data.grade<=2){
             tv_user_dengji.setImageResource(R.mipmap.pingfen_tow);

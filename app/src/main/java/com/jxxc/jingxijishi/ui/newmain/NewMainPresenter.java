@@ -99,6 +99,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult<List<AwaitReceiveOrderEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<AwaitReceiveOrderEntity>>> response) {
+                        StyledDialog.dismissLoading();
                         List<AwaitReceiveOrderEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.unfinishedOrderCallBack(d);

@@ -22,5 +22,6 @@ public class LoginContract {
         void getAuthCode(String phonenumber, TextView tvAuthCode);
         void loginCode(String phonenumber,String code);//验证码登录
         void thirdPartyLogin(String wxOpenId);//第三方登录
+        void reportCofing();//上传配置文件
     }
 }
