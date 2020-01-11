@@ -98,24 +98,68 @@
                     android:visibility="visible" />
             </android.support.v4.widget.SwipeRefreshLayout>
             <LinearLayout
-                android:id="@+id/ll_icon_home_shuaxin"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:background="@color/white">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_home_shuaxin"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="刷新"/>
+                <LinearLayout
+                    android:id="@+id/ll_pai_xu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="20dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_home_shezhi"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/black333"
+                        android:text="智能排序"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_icon_home_shuaxin"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/shape_bg_edittext">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_home_shuaxin"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="刷新"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_ting_dan"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:paddingRight="20dp"
+                    android:gravity="center_vertical|right">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_home_tingdan"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/black333"
+                        android:text="开启听单"/>
+                </LinearLayout>
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

@@ -110,6 +110,10 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     LinearLayout ll_today_shouru;
     @BindView(R.id.ll_icon_home_shuaxin)
     LinearLayout ll_icon_home_shuaxin;
+    @BindView(R.id.ll_ting_dan)
+    LinearLayout ll_ting_dan;
+    @BindView(R.id.ll_pai_xu)
+    LinearLayout ll_pai_xu;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -251,7 +255,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
 
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
     R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info,
-    R.id.tv_service_type,R.id.ll_today_order,R.id.ll_money_tixian,R.id.ll_today_shouru,R.id.ll_icon_home_shuaxin})
+    R.id.tv_service_type,R.id.ll_today_order,R.id.ll_money_tixian,R.id.ll_today_shouru,R.id.ll_icon_home_shuaxin,
+    R.id.ll_ting_dan,R.id.ll_pai_xu})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -321,6 +326,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.ll_icon_home_shuaxin://刷新
                 getLatLng();
+                break;
+            case R.id.ll_ting_dan://开启听单
+                toast(this,"功能规划中");
+                break;
+            case R.id.ll_pai_xu://只能排序
+                toast(this,"功能规划中");
                 break;
             default:
         }
