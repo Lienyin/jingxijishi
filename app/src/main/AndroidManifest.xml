@@ -102,6 +102,9 @@
         <!--考试-->
         <activity android:name=".ui.examination.ExaminationActivity"
             android:screenOrientation="portrait"/>
+        <!--考试成功跳转界面-->
+        <activity android:name=".ui.examinationresult.ExaminationResultActivity"
+            android:screenOrientation="portrait"/>
         <!--我的钱包-->
         <activity android:name=".ui.mywallet.MyWalletActivity"
             android:screenOrientation="portrait"/>

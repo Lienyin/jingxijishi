@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.examination;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +24,8 @@ import com.jxxc.jingxijishi.entity.backparameter.EndExaminationEntity;
 import com.jxxc.jingxijishi.entity.backparameter.SartExaminationEntity;
 import com.jxxc.jingxijishi.http.HttpResult;
 import com.jxxc.jingxijishi.http.JsonCallback;
+import com.jxxc.jingxijishi.http.ZzRouter;
+import com.jxxc.jingxijishi.ui.examinationresult.ExaminationResultActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.lzy.okgo.OkGo;
@@ -109,12 +112,10 @@ public class ExaminationActivity extends FragmentActivity {
                         StyledDialog.dismissLoading();
                         EndExaminationEntity d = response.body().data;
                         if (response.body().code == 0) {
-                            //通过状态 1通过 0未通过
-                            if (d.status ==1){
-                                Toast.makeText(ExaminationActivity.this, "恭喜您通过", Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(ExaminationActivity.this, "您未通过考试", Toast.LENGTH_LONG).show();
-                            }
+                            Intent intent = new Intent(ExaminationActivity.this, ExaminationResultActivity.class);
+                            intent.putExtra("status",d.status);
+                            intent.putExtra("score",d.score);
+                            startActivity(intent);
                             finish();
                         } else {
                             Toast.makeText(ExaminationActivity.this, response.body().message, Toast.LENGTH_LONG).show();

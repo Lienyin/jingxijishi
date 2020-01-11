@@ -160,10 +160,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                         //状态 线上考试是否合格 1合格 0不合格
                         if (isExaminationQualified ==0){
                             toast(NewMainActivity.this,"线上考试不合格");
-                        }else if (isOperationQualified==0){
-                            //状态 线下实操是否合格 1合格 0不合格
-                            toast(NewMainActivity.this,"线下实操不合格");
-                        }else{
+                        }
+//                        else if (isOperationQualified==0){
+//                            //状态 线下实操是否合格 1合格 0不合格
+//                            toast(NewMainActivity.this,"线下实操不合格");
+//                        }
+                        else{
                             StyledDialog.buildLoading("正在抢单").setActivity(NewMainActivity.this).show();
                             mPresenter.receive(orderId);
                         }
