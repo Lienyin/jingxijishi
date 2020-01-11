@@ -118,8 +118,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     LinearLayout ll_pai_xu;
     @BindView(R.id.ll_function_view)
     View ll_function_view;
+    @BindView(R.id.view_style)
+    View view_style;
     @BindView(R.id.ll_function_view_plus)
     LinearLayout ll_function_view_plus;
+    @BindView(R.id.ll_sys_notification)
+    LinearLayout ll_sys_notification;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -273,7 +277,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @OnClick({R.id.iv_user_center,R.id.ll_main_setting,R.id.ll_out_login,R.id.rb_dating,R.id.rb_fuwu,
     R.id.iv_user_msg,R.id.ll_order_list,R.id.ll_jishi_renzheng,R.id.ll_my_wallet,R.id.ll_user_info,
     R.id.tv_service_type,R.id.ll_today_order,R.id.ll_money_tixian,R.id.ll_today_shouru,R.id.ll_icon_home_shuaxin,
-    R.id.ll_ting_dan,R.id.ll_pai_xu})
+    R.id.ll_ting_dan,R.id.ll_pai_xu,R.id.ll_sys_notification,R.id.view_style})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -296,6 +300,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 //drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
             case R.id.iv_user_msg://系统信息
+            case R.id.ll_sys_notification://系统信息
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, MessageActivity.class);
                 break;
@@ -353,6 +358,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.ll_pai_xu://只能排序
                 popFiltrate.showPopupWindow(ll_function_view);
+                break;
+            case R.id.view_style://拦截抽到空白点击
                 break;
             default:
         }
