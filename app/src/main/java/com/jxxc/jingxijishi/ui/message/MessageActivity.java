@@ -14,6 +14,7 @@ import com.jxxc.jingxijishi.entity.backparameter.OrderListEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
+import com.jxxc.jingxijishi.ui.messagedetails.MessageDetailsActivity;
 import com.jxxc.jingxijishi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxijishi.ui.orderlist.OrderListActivity;
 import com.jxxc.jingxijishi.ui.orderlist.OrderListAdapter;
@@ -45,6 +46,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
     RecyclerView rvList;
     private MsgAdapter adapter;
     private int offset = 2;
+    private List<MessageListEntity> list;
 
     @Override
     protected int layoutId() {
@@ -67,6 +69,12 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
         rvList.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, rvList);
         adapter.setEmptyView(R.layout.layout_nothing);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ZzRouter.gotoActivity(MessageActivity.this, MessageDetailsActivity.class,list.get(position));
+            }
+        });
     }
 
     @OnClick({R.id.tv_back})
@@ -82,6 +90,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
 
     @Override
     public void MessageListCallBack(List<MessageListEntity> data) {
+        list = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
         adapter.disableLoadMoreIfNotFullPage();
@@ -89,6 +98,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
 
     @Override
     public void MessageListMoreCallBack(List<MessageListEntity> data) {
+        list.addAll(data);
         swipeLayout.setRefreshing(false);
         offset++;
         adapter.addData(data);

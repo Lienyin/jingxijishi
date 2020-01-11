@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.entity.backparameter.MessageListEntity;
+import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
@@ -24,7 +26,13 @@ public class MessageDetailsActivity extends MVPBaseActivity<MessageDetailsContra
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
-
+    @BindView(R.id.tv_msg_title)
+    TextView tv_msg_title;
+    @BindView(R.id.tv_msg_time)
+    TextView tv_msg_time;
+    @BindView(R.id.tv_msg_content)
+    TextView tv_msg_content;
+    private MessageListEntity data;
     @Override
     protected int layoutId() {
         return R.layout.message_details_activity;
@@ -33,7 +41,11 @@ public class MessageDetailsActivity extends MVPBaseActivity<MessageDetailsContra
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
-        tv_title.setText("信息详情");
+        tv_title.setText("消息详情");
+        data = ZzRouter.getIntentData(this,MessageListEntity.class);
+        tv_msg_title.setText(data.messageTopic);
+        tv_msg_time.setText(data.sendTime);
+        tv_msg_content.setText(data.content);
     }
 
     @OnClick({R.id.tv_back})

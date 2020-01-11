@@ -240,6 +240,9 @@
         <activity android:name=".ui.message.MessageActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
+        <!--我的消息详情-->
+        <activity android:name=".ui.messagedetails.MessageDetailsActivity"
+            android:screenOrientation="portrait"/>
         <!--我的订单-->
         <activity android:name=".ui.orderlist.OrderListActivity"
             android:screenOrientation="portrait"/>
