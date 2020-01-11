@@ -97,9 +97,17 @@
                     android:divider="@color/transparent"
                     android:visibility="visible" />
             </android.support.v4.widget.SwipeRefreshLayout>
-            <LinearLayout
+            <View
+                android:id="@+id/ll_function_view"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="71dp"
+                android:background="@color/gray"/>
+            <LinearLayout
+                android:id="@+id/ll_function_view_plus"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:layout_gravity="bottom"
                 android:gravity="center_vertical"
                 android:background="@color/white">

@@ -29,7 +29,7 @@ public class NewMainContract {
 
     interface  Presenter extends BasePresenter<View> {
         void getUserInfo();
-        void awaitReceiveOrder(double lng,double lat);
+        void awaitReceiveOrder(int sort,int queryFlag,double lng,double lat);
         void unfinishedOrder();
         void updateServiceStatic(int type);
         void latestVersion(int type);

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.dialog.PopFiltrate;
 import com.jxxc.jingxijishi.dialog.PopSeek;
 import com.jxxc.jingxijishi.dialog.ZhuanDanDialog;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
@@ -115,16 +116,22 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     LinearLayout ll_ting_dan;
     @BindView(R.id.ll_pai_xu)
     LinearLayout ll_pai_xu;
+    @BindView(R.id.ll_function_view)
+    View ll_function_view;
+    @BindView(R.id.ll_function_view_plus)
+    LinearLayout ll_function_view_plus;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
     private List<AwaitReceiveOrderEntity> list = new ArrayList<>();
     private PopSeek popSeek;
+    private PopFiltrate popFiltrate;
     private int isOnline;
     private String oId;//订单id
     private ZhuanDanDialog zhuanDanDialog;
     private int isExaminationQualified=-1;
     private int isOperationQualified=-1;
+    private int filtrateType=0;
     Handler handler = new Handler(){
 
         @Override
@@ -151,7 +158,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         StyledDialog.buildLoading("加载中").setActivity(this).show();
-        getLatLng();
+        getLatLng(filtrateType);
         zhuanDanDialog = new ZhuanDanDialog(this);
         adapter = new NewMainAdapter(this);
         adapter.setData(list);
@@ -225,17 +232,26 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 mPresenter.transferOrder(oId);
             }
         });
+        //条件筛选
+        popFiltrate = new PopFiltrate(this);
+        popFiltrate.setOnFenxiangClickListener(new PopFiltrate.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int type) {
+                filtrateType = type;
+                getLatLng(filtrateType);
+            }
+        });
     }
 
     /**
      * 获取当前经纬度
      */
-    public void getLatLng() {
+    public void getLatLng(int type) {
         Location location = LocationUtils.getInstance(NewMainActivity.this).showLocation();
         if (location != null) {
             Log.i("TAG","lng=="+location.getLongitude()+"  lat=="+location.getLatitude());
             if (rb_dating.isChecked() == true){
-                mPresenter.awaitReceiveOrder(location.getLongitude(),location.getLatitude());
+                mPresenter.awaitReceiveOrder(type,2,location.getLongitude(),location.getLatitude());
             }else{
                 mPresenter.unfinishedOrder();
             }
@@ -244,7 +260,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             String lng = SPUtils.get(this, "lng", "31.389817");
             if (!AppUtils.isEmpty(lat)) {
                 if (rb_dating.isChecked() == true){
-                    mPresenter.awaitReceiveOrder(Double.valueOf(lng),Double.valueOf(lat));
+                    mPresenter.awaitReceiveOrder(type ,2,Double.valueOf(lng),Double.valueOf(lat));
                 }else{
                     mPresenter.unfinishedOrder();
                 }
@@ -279,8 +295,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this, SetingActivity.class);
                 //drawerLayout.closeDrawer(Gravity.LEFT);//关闭抽屉
                 break;
-            case R.id.iv_user_msg://系统设置
-                //系统信息
+            case R.id.iv_user_msg://系统信息
                 AnimUtils.clickAnimator(view);
                 ZzRouter.gotoActivity(this, MessageActivity.class);
                 break;
@@ -306,12 +321,16 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this, UsercenterActivity.class);
                 break;
             case R.id.rb_dating://抢单大厅
-                getLatLng();
+                getLatLng(filtrateType);
+                ll_function_view.setVisibility(View.VISIBLE);
+                ll_function_view_plus.setVisibility(View.VISIBLE);
                 break;
-            case R.id.rb_fuwu://带服务
+            case R.id.rb_fuwu://待服务
                 mPresenter.unfinishedOrder();
                 adapter.start();
                 handler.sendEmptyMessageDelayed(1,1000);
+                ll_function_view.setVisibility(View.GONE);
+                ll_function_view_plus.setVisibility(View.GONE);
                 break;
             case R.id.tv_service_type://服务状态
                 popSeek.showPopupWindow(tv_service_type,isOnline);
@@ -327,13 +346,13 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 break;
             case R.id.ll_icon_home_shuaxin://刷新
                 StyledDialog.buildLoading("正在刷新").setActivity(this).show();
-                getLatLng();
+                getLatLng(filtrateType);
                 break;
             case R.id.ll_ting_dan://开启听单
                 toast(this,"功能规划中");
                 break;
             case R.id.ll_pai_xu://只能排序
-                toast(this,"功能规划中");
+                popFiltrate.showPopupWindow(ll_function_view);
                 break;
             default:
         }
@@ -469,13 +488,13 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     //下拉刷新
     @Override
     public void onRefresh() {
-       getLatLng();
+       getLatLng(filtrateType);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         mPresenter.getUserInfo();
-        getLatLng();
+        getLatLng(filtrateType);
     }
 }

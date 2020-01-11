@@ -71,8 +71,10 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
      * @param lat
      */
     @Override
-    public void awaitReceiveOrder(double lng, double lat) {
+    public void awaitReceiveOrder(int sort,int queryFlag,double lng, double lat) {
         OkGo.<HttpResult<List<AwaitReceiveOrderEntity>>>post(Api.AWAIT_RECEIVE_ORDER)
+                .params("sort",sort)
+                .params("queryFlag",queryFlag)
                 .params("lng",lng)
                 .params("lat",lat)
                 .execute(new JsonCallback<HttpResult<List<AwaitReceiveOrderEntity>>>() {
