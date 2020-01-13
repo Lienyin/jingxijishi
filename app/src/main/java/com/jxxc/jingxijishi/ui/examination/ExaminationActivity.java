@@ -27,6 +27,7 @@ import com.jxxc.jingxijishi.http.JsonCallback;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.ui.examinationresult.ExaminationResultActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
+import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -47,6 +48,7 @@ public class ExaminationActivity extends FragmentActivity {
     private TextView tv_examination_back;
     private TextView tv_topic_number;
     private TextView tv_examination_affirm;
+    private TextView tv_time_kaoshi;
     private List<SartExaminationEntity.Question> list = new ArrayList<>();
     private String examinationId;
 
@@ -59,6 +61,7 @@ public class ExaminationActivity extends FragmentActivity {
         tv_examination_back = (TextView) findViewById(R.id.tv_examination_back);
         tv_topic_number = (TextView) findViewById(R.id.tv_topic_number);
         tv_examination_affirm = (TextView) findViewById(R.id.tv_examination_affirm);
+        tv_time_kaoshi = (TextView) findViewById(R.id.tv_time_kaoshi);
         StyledDialog.buildLoading("加载中").setActivity(this).show();
         startExamination();//获取试题
         //返回
@@ -147,11 +150,11 @@ public class ExaminationActivity extends FragmentActivity {
             Bundle args = new Bundle();
             args.putInt("num", num);
             args.putInt("zNum", zongNumber);
-            args.putString("topic",list.topic);
-            args.putString("answerA",list.answerA);
-            args.putString("answerB",list.answerB);
-            args.putString("answerC",list.answerC);
-            args.putString("answerD",list.answerD);
+            args.putString("topic",AppUtils.isEmpty(list.topic)?"无题":list.topic);
+            args.putString("answerA",AppUtils.isEmpty(list.answerA)?"其他":list.answerA);
+            args.putString("answerB",AppUtils.isEmpty(list.answerB)?"其他":list.answerB);
+            args.putString("answerC",AppUtils.isEmpty(list.answerC)?"其他":list.answerC);
+            args.putString("answerD",AppUtils.isEmpty(list.answerD)?"其他":list.answerD);
             array.setArguments(args);
             return array;
         }
@@ -183,6 +186,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
+                ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
             } else if (mNum == 1) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -192,6 +196,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
+                ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
             } else if (mNum == 2) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -201,6 +206,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
+                ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
             } else {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -210,6 +216,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_c)).setText(answerC);
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
+                ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
             }
             ((RadioButton) v.findViewById(R.id.tv_topic_a)).setOnClickListener(new View.OnClickListener() {
                 @Override
