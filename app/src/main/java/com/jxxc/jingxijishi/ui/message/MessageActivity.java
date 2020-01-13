@@ -56,7 +56,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
-        tv_title.setText("我的信息");
+        tv_title.setText("我的消息");
         initAdapter();
         onRefresh();
     }

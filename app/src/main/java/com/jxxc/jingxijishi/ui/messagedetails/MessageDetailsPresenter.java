@@ -14,6 +14,6 @@ public class MessageDetailsPresenter extends BasePresenterImpl<MessageDetailsCon
 
     @Override
     protected void onEventComing(EventCenter center) {
-        
+
     }
 }
