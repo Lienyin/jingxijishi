@@ -73,7 +73,7 @@ public class AccomplishOrderPresenter extends BasePresenterImpl<AccomplishOrderC
                 .cropSize(1, 1, 200, 200)
                 .needCrop(false)
                 .needCamera(true)
-                .maxNum(3)
+                .maxNum(4)
                 .build();
 
     }
@@ -91,6 +91,7 @@ public class AccomplishOrderPresenter extends BasePresenterImpl<AccomplishOrderC
     public void endService(String orderId,String imgUrl) {
         OkGo.<HttpResult>post(Api.END_SERVICE)
                 .params("orderId",orderId)
+                .params("imgUrl",imgUrl)
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
@@ -157,6 +158,26 @@ public class AccomplishOrderPresenter extends BasePresenterImpl<AccomplishOrderC
                     .params("file0",fileList.get(0))
                     .params("file1",fileList.get(1))
                     .params("file2",fileList.get(2))
+                    //.addFileParams("file",fileList)
+                    .execute(new JsonCallback<HttpResult<UpdateInfoEntity>>() {
+                        @Override
+                        public void onSuccess(Response<HttpResult<UpdateInfoEntity>> response) {
+                            UpdateInfoEntity d = response.body().data;
+                            if (response.body().code == 0) {
+                                mView.commitCallback(d.fileName);
+                                toast(mContext,response.body().message);
+                            }else{
+                                toast(mContext,response.body().message);
+                            }
+                        }
+                    });
+        }else if (fileList.size() == 4){
+            OkGo.<HttpResult<UpdateInfoEntity>>post(Api.UPLOAD)
+                    .isMultipart(true)
+                    .params("file0",fileList.get(0))
+                    .params("file1",fileList.get(1))
+                    .params("file2",fileList.get(2))
+                    .params("file3",fileList.get(3))
                     //.addFileParams("file",fileList)
                     .execute(new JsonCallback<HttpResult<UpdateInfoEntity>>() {
                         @Override

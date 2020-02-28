@@ -185,7 +185,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 mPresenter.startService(data.orderId);
                 break;
             case R.id.tv_dating_order_wancheng://完成服务
-                ZzRouter.gotoActivity(this, AccomplishOrderActivity.class);
+                ZzRouter.gotoActivity(this, AccomplishOrderActivity.class,data.orderId);
                 break;
             case R.id.btn_rob_order://接单
                 mPresenter.receive(data.orderId);

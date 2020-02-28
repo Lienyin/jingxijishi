@@ -100,7 +100,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         mImagesAdapter = new ImagesAdapter(R.layout.item_malfunction_repair_image, uriList);
         rvListImages.setAdapter(mImagesAdapter);
         //加号
-        if (mImagesAdapter.getData().size()<3) {
+        if (mImagesAdapter.getData().size()<4) {
             addList.clear();
             addList.addAll(mImagesAdapter.getData());
             addList.add("");
@@ -115,7 +115,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                     mPresenter.gotoImageSelect(AccomplishOrderActivity.this, REQUEST_CODE_CHOOSE);
                 }else if (view.getId() == R.id.fl_delete) {
                     mImagesAdapter.remove(position);
-                    if (mImagesAdapter.getData().size()<=3) {
+                    if (mImagesAdapter.getData().size()<=4) {
                         addList.clear();
                         addList.addAll(mImagesAdapter.getData());
                         addList.add("");
@@ -165,7 +165,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                             String absolutePath = file.getAbsolutePath();
                             path2.add(absolutePath);
                             mImagesAdapter.setNewData(path2);
-                            if (mImagesAdapter.getData().size()<=3) {
+                            if (mImagesAdapter.getData().size()<=4) {
                                 addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");
@@ -176,7 +176,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                         @Override
                         public void onError(Throwable e) {
                             mImagesAdapter.setNewData(pathList);
-                            if (mImagesAdapter.getData().size()<=3) {
+                            if (mImagesAdapter.getData().size()<=4) {
                                 addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");

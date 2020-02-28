@@ -3,6 +3,8 @@ package com.jxxc.jingxijishi.ui.examination;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -34,6 +36,8 @@ import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * MVPPlugin
@@ -51,6 +55,9 @@ public class ExaminationActivity extends FragmentActivity {
     private TextView tv_time_kaoshi;
     private List<SartExaminationEntity.Question> list = new ArrayList<>();
     private String examinationId;
+    private boolean isRun = true;
+    private int s = 3599;
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,7 @@ public class ExaminationActivity extends FragmentActivity {
         tv_time_kaoshi = (TextView) findViewById(R.id.tv_time_kaoshi);
         StyledDialog.buildLoading("加载中").setActivity(this).show();
         startExamination();//获取试题
+        timer.schedule(task, 1000, 1000);
         //返回
         tv_examination_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,5 +302,36 @@ public class ExaminationActivity extends FragmentActivity {
         public void onDestroy() {
             super.onDestroy();
         }
+    }
+
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+
+            runOnUiThread(new Runnable() {		// UI thread
+                @Override
+                public void run() {
+                    s--;
+                    int m = s/60;//分钟
+                    int ss = s-m*60;//秒数
+                    tv_time_kaoshi.setText(m+":"+ss);
+                    if(s < 0){
+                        timer.cancel();
+                        tv_time_kaoshi.setText("请提交试卷");
+                    }
+                }
+            });
+        }
+    };
+
+    //倒计时
+    private void daoJishi(){
+//        int m = s/60;//分钟
+//        s = s-m*60;//秒数
+//        if (m>=10){
+//            tv_time_kaoshi.setText(m+":"+s);
+//        }else{
+//            tv_time_kaoshi.setText("  0"+m+":"+s);
+//        }
     }
 }

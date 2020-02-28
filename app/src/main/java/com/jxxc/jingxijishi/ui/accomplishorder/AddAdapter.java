@@ -30,7 +30,7 @@ public class AddAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         helper.addOnClickListener(R.id.iv_item);
         if (helper.getAdapterPosition() == data.size()-1) {
             helper.setVisible(R.id.fl_delete, false);
-            if (helper.getAdapterPosition() ==6) {
+            if (helper.getAdapterPosition() ==4) {
                 helper.setVisible(R.id.iv_item, false);
             }else {
                 helper.setVisible(R.id.iv_item, true);
