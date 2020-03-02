@@ -169,19 +169,19 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
      */
     @Override
     public void reportCofing() {
-        //手机类型 1, "华为", 2, "小米", 3, "苹果",4, "OPPO",5, "VIVO"， 6, "魅族"，7, "锤子"，8, "其他"
         //机型    1,”华为”;  2,”IOS”;  3,”小米”; 4,”OPPP”;  5,”VIVO”;  6,”魅族”;  7,”锤子”;  8,”其他”;
         String pToken = JPushInterface.getRegistrationID(mContext);//170976fa8aec9206131
+        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
         String pModel = SystemUtil.getSystemModel();
         String pType = "";
         if ("Xiaomi".equals(SystemUtil.getDeviceBrand())){
-            pType = "2";
+            pType = "3";
         }else if ("HUAWEI".equals(SystemUtil.getDeviceBrand())){
             pType = "1";
         }else if ("oppo".equals(SystemUtil.getDeviceBrand())){
-            pType = "5";
+            pType = "4";
         }else if ("vivo".equals(SystemUtil.getDeviceBrand())){
-            pType = "6";
+            pType = "5";
         }else{
             pType = "8";
         }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jxxc.jingxijishi.play.AudioPlayer;
 import com.jxxc.jingxijishi.ui.message.MessageActivity;
 import com.jxxc.jingxijishi.utils.SPUtils;
 
@@ -26,9 +27,11 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class MyReceiver extends BroadcastReceiver {
 	private static final String TAG = "TAG";
+	private static Context mContext;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		mContext = context;
 		try {
 			Bundle bundle = intent.getExtras();
 			Log.i(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
@@ -88,10 +91,40 @@ public class MyReceiver extends BroadcastReceiver {
 					JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
 					Iterator<String> it =  json.keys();
 
+                    /**
+                     * 1.抢单大厅出新单
+                     * 2.抢单成功
+                     * 3.转单成功
+                     * 4.订单取消
+                     * 5.订单即将超时
+                     * 6.订单已经超时
+                     * 7.会员升级
+                     */
 					while (it.hasNext()) {
 						String myKey = it.next();
-						sb.append("\nkey:" + key + ", value3: [" +
-								myKey + " - " +json.optString(myKey) + "]");
+						sb.append("\nkey:" + key + ", value3: [" +myKey + " - " +json.optString(myKey) + "]");
+						if ("sourceType".equals(myKey)&&"1".equals(json.optString(myKey))){
+							//抢单大厅出新单
+							AudioPlayer.getInstance().startPlay(mContext, "1");
+						}else if ("sourceType".equals(myKey)&&"2".equals(json.optString(myKey))){
+							//抢单成功
+							AudioPlayer.getInstance().startPlay(mContext, "2");
+						}else if ("sourceType".equals(myKey)&&"3".equals(json.optString(myKey))){
+							//转单成功
+							AudioPlayer.getInstance().startPlay(mContext, "3");
+						}else if ("sourceType".equals(myKey)&&"4".equals(json.optString(myKey))){
+							//订单取消
+							AudioPlayer.getInstance().startPlay(mContext, "4");
+						}else if ("sourceType".equals(myKey)&&"5".equals(json.optString(myKey))){
+                            //订单即将超时
+                            AudioPlayer.getInstance().startPlay(mContext, "5");
+                        }else if ("sourceType".equals(myKey)&&"6".equals(json.optString(myKey))){
+                            //订单已经超时
+                            AudioPlayer.getInstance().startPlay(mContext, "6");
+                        }else if ("sourceType".equals(myKey)&&"7".equals(json.optString(myKey))){
+                            //会员升级
+                            AudioPlayer.getInstance().startPlay(mContext, "7");
+                        }
 					}
 				} catch (JSONException e) {
 					Log.e(TAG, "Get message extra JSON error!");
