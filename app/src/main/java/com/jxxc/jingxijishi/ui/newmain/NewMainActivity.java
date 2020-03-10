@@ -259,6 +259,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             }else{
                 mPresenter.unfinishedOrder();
             }
+            mPresenter.reportLocation(location.getLongitude(),location.getLatitude());
         } else {
             String lat = SPUtils.get(this, "lat", "120.97111");//默认江苏昆山
             String lng = SPUtils.get(this, "lng", "31.389817");
@@ -271,6 +272,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             }else{
                 toast(this,"定位失败");
             }
+            mPresenter.reportLocation(Double.valueOf(lng),Double.valueOf(lat));
         }
     }
 

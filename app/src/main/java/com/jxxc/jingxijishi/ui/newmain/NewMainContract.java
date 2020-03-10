@@ -36,5 +36,6 @@ public class NewMainContract {
         void receive(String orderId);
         void startService(String orderId);
         void transferOrder(String orderId);
+        void reportLocation(double lng,double lat);
     }
 }

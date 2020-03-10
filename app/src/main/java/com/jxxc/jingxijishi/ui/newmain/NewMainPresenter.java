@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.newmain;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.Api;
@@ -325,6 +326,28 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                             AppUtils.installApk(context, file, BuildConfig.APPLICATION_ID + ".provider");
                         }
 
+                    }
+                });
+    }
+
+    /**
+     * 位置定时上报（10分钟一次）
+     * @param lng
+     * @param lat
+     */
+    @Override
+    public void reportLocation(double lng, double lat) {
+        OkGo.<HttpResult>post(Api.REPORT_LOCATION)
+                .params("lng",lng)
+                .params("lat",lat)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            Log.i("TAG","位置上报成功");
+                        }else{
+                            Log.i("TAG","位置上报失败");
+                        }
                     }
                 });
     }

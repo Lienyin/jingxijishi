@@ -62,4 +62,6 @@ public class Api {
     public static final String MESSAGE_LIST = BASEURL + "biz/message/messageList";
     //27-配置上报
     public static final String REPORTCOFING = BASEURL + "system/technician/reportCofing";
+    //28-位置定时上报（10分钟一次）
+    public static final String REPORT_LOCATION = BASEURL + "system/technician/reportLocation";
 }
