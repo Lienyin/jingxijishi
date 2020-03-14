@@ -261,8 +261,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             }
             mPresenter.reportLocation(location.getLongitude(),location.getLatitude());
         } else {
-            String lat = SPUtils.get(this, "lat", "120.97111");//默认江苏昆山
-            String lng = SPUtils.get(this, "lng", "31.389817");
+            String lat = SPUtils.get(this, "lat", "31.389817");//默认江苏昆山
+            String lng = SPUtils.get(this, "lng", "120.97111");
             if (!AppUtils.isEmpty(lat)) {
                 if (rb_dating.isChecked() == true){
                     mPresenter.awaitReceiveOrder(type ,2,Double.valueOf(lng),Double.valueOf(lat));
