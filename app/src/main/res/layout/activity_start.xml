@@ -10,12 +10,14 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:background="@mipmap/open_peag"
         android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@mipmap/ic_launcher_round" />
-
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="江苏汇智拓信息科技有限公司"/>
 </LinearLayout>
