@@ -66,13 +66,14 @@ public class AudioComposeHelper {
     }
 
     private void read(String paramString) {
-        audioMa = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        final int current = audioMa.getStreamVolume(AudioManager.STREAM_MUSIC);//当前音量
-        final int max = audioMa.getStreamMaxVolume(AudioManager.STREAM_MUSIC);//最大音量
-        if (current < max-5){
-            audioMa.setStreamVolume(AudioManager.STREAM_MUSIC,audioMa.getStreamMaxVolume
-                    (AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
-        }
+        //设置音量
+//        audioMa = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+//        final int current = audioMa.getStreamVolume(AudioManager.STREAM_MUSIC);//当前音量
+//        final int max = audioMa.getStreamMaxVolume(AudioManager.STREAM_MUSIC);//最大音量
+//        if (current < max-5){
+//            audioMa.setStreamVolume(AudioManager.STREAM_MUSIC,audioMa.getStreamMaxVolume
+//                    (AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+//        }
 
         for (int i = 0;i < paramString.length() ; i++) {
             try {
@@ -88,19 +89,19 @@ public class AudioComposeHelper {
                 e.printStackTrace();
             }
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(6500);
-                    if (current < max-5){
-                        audioMa.setStreamVolume(AudioManager.STREAM_MUSIC,current,AudioManager.FLAG_SHOW_UI);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(6500);
+//                    if (current < max-5){
+//                        audioMa.setStreamVolume(AudioManager.STREAM_MUSIC,current,AudioManager.FLAG_SHOW_UI);
+//                    }
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
     }
 
     private String getDiskCacheDir() {
