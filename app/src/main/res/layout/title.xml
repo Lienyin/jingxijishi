@@ -41,7 +41,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="10dp"
-            android:text=""
             android:textColor="@color/black"
             android:textSize="14sp"
             android:visibility="gone"/>
