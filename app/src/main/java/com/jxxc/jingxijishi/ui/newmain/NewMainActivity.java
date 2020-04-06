@@ -293,7 +293,6 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             case R.id.ll_out_login://退出登录
                 AnimUtils.clickAnimator(view);
                 SPUtils.remove(this,SPUtils.K_TOKEN);
-                SPUtils.remove(this,SPUtils.K_SESSION_MOBILE);
                 ZzRouter.gotoActivity(this, LoginActivity.class);
                 break;
             case R.id.ll_main_setting://系统设置
