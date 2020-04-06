@@ -204,7 +204,11 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         list = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
+        if (data.size() < 10){
+            adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
+        }
     }
 
     @Override
