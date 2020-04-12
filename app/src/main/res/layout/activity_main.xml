@@ -98,7 +98,7 @@
     </RelativeLayout>
     <!--抽屉-->
     <LinearLayout
-        android:layout_width="300.dip"
+        android:layout_width="250.dip"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
