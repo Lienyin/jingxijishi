@@ -61,6 +61,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                             String url = version.url;
                             String memo = version.memo;
                             String ver = version.version;
+                            StyledDialog.dismissLoading();
 //                            if (!AppUtils.isEmpty(version)) {
 //                                if (ver.contains(".")) {
 //                                    String vOnline = ver.replace(".", "").trim();
