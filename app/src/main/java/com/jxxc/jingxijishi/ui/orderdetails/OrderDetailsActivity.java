@@ -94,7 +94,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @BindView(R.id.tv_comm_static)
     TextView tv_comm_static;
     @BindView(R.id.rb_pinglun)
-    RatingBar rb_pinglun;
+    ImageView rb_pinglun;
     @BindView(R.id.ll_comm_view)
     LinearLayout ll_comm_view;
     private String orderId;
@@ -299,18 +299,22 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
             //评论内容
             if (!AppUtils.isEmpty(data.commentContent)){
                 ll_comm_view.setVisibility(View.VISIBLE);
-                rb_pinglun.setRating(data.starLevel);
                 tv_comment_content.setText(data.commentContent);
                 tv_customer_comment_time.setText(data.customerCommentTime);
-                if (data.starLevel>0&&data.starLevel<=1){
+                if (data.starLevel==1){
+                    rb_pinglun.setBackgroundResource(R.mipmap.score);
                     tv_comm_static.setText("差评");
-                }else if (data.starLevel>1&&data.starLevel<=2){
+                }else if (data.starLevel==2){
+                    rb_pinglun.setBackgroundResource(R.mipmap.pingfen_tow);
                     tv_comm_static.setText("一般");
-                }else if (data.starLevel>2&&data.starLevel<=3){
+                }else if (data.starLevel==3){
+                    rb_pinglun.setBackgroundResource(R.mipmap.pingfen_three);
                     tv_comm_static.setText("及格");
-                }else if (data.starLevel>3&&data.starLevel<=4){
+                }else if (data.starLevel==4){
+                    rb_pinglun.setBackgroundResource(R.mipmap.pingfen_forl);
                     tv_comm_static.setText("好评");
-                }else if (data.starLevel>4&&data.starLevel<=5){
+                }else if (data.starLevel==5){
+                    rb_pinglun.setBackgroundResource(R.mipmap.pingfen_five);
                     tv_comm_static.setText("优秀");
                 }
             }

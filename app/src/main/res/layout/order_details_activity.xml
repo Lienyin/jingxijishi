@@ -230,7 +230,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/gray" />
+                    android:background="#F3F3F3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -255,6 +255,7 @@
                         android:id="@+id/gv_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:numColumns="4" />
                 </LinearLayout>
 
@@ -262,7 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/gray" />
+                    android:background="#F3F3F3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -324,7 +325,7 @@
                     android:id="@+id/ll_comm_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -339,16 +340,12 @@
                             android:textColor="@color/black999"
                             android:textSize="14sp" />
 
-                        <RatingBar
+                        <ImageView
                             android:id="@+id/rb_pinglun"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:stepSize="1"
-                            android:numStars="5"
-                            android:isIndicator="true"
-                            android:progressTint="#FFCC32"
-                            android:secondaryProgressTint="#FFCC32"/>
+                            android:background="@mipmap/score"/>
                         <TextView
                             android:id="@+id/tv_comm_static"
                             android:layout_width="wrap_content"
@@ -368,7 +365,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="70dp"
                             android:textColor="@color/black"
                             android:text="XXX"/>
                         <TextView
@@ -377,7 +374,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="70dp"
                             android:textColor="@color/black666"
                             android:text="XXXX-XX-XX XX:XX:XX"/>
                     </LinearLayout>

@@ -91,7 +91,11 @@ public class WithdrawDepositDetailActivity extends MVPBaseActivity<WithdrawDepos
     public void drawMoneyRecordCallBack(List<WithdrawDepositDetailEntity> data) {
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
+        if (data.size() < 10){
+            adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
+        }
     }
 
     @Override

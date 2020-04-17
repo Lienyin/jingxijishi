@@ -82,7 +82,11 @@ public class CommissionListActivity extends MVPBaseActivity<CommissionListContra
     public void CommissionDetailCallBack(List<CommissionListEntity> data) {
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
+        if (data.size() < 10){
+            adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
+        }
     }
 
     @Override
