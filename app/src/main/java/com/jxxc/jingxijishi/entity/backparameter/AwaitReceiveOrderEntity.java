@@ -21,6 +21,7 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public String statusName;
     public String duration;
     public int status;
+    public int serviceType;
     public float starLevel;
     public String commentContent;
     public String customerCommentTime;

@@ -106,7 +106,11 @@ public class NewMainAdapter extends BaseAdapter {
             holder.tv_dating_order_static_memo.setTextColor(context.getResources().getColor(R.color.dai_fuwu));
             holder.ll_dating.setVisibility(View.GONE);
             holder.ll_fuwu.setVisibility(View.VISIBLE);
-            holder.tv_dating_order_zhuandan.setVisibility(View.VISIBLE);
+            if (data.serviceType==0){
+                holder.tv_dating_order_zhuandan.setVisibility(View.VISIBLE);
+            }else{
+                holder.tv_dating_order_zhuandan.setVisibility(View.INVISIBLE);
+            }
             holder.tv_dating_order_start.setVisibility(View.VISIBLE);
             holder.tv_dating_order_wancheng.setVisibility(View.GONE);
             holder.tv_dating_order_count_down.setVisibility(View.GONE);
