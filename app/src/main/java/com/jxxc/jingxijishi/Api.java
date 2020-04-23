@@ -5,7 +5,7 @@ import com.jxxc.jingxijishi.utils.SPUtils;
 public class Api {
 //    public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
 //    public static final String BASEURL = "https://zhizuxia.zhizukj.com/ydb/app/";//生产
-   public static final String BASEURL = "http://47.101.185.138:8100/";//
+   public static final String BASEURL = "https://jx.bashideban.com/technician/";//
    //public static final String BASEURL = "http://192.168.0.59:8100/";//于立华
 
     //1-客户登录
