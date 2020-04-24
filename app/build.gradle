@@ -1,6 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    signingConfigs {
+        config {
+            keyAlias 'jingxi'
+            keyPassword '123456'
+            storeFile file('../key.jks')
+            storePassword '123456'
+        }
+    }
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.jxxc.jingxijishi"
@@ -15,11 +32,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {
         main {
-            jniLibs.srcDir 'libs'
+            //jniLibs.srcDir 'libs'
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -29,6 +53,7 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
         maven {url 'https://maven.google.com'}
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 repositories{
