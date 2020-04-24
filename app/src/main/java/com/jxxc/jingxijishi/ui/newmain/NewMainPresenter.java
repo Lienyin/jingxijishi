@@ -55,6 +55,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult<UserInfoEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<UserInfoEntity>> response) {
+                        StyledDialog.dismissLoading();
                         UserInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
@@ -124,6 +125,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
                         if (response.body().code == 0){
                             mView.updateServiceStaticCallBack();
                         }else{
@@ -144,6 +146,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult<LatestVersionEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<LatestVersionEntity>> response) {
+                        StyledDialog.dismissLoading();
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
@@ -205,6 +208,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
                         if (response.body().code==0){
                             mView.startServiceCallBack();
                             toast(mContext,response.body().message);
@@ -226,6 +230,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
                         if (response.body().code==0){
                             mView.transferOrderCallBack();
                             toast(mContext,response.body().message);

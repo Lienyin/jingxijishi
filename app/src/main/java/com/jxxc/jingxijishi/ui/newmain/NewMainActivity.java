@@ -136,6 +136,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     private int isExaminationQualified=-1;
     private int isOperationQualified=-1;
     private int filtrateType=0;
+    private String WithdrawMoney;
     Handler handler = new Handler(){
 
         @Override
@@ -345,7 +346,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
                 ZzRouter.gotoActivity(this,OrderListActivity.class);
                 break;
             case R.id.ll_money_tixian://可提现金额
-                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class);
+                ZzRouter.gotoActivity(this, WithdrawDepositActivity.class,WithdrawMoney);
                 break;
             case R.id.ll_today_shouru://今日预计收入
                 ZzRouter.gotoActivity(this, CommissionListActivity.class);
@@ -396,6 +397,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         tv_user_name.setText(data.realName);
         tv_user_phonenumber.setText(AppUtils.isEmpty(data.technicianCode)?"":data.technicianCode);
         tv_today_order.setText(data.todayFinishOrder);
+        WithdrawMoney = data.canWithdrawMoney;
         tv_tixian_money.setText(data.canWithdrawMoney);
         tv_today_shouru.setText(data.todayProjectedIncome);
         if (data.grade>=0&&data.grade<=1){
