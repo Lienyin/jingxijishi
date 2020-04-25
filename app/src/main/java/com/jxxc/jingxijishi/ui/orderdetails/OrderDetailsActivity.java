@@ -254,7 +254,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         tv_dating_order_car_number.setText(data.carNum);
         tv_dating_order_address.setText(data.address);
         tv_dating_order_time.setText(data.appointmentTime);
-        tv_dating_order_memo.setText(AppUtils.isEmpty(data.remark)?"无":data.remark);
+        tv_dating_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         tv_dating_order_money.setText("￥"+data.price);
         tv_dating_order_car_type.setText(data.brandType);
         tv_dating_order_phone_number.setText(data.phonenumber);
