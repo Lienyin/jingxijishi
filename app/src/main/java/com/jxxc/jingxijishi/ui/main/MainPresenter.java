@@ -2,6 +2,7 @@ package com.jxxc.jingxijishi.ui.main;
 
 import android.content.Context;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxijishi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
@@ -42,6 +43,7 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
                 .execute(new JsonCallback<HttpResult<UserInfoEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<UserInfoEntity>> response) {
+                        StyledDialog.dismissLoading();
                         UserInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);

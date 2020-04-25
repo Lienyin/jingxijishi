@@ -5,11 +5,8 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="@mipmap/jingxi_04"
-        android:orientation="vertical">
-    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/jingxi_logo_qidong"/>
 </LinearLayout>
