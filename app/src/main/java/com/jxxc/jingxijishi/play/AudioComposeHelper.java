@@ -52,6 +52,7 @@ public class AudioComposeHelper {
          * 5.订单即将超时
          * 6.订单已经超时
          * 7.会员升级
+         * 10.客户催单
          */
         mMatchMap.put("一", "qiang_order.mp3");
         mMatchMap.put("二", "qiang_order_chenggong.mp3");
@@ -60,6 +61,7 @@ public class AudioComposeHelper {
         mMatchMap.put("五", "order_chaoshi.mp3");
         mMatchMap.put("六", "order_yi_chaoshi.mp3");
         mMatchMap.put("七", "vip_shengji.mp3");
+        mMatchMap.put("十", "gui_order.mp3");
         mInputStream = null;
         mContext = paramContext;
         read(paramString);

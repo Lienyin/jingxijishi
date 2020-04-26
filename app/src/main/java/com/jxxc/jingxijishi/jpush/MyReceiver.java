@@ -124,7 +124,10 @@ public class MyReceiver extends BroadcastReceiver {
                         }else if ("sourceType".equals(myKey)&&"7".equals(json.optString(myKey))){
                             //会员升级
                             AudioPlayer.getInstance().startPlay(mContext, "7");
-                        }
+                        }else if ("sourceType".equals(myKey)&&"10".equals(json.optString(myKey))){
+							//会员升级
+							AudioPlayer.getInstance().startPlay(mContext, "10");
+						}
 					}
 				} catch (JSONException e) {
 					Log.e(TAG, "Get message extra JSON error!");

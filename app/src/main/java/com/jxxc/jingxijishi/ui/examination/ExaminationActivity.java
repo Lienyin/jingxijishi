@@ -257,12 +257,15 @@ public class ExaminationActivity extends FragmentActivity {
             return v;
         }
 
+        AnswerEntity answerEntity = new AnswerEntity();
         //组装数据
         public void getAnswer(String str,String answer){
             int n=0;
-            AnswerEntity answerEntity = new AnswerEntity();
-            for (int i=0;i<listStr.size();i++){
-                if (listStr.get(i).toString().equals(str)){
+            for (int i=0;i < listStr.size();i++){
+                if (listStr.get(i).substring(0,listStr.get(i).length()-2).equals(str.substring(0,str.length()-2))){
+                    listStr.set(i,str);
+                    answerEntity.setAnswer(answer);
+                    list.set(i,answerEntity);
                     n=1;
                 }
             }
@@ -270,9 +273,6 @@ public class ExaminationActivity extends FragmentActivity {
                 answerEntity.setAnswer(answer);
                 list.add(answerEntity);
                 listStr.add(str);
-            }else{
-                list.remove(answerEntity);
-                listStr.remove(str);
             }
         }
         //组装数据成功返回去
@@ -287,6 +287,11 @@ public class ExaminationActivity extends FragmentActivity {
             }
             Log.i("TAG","str=="+str);
             return str;
+        }
+
+        public static void setEmptyList(){
+            list.clear();
+            listStr.clear();
         }
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
@@ -333,5 +338,11 @@ public class ExaminationActivity extends FragmentActivity {
 //        }else{
 //            tv_time_kaoshi.setText("  0"+m+":"+s);
 //        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ArrayFragment.setEmptyList();
     }
 }

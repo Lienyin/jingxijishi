@@ -33,7 +33,7 @@ public class CommissionAdapter extends BaseQuickAdapter<CommissionListEntity, Ba
         helper.setText(R.id.tv_order_type, "分佣");
         helper.setText(R.id.tv_order_id, item.orderId);
         helper.setText(R.id.tv_order_time, item.createTime);
-        helper.setText(R.id.tv_order_money, "￥"+item.orderMoney);
+        helper.setText(R.id.tv_order_money, "￥"+item.technicianMoney);
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;

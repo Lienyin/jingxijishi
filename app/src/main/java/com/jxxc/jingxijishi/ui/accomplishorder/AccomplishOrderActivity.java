@@ -100,7 +100,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         mImagesAdapter = new ImagesAdapter(R.layout.item_malfunction_repair_image, uriList);
         rvListImages.setAdapter(mImagesAdapter);
         //加号
-        if (mImagesAdapter.getData().size()<4) {
+        if (mImagesAdapter.getData().size()<=4) {
             addList.clear();
             addList.addAll(mImagesAdapter.getData());
             addList.add("");
@@ -166,7 +166,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                             path2.add(absolutePath);
                             mImagesAdapter.setNewData(path2);
                             if (mImagesAdapter.getData().size()<=4) {
-                                addList.clear();
+                                //addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");
                             }
@@ -177,7 +177,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                         public void onError(Throwable e) {
                             mImagesAdapter.setNewData(pathList);
                             if (mImagesAdapter.getData().size()<=4) {
-                                addList.clear();
+                                //addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");
                             }
