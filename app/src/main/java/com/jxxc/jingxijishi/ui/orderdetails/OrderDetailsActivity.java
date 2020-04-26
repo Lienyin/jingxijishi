@@ -43,6 +43,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView tv_title;
     @BindView(R.id.tv_dating_order_static)
     TextView tv_dating_order_static;
+    @BindView(R.id.tv_dating_order_type)
+    TextView tv_dating_order_type;
     @BindView(R.id.tv_dating_order_static_memo)
     TextView tv_dating_order_static_memo;
     @BindView(R.id.iv_dating_order_static_icon)
@@ -250,9 +252,10 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
             gv_data.setAdapter(carAdapter);
         }
 
-        tv_dating_order_static.setText(data.orderTopic);
+        tv_dating_order_static.setText("订单号:"+data.orderId);
         tv_dating_order_car_number.setText(data.carNum);
         tv_dating_order_address.setText(data.address);
+        tv_dating_order_type.setText(data.orderTopic);
         tv_dating_order_time.setText(data.appointmentTime);
         tv_dating_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         tv_dating_order_money.setText("￥"+data.price);
