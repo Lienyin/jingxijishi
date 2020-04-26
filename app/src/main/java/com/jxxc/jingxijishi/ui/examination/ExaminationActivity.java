@@ -290,8 +290,12 @@ public class ExaminationActivity extends FragmentActivity {
         }
 
         public static void setEmptyList(){
-            list.clear();
-            listStr.clear();
+            if (list.size()>0){
+                list.clear();
+            }
+            if (listStr.size()>0){
+                listStr.clear();
+            }
         }
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
