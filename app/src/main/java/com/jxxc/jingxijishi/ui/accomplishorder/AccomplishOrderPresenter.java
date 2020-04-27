@@ -62,7 +62,7 @@ public class AccomplishOrderPresenter extends BasePresenterImpl<AccomplishOrderC
     public void initImageSelecter() {
         config = new ISListConfig.Builder()
                 .multiSelect(true)
-                .rememberSelected(true)
+                .rememberSelected(false)
                 .btnBgColor(Color.TRANSPARENT)
                 .btnTextColor(Color.WHITE)
                 .statusBarColor(ContextCompat.getColor(mView.getContext().getApplicationContext(), R.color.public_all))
