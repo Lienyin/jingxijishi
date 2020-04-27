@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.orderlist;
 
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
@@ -153,7 +154,9 @@ public class OrderListActivity extends MVPBaseActivity<OrderListContract.View, O
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ZzRouter.gotoActivity(OrderListActivity.this, OrderDetailsActivity.class,list.get(position).orderId);
+                Intent intent = new Intent(OrderListActivity.this, OrderDetailsActivity.class);
+                intent.putExtra("orderId",list.get(position).orderId);
+                startActivity(intent);
             }
         });
         zhuanDanDialog.setOnFenxiangClickListener(new ZhuanDanDialog.OnFenxiangClickListener() {
