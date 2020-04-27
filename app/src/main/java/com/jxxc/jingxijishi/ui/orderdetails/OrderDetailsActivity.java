@@ -282,12 +282,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         }
 
         //技师端上传的图片
-        String[] split = data.technicianCommentImgs.split(",");
-        for (int i=0;i<split.length;i++){
-            imgList.add(split[i]);
+        if (!AppUtils.isEmpty(data.technicianCommentImgs)){
+            String[] split = data.technicianCommentImgs.split(",");
+            for (int i=0;i<split.length;i++){
+                imgList.add(split[i]);
+            }
+            imgAdapter.setData(imgList);
+            imgAdapter.notifyDataSetChanged();
         }
-        imgAdapter.setData(imgList);
-        imgAdapter.notifyDataSetChanged();
 
         tv_dating_order_static.setText("订单号:"+data.orderId);
         tv_dating_order_car_number.setText(data.carNum);
