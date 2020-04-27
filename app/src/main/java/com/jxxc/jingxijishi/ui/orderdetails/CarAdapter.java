@@ -55,7 +55,7 @@ public class CarAdapter extends BaseAdapter {
         }
         AwaitReceiveOrderEntity.Products data = list.get(position);
         holder.tv_service_name.setText(data.productName);
-        GlideImgManager.loadCircleDoorImage(context,data.imgUrl,holder.tv_car_service_icon);
+        GlideImgManager.loadImage(context,data.imgUrl,holder.tv_car_service_icon);
         return convertView;
     }
 
