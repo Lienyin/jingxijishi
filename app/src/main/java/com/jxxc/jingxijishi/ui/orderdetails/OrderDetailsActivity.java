@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.R;
+import com.jxxc.jingxijishi.dialog.ImgDialog;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
@@ -25,7 +28,9 @@ import com.jxxc.jingxijishi.utils.StatusBarUtil;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -100,11 +105,16 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     ImageView rb_pinglun;
     @BindView(R.id.ll_comm_view)
     LinearLayout ll_comm_view;
+    @BindView(R.id.gv_img_data)
+    GridView gv_img_data;
     private String orderId;
     private int isExaminationQualified;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
     private CarAdapter carAdapter;
+    private ImgAdapter imgAdapter;
+    private ImgDialog imgDialog;
+    private List<String> imgList = new ArrayList<>();
     Handler handler = new Handler(){
 
         @Override
@@ -130,6 +140,17 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         orderId = getIntent().getStringExtra("orderId");
         isExaminationQualified = getIntent().getIntExtra("isExaminationQualified",0);
         mPresenter.getOrderDetails(orderId);
+
+        imgAdapter = new ImgAdapter(this);
+        imgAdapter.setData(imgList);
+        gv_img_data.setAdapter(imgAdapter);
+        gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                imgDialog.showShareDialog(true,imgList);
+            }
+        });
+        imgDialog = new ImgDialog(this);
     }
 
     //倒计时
@@ -259,6 +280,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
             carAdapter.setData(data.products);
             gv_data.setAdapter(carAdapter);
         }
+
+        //技师端上传的图片
+        String[] split = data.technicianCommentImgs.split(",");
+        for (int i=0;i<split.length;i++){
+            imgList.add(split[i]);
+        }
+        imgAdapter.setData(imgList);
+        imgAdapter.notifyDataSetChanged();
 
         tv_dating_order_static.setText("订单号:"+data.orderId);
         tv_dating_order_car_number.setText(data.carNum);

@@ -336,26 +336,37 @@
                 <LinearLayout
                     android:id="@+id/ll_dating_wan_order_time"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:gravity="center_vertical"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="服务时长"
-                        android:textColor="@color/black999"
-                        android:textSize="14sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="服务时长"
+                            android:textColor="@color/black999"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tv_dating_wan_order_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="XXX"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_dating_wan_order_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="XXX"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.jxxc.jingxijishi.utils.MyGridView
+                        android:id="@+id/gv_img_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="5" />
                 </LinearLayout>
             </LinearLayout>
             <!--                评价-->

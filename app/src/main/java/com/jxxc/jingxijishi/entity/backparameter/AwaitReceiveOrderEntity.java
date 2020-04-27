@@ -25,6 +25,7 @@ public class AwaitReceiveOrderEntity implements Serializable {
     public float starLevel;
     public String commentContent;
     public String customerCommentTime;
+    public String technicianCommentImgs;
     public List<Products> products;
 
     public class Products{
