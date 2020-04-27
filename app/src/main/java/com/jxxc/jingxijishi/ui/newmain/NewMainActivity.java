@@ -157,12 +157,12 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
+        StyledDialog.buildLoading("加载中").setActivity(this).show();
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         mPresenter.getUserInfo();
         mPresenter.latestVersion(1);//暂时关闭
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
-        StyledDialog.buildLoading("加载中").setActivity(this).show();
         getLatLng(filtrateType);
         zhuanDanDialog = new ZhuanDanDialog(this);
         adapter = new NewMainAdapter(this);

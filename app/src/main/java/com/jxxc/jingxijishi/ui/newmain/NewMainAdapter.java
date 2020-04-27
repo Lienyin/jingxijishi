@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.dialog.PopSeek;
 import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
+import com.jxxc.jingxijishi.utils.AppUtils;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -79,7 +80,7 @@ public class NewMainAdapter extends BaseAdapter {
         holder.tv_dating_order_car_number.setText(data.carNum);
         holder.tv_dating_order_address.setText(data.address);
         holder.tv_dating_order_time.setText(data.appointmentTime);
-        holder.tv_dating_order_memo.setText(data.remark);
+        holder.tv_dating_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         holder.tv_dating_order_money.setText("￥"+data.price);
 
         //订单状态 0待支付 1已支付待接单 2已接单待服务 3服务中 4服务已完成 5取消订单
