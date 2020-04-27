@@ -16,6 +16,7 @@ import com.jxxc.jingxijishi.entity.backparameter.AwaitReceiveOrderEntity;
 import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
+import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.MyGridView;
@@ -100,6 +101,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @BindView(R.id.ll_comm_view)
     LinearLayout ll_comm_view;
     private String orderId;
+    private int isExaminationQualified;
     private AwaitReceiveOrderEntity data;
     private boolean isRun = true;
     private CarAdapter carAdapter;
@@ -125,7 +127,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("订单详情");
         StyledDialog.buildLoading("正在查询").setActivity(this).show();
-        orderId = ZzRouter.getIntentData(this,String.class);
+        orderId = getIntent().getStringExtra("orderId");
+        isExaminationQualified = getIntent().getIntExtra("isExaminationQualified",0);
         mPresenter.getOrderDetails(orderId);
     }
 
@@ -190,7 +193,12 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 ZzRouter.gotoActivity(this, AccomplishOrderActivity.class,data.orderId);
                 break;
             case R.id.btn_rob_order://接单
-                mPresenter.receive(data.orderId);
+                //状态 线上考试是否合格 1合格 0不合格
+                if (isExaminationQualified ==0){
+                    toast(this,"线上考试不合格");
+                }else{
+                    mPresenter.receive(data.orderId);
+                }
                 break;
             default:
         }

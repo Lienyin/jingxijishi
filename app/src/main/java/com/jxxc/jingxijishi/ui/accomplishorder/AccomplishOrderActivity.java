@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxc.jingxijishi.ConfigApplication;
@@ -66,6 +67,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
     private static final int REQUEST_CODE_CHOOSE = 110;
     private String OrderId="";
     private boolean isRun = true;
+    private ArrayList<String> path2 = new ArrayList<>();
     private AwaitReceiveOrderEntity awaitReceiveOrderEntity;
     Handler handler = new Handler(){
 
@@ -149,7 +151,6 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             final List<String> pathList = data.getStringArrayListExtra("result");
-            final ArrayList<String> path2 = new ArrayList<>();
             Luban.with(this)
                     .load(pathList)
                     .ignoreBy(50)
@@ -163,10 +164,14 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                         @Override
                         public void onSuccess(File file) {
                             String absolutePath = file.getAbsolutePath();
-                            path2.add(absolutePath);
+                            if (path2.size()<4){
+                                path2.add(absolutePath);
+                            }else{
+                                Toast.makeText(AccomplishOrderActivity.this,"最多上传4张",Toast.LENGTH_SHORT).show();
+                            }
                             mImagesAdapter.setNewData(path2);
                             if (mImagesAdapter.getData().size()<=4) {
-                                //addList.clear();
+                                addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");
                             }
@@ -177,7 +182,7 @@ public class AccomplishOrderActivity extends MVPBaseActivity<AccomplishOrderCont
                         public void onError(Throwable e) {
                             mImagesAdapter.setNewData(pathList);
                             if (mImagesAdapter.getData().size()<=4) {
-                                //addList.clear();
+                                addList.clear();
                                 addList.addAll(mImagesAdapter.getData());
                                 addList.add("");
                             }

@@ -209,7 +209,11 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
         lv_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ZzRouter.gotoActivity(NewMainActivity.this, OrderDetailsActivity.class,list.get(i).orderId);
+                //ZzRouter.gotoActivity(NewMainActivity.this, OrderDetailsActivity.class,list.get(i).orderId);
+                Intent intent = new Intent(NewMainActivity.this, OrderDetailsActivity.class);
+                intent.putExtra("orderId",list.get(i).orderId);
+                intent.putExtra("isExaminationQualified",isExaminationQualified);
+                startActivity(intent);
             }
         });
         popSeek = new PopSeek(this);
@@ -499,6 +503,7 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     @Override
     public void onRefresh() {
        getLatLng(filtrateType);
+       mPresenter.getUserInfo();
     }
 
     @Override

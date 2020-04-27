@@ -435,6 +435,8 @@
         android:id="@+id/ll_fuwu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center_vertical"
         android:visibility="visible">
 
