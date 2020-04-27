@@ -237,7 +237,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
                 ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setText("说明：从业上岗资格合格成绩≥"+PassScore+"分");
             }
-            if (mNum==0||(mNum+1) == zNum){
+            if (mNum==0){
                 ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setVisibility(View.VISIBLE);
             }else{
                 ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setVisibility(View.GONE);
