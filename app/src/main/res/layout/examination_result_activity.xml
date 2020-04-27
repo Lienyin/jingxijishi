@@ -13,27 +13,29 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/iv_kaoshi_static"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="50dp"
-            android:src="@mipmap/deng_pao" />
+            android:background="@mipmap/deng_pao" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:layout_marginTop="30dp"
-            android:text="恭喜您，已完成从业资格考试，"/>
+            android:text="恭喜，您已完成从业资格考试，"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_score_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginTop="5dp"
-                android:text="成绩，为"/>
+                android:text="成绩合格("/>
             <TextView
                 android:id="@+id/tv_score"
                 android:layout_width="wrap_content"
@@ -49,8 +51,16 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginTop="5dp"
-                android:text="分，符合从业上岗资质。"/>
+                android:text=")分，符合从业上岗资质。"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_jige_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black999"
+            android:textSize="12sp"
+            android:layout_marginTop="50dp"
+            android:text=""/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_back_home"

@@ -57,6 +57,7 @@ public class ExaminationActivity extends FragmentActivity {
     private String examinationId;
     private boolean isRun = true;
     private int s = 3599;
+    private String PassScore;
     Timer timer = new Timer();
 
     @Override
@@ -102,9 +103,10 @@ public class ExaminationActivity extends FragmentActivity {
                         SartExaminationEntity d = response.body().data;
                         if (response.body().code == 0) {
                             examinationId = d.examinationId;
+                            PassScore = d.passScore;
                             list = d.questionList;
                             mAdapter = new MyAdapter(getSupportFragmentManager());
-                            mAdapter.setData(ExaminationActivity.this,d.questionList);
+                            mAdapter.setData(ExaminationActivity.this,d.questionList,d.passScore);
                             mPager.setAdapter(mAdapter);
                         } else {
                             Toast.makeText(ExaminationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
@@ -126,6 +128,7 @@ public class ExaminationActivity extends FragmentActivity {
                             Intent intent = new Intent(ExaminationActivity.this, ExaminationResultActivity.class);
                             intent.putExtra("status",d.status);
                             intent.putExtra("score",d.score);
+                            intent.putExtra("PassScore",PassScore);
                             startActivity(intent);
                             finish();
                         } else {
@@ -146,18 +149,21 @@ public class ExaminationActivity extends FragmentActivity {
         private String answerB;
         private String answerC;
         private String answerD;
+        private String PassScore;
         public static String answer="";
         public static List<String> listStr = new ArrayList<>();
         public static List<AnswerEntity> list = new ArrayList<>();
         private static int zongAnswer=0;
         private static Context context;
 
-        static ArrayFragment newInstance(Context mContext,int num,SartExaminationEntity.Question list,int zongNumber) {
+        static ArrayFragment newInstance(Context mContext,int num,SartExaminationEntity.Question list,int zongNumber,String passScore) {
             context = mContext;
+
             ArrayFragment array = new ArrayFragment();
             Bundle args = new Bundle();
             args.putInt("num", num);
             args.putInt("zNum", zongNumber);
+            args.putString("passScore", passScore);
             args.putString("topic",AppUtils.isEmpty(list.topic)?"无题":list.topic);
             args.putString("answerA",AppUtils.isEmpty(list.answerA)?"其他":list.answerA);
             args.putString("answerB",AppUtils.isEmpty(list.answerB)?"其他":list.answerB);
@@ -172,6 +178,7 @@ public class ExaminationActivity extends FragmentActivity {
             super.onCreate(savedInstanceState);
             mNum = getArguments() != null ? getArguments().getInt("num") : 1;
             zNum = getArguments() != null ? getArguments().getInt("zNum") : 0;
+            PassScore = getArguments() != null ? getArguments().getString("passScore") : "60";
             topic = getArguments() != null ? getArguments().getString("topic") : "";
             answerA = getArguments() != null ? getArguments().getString("answerA") : "";
             answerB = getArguments() != null ? getArguments().getString("answerB") : "";
@@ -195,6 +202,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
                 ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setText("说明：从业上岗资格合格成绩≥"+PassScore+"分");
             } else if (mNum == 1) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -205,6 +213,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
                 ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setText("说明：从业上岗资格合格成绩≥"+PassScore+"分");
             } else if (mNum == 2) {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -215,6 +224,7 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
                 ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setText("说明：从业上岗资格合格成绩≥"+PassScore+"分");
             } else {
                 v = inflater.inflate(R.layout.pagers_fragment1, container, false);
                 ((TextView) v.findViewById(R.id.textView1)).setText(mNum + "= mNum");
@@ -225,7 +235,15 @@ public class ExaminationActivity extends FragmentActivity {
                 ((RadioButton) v.findViewById(R.id.tv_topic_d)).setText(answerD);
                 ((TextView) v.findViewById(R.id.tv_topic_number)).setText((mNum+1)+"/"+zNum);
                 ((TextView) v.findViewById(R.id.tv_topic_newt_number)).setText((mNum+1) == zNum?"最后一题":"下一题");
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setText("说明：从业上岗资格合格成绩≥"+PassScore+"分");
             }
+            if (mNum==0||(mNum+1) == zNum){
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setVisibility(View.VISIBLE);
+            }else{
+                ((TextView) v.findViewById(R.id.tv_kaoshi_tongguo_hint)).setVisibility(View.GONE);
+            }
+
+
             ((RadioButton) v.findViewById(R.id.tv_topic_a)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

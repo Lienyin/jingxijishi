@@ -12,15 +12,17 @@ import java.util.List;
 
 public class MyAdapter extends FragmentStatePagerAdapter {
     private Context context;
+    private String PassScore;
     public List<SartExaminationEntity.Question> list;
 
     public MyAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void setData(Context context,List<SartExaminationEntity.Question> list) {
+    public void setData(Context context,List<SartExaminationEntity.Question> list,String PassScore) {
         this.list = list;
         this.context = context;
+        this.PassScore = PassScore;
     }
     @Override
     public int getCount() {
@@ -29,7 +31,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
     //得到每个item
     @Override
     public Fragment getItem(int position) {
-        return ExaminationActivity.ArrayFragment.newInstance(context,position,list.get(position),list.size());
+        return ExaminationActivity.ArrayFragment.newInstance(context,position,list.get(position),list.size(),PassScore);
     }
     // 初始化每个页卡选项
     @Override
