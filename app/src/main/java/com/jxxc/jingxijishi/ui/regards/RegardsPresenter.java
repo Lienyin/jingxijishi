@@ -62,20 +62,20 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                             String memo = version.memo;
                             String ver = version.version;
                             StyledDialog.dismissLoading();
-//                            if (!AppUtils.isEmpty(version)) {
-//                                if (ver.contains(".")) {
-//                                    String vOnline = ver.replace(".", "").trim();
-//                                    String versionName = BuildConfig.VERSION_NAME;
-//                                    String vLoal = versionName.replace(".", "").trim();
-//                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
-//                                        if (version.isForce == 1) {//是否强制更新
-//                                            updateAPK(url, memo, true,ver);
-//                                        } else {
-//                                            updateAPK(url, memo, false,ver);
-//                                        }
-//                                    }
-//                                }
-//                            }
+                            if (!AppUtils.isEmpty(version)) {
+                                if (ver.contains(".")) {
+                                    String vOnline = ver.replace(".", "").trim();
+                                    String versionName = BuildConfig.VERSION_NAME;
+                                    String vLoal = versionName.replace(".", "").trim();
+                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
+                                        if (version.isForce == 1) {//是否强制更新
+                                            updateAPK(url, memo, true,ver);
+                                        } else {
+                                            updateAPK(url, memo, false,ver);
+                                        }
+                                    }
+                                }
+                            }
                             //mView.latestVersionCallBack();
                         }else{
                             toast(mContext,response.body().message);
