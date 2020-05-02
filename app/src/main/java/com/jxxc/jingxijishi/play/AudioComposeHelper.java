@@ -61,6 +61,7 @@ public class AudioComposeHelper {
         mMatchMap.put("五", "order_chaoshi.mp3");
         mMatchMap.put("六", "order_yi_chaoshi.mp3");
         mMatchMap.put("七", "vip_shengji.mp3");
+        mMatchMap.put("八", "pai_dan.mp3");
         mMatchMap.put("十", "gui_order.mp3");
         mInputStream = null;
         mContext = paramContext;
