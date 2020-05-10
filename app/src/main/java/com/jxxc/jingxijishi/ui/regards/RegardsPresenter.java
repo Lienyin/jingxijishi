@@ -58,7 +58,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
-                            String url = version.url;
+                            String url = "http://"+version.url;
                             String memo = version.memo;
                             String ver = version.version;
                             StyledDialog.dismissLoading();
@@ -145,7 +145,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
     private void startDownloadAPK(String url) {
         UpdateProgressDialog.show(mView.getContext());
         final RxDownload mRxDownload = RxDownload.getInstance(mView.getContext());
-        mRxDownload.download(url, "jingxi.apk", ConfigApplication.CACHA_URL)
+        mRxDownload.download(url, "jingxi_jishi.apk", ConfigApplication.CACHA_URL)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<DownloadStatus>() {
@@ -170,7 +170,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                         if (!AppUtils.isEmpty(mView)) {
                             //下载成功
                             UpdateProgressDialog.dismiss();
-                            File file = mRxDownload.getRealFiles("jingxi.apk", ConfigApplication.CACHA_URL)[0];
+                            File file = mRxDownload.getRealFiles("jingxi_jishi.apk", ConfigApplication.CACHA_URL)[0];
                             Context context = mView.getContext().getApplicationContext();
                             AppUtils.installApk(context, file, BuildConfig.APPLICATION_ID + ".provider");
                             //install(mContext,file);
