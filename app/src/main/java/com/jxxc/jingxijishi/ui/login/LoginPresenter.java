@@ -145,7 +145,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                 }
                 if (tvAuthCode != null) {
                     tvAuthCode.setEnabled(false);
-                    tvAuthCode.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.public_all));
+                    tvAuthCode.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.blackccc));
                     tvAuthCode.setText("重新发送(" + (millisUntilFinished / 1000) + ")");
                 }
             }
@@ -157,7 +157,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                 }
                 if (tvAuthCode != null) {
                     tvAuthCode.setEnabled(true);
-                    tvAuthCode.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.black));
+                    tvAuthCode.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.public_all));
                     tvAuthCode.setText("获取验证码");
                 }
             }
