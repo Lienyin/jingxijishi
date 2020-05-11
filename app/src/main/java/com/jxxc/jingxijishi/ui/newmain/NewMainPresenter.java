@@ -150,24 +150,24 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
-                            String url = version.url;
+                            String url = "http://"+version.url;
                             String memo = version.memo;
                             String ver = version.version;
-//                            if (!AppUtils.isEmpty(version)) {
-//                                if (ver.contains(".")) {
-//                                    String vOnline = ver.replace(".", "").trim();
-//                                    String versionName = BuildConfig.VERSION_NAME;
-//                                    String vLoal = versionName.replace(".", "").trim();
-//                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
-//                                        if (version.isForce == 1) {//是否强制更新
-//                                            updateAPK(url, memo, true,ver);
-//                                        } else {
-//                                            updateAPK(url, memo, false,ver);
-//                                        }
-//                                    }
-//                                }
-//                            }
-                            mView.latestVersionCallBack();
+                            if (!AppUtils.isEmpty(version)) {
+                                if (ver.contains(".")) {
+                                    String vOnline = ver.replace(".", "").trim();
+                                    String versionName = BuildConfig.VERSION_NAME;
+                                    String vLoal = versionName.replace(".", "").trim();
+                                    if (Integer.parseInt(vOnline) > Integer.parseInt(vLoal)) {
+                                        if (version.isForce == 1) {//是否强制更新
+                                            updateAPK(url, memo, true,ver);
+                                        } else {
+                                            updateAPK(url, memo, false,ver);
+                                        }
+                                    }
+                                }
+                            }
+                            //mView.latestVersionCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }
@@ -301,7 +301,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
     private void startDownloadAPK(String url) {
         UpdateProgressDialog.show(mView.getContext());
         final RxDownload mRxDownload = RxDownload.getInstance(mView.getContext());
-        mRxDownload.download(url, "jingxi.apk", ConfigApplication.CACHA_URL)
+        mRxDownload.download(url, "jingxi_jishi.apk", ConfigApplication.CACHA_URL)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<DownloadStatus>() {
@@ -326,7 +326,7 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
                         if (!AppUtils.isEmpty(mView)) {
                             //下载成功
                             UpdateProgressDialog.dismiss();
-                            File file = mRxDownload.getRealFiles("jingxi.apk", ConfigApplication.CACHA_URL)[0];
+                            File file = mRxDownload.getRealFiles("jingxi_jishi.apk", ConfigApplication.CACHA_URL)[0];
                             Context context = mView.getContext().getApplicationContext();
                             AppUtils.installApk(context, file, BuildConfig.APPLICATION_ID + ".provider");
                         }

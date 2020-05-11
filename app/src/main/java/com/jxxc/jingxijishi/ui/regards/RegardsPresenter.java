@@ -73,6 +73,8 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                                         } else {
                                             updateAPK(url, memo, false,ver);
                                         }
+                                    }else{
+                                        toast(mContext,"已是最新版");
                                     }
                                 }
                             }
