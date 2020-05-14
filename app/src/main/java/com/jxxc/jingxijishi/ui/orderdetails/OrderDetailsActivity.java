@@ -1,6 +1,7 @@
 package com.jxxc.jingxijishi.ui.orderdetails;
 
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.jxxc.jingxijishi.http.ZzRouter;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
 import com.jxxc.jingxijishi.ui.accomplishorder.AccomplishOrderActivity;
 import com.jxxc.jingxijishi.ui.newmain.NewMainActivity;
+import com.jxxc.jingxijishi.ui.photoview.PhotoViewActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 import com.jxxc.jingxijishi.utils.AppUtils;
 import com.jxxc.jingxijishi.utils.MyGridView;
@@ -147,7 +149,11 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                imgDialog.showShareDialog(true,imgList);
+                //imgDialog.showShareDialog(true,imgList);
+                Intent intent = new Intent(OrderDetailsActivity.this, PhotoViewActivity.class);
+                intent.putExtra("currentPosition", i);
+                intent.putExtra("dataBeanUrl", data.technicianCommentImgs);
+                startActivity(intent);
             }
         });
         imgDialog = new ImgDialog(this);

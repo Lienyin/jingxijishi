@@ -282,5 +282,9 @@
         <activity
             android:name=".ui.regardsagreement.RegardsAgreementActivity"
             android:screenOrientation="portrait" />
+        <!-- 图片查看 -->
+        <activity
+            android:name=".ui.photoview.PhotoViewActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
