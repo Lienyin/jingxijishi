@@ -106,7 +106,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @BindView(R.id.ll_comm_view)
     LinearLayout ll_comm_view;
     @BindView(R.id.gv_img_data)
-    GridView gv_img_data;
+    MyGridView gv_img_data;
     private String orderId;
     private int isExaminationQualified;
     private AwaitReceiveOrderEntity data;

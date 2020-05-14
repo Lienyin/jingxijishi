@@ -17,7 +17,7 @@ import java.io.File;
 
 public class GlideImgManager {
 
-    private static int noImg = R.mipmap.logo;
+    private static int noImg = R.mipmap.zhan_weitu;
 //    private static int noImg = R.drawable.loading_large;
 
     //    public static final  float THUMBNAIL_LEVEL =0.2f;
@@ -167,8 +167,8 @@ public class GlideImgManager {
     public static void loadCircleDoorImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.zhan_weitu)
+                .error(R.mipmap.zhan_weitu)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override
@@ -190,8 +190,8 @@ public class GlideImgManager {
     public static void loadRectangleImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.zhan_weitu)
+                .error(R.mipmap.zhan_weitu)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override
@@ -213,8 +213,8 @@ public class GlideImgManager {
     public static void loadRectangleSiteImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.zhan_weitu)
+                .error(R.mipmap.zhan_weitu)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override

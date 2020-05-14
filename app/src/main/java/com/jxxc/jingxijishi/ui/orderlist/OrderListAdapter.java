@@ -36,7 +36,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListEntity, BaseView
         helper.setText(R.id.tv_dating_order_car_number, item.carNum);
         helper.setText(R.id.tv_dating_order_address, item.address);
         helper.setText(R.id.tv_dating_order_time, item.appointmentTime);
-        helper.setText(R.id.tv_dating_order_memo, item.remark);
+        helper.setText(R.id.tv_dating_order_memo, !AppUtils.isEmpty(item.remark)?item.remark:"无");
         helper.setText(R.id.tv_dating_order_money, "￥"+item.price);
 
         //订单状态 0待支付 1已支付待接单 2已接单待服务 3服务中 4服务已完成 5取消订单

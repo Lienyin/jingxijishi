@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
+import com.jxxc.jingxijishi.utils.GlideImgManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -38,7 +39,8 @@ public class LookImgAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView=new ImageView(context);
-        ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
+        //ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
+        GlideImgManager.loadRectangleSiteImage(context, list.get(position%list.size()),imageView);
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         container.addView(imageView);
 
