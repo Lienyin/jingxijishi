@@ -278,5 +278,9 @@
         <!--关于我们-->
         <activity android:name=".ui.regards.RegardsActivity"
             android:screenOrientation="portrait"/>
+        <!-- 用户协议/隐私政策 -->
+        <activity
+            android:name=".ui.regardsagreement.RegardsAgreementActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

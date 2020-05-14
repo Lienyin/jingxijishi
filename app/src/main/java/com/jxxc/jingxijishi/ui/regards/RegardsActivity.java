@@ -12,6 +12,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxijishi.BuildConfig;
 import com.jxxc.jingxijishi.R;
 import com.jxxc.jingxijishi.mvp.MVPBaseActivity;
+import com.jxxc.jingxijishi.ui.regardsagreement.RegardsAgreementActivity;
 import com.jxxc.jingxijishi.utils.AnimUtils;
 
 import butterknife.BindView;
@@ -63,6 +64,11 @@ public class RegardsActivity extends MVPBaseActivity<RegardsContract.View, Regar
                 gradeGo();
                 break;
             case R.id.ll_privacy://隐私政策
+                String URL = "https://jx.bashideban.com/tool/build/ios_privacy";
+                Intent intent = new Intent(this, RegardsAgreementActivity.class);
+                intent.putExtra("URL",URL);
+                intent.putExtra("h5Type","0");
+                startActivity(intent);
                 break;
             case R.id.ll_renewal://版本更新
                 StyledDialog.buildLoading("加载中").setActivity(this).show();

@@ -101,14 +101,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="#55cccccc"/>
     <!--隐私政策-->
     <LinearLayout
         android:id="@+id/ll_privacy"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center_vertical"
         android:paddingLeft="20dp">
         <TextView
