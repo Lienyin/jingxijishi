@@ -124,6 +124,8 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
     LinearLayout ll_function_view_plus;
     @BindView(R.id.ll_sys_notification)
     LinearLayout ll_sys_notification;
+    @BindView(R.id.tv_call_phone)
+    TextView tv_call_phone;
     private DrawerLayout drawerLayout;
     private long exitTime = 0;
     private NewMainAdapter adapter;
@@ -248,6 +250,14 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View, NewMa
             public void onFenxiangClick(int type) {
                 filtrateType = type;
                 getLatLng(filtrateType);
+            }
+        });
+
+        //400电话
+        tv_call_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppUtils.callPhone(NewMainActivity.this,"4001008682");
             }
         });
     }

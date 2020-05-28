@@ -157,6 +157,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:paddingRight="20dp"
+                android:visibility="invisible"
                 android:gravity="center_vertical|right">
                 <ImageView
                     android:layout_width="wrap_content"
@@ -555,7 +556,21 @@
         <View
             android:id="@+id/view_style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_call_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/kefu_call"
+                android:textSize="14sp"
+                android:textColor="@color/black333"
+                android:text="  400  100  8682"/>
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
